@@ -1,0 +1,202 @@
+[
+    {
+        "id": 1,
+        "title": "The Legend of Zelda: Breath of the Wild",
+        "tags":[
+            "open world", "cool", "adventure", "3D"
+        ],
+        "userid": 1,
+        "img": "/images/img1.png",
+        "text": "The Legend of Zelda: Breath of the Wild eschewed the semi-linear, borderline predictable path of the 3D Zelda games before it in favor of a bold, crazy new approach: let players do what they want, how they want, and in whatever order they decide. By marrying an open-ended approach to quest structure with the ability to freely explore a vast, beautiful, intriguing world with little specific regulation, the 3D Zelda game template was shattered about as fast as the average breakable weapon in Breath of the Wild. The result is a gorgeous, freeing open-world action/adventure experience that evokes the wonder and fear of exploring a bold new place with the empowering tangibility of becoming its hero. - Brian Altano"
+    },
+    {
+        "id": 2,
+        "title": "Super Mario World",
+        "tags":[
+            "cool", "adventure", "2D"
+        ],
+        "userid": 1,
+        "img": "/images/img2.png",
+        "text": "Super Mario World is a relatively simple game to describe. It’s a Super Mario game, and we all know what that means: Mushrooms; perfect running and jumping action; and a giant world to explore, crammed with secrets. But what sets Super Mario World apart from other 2D Mario games is its irresistible complexity. Subsequent Super Mario games, like the New Super Mario Bros. series, simplified the overworld, trading Super Mario World’s cool hidden paths for linear tracks, largely abandoned the skies and treetops of Super Mario World’s vertical levels for ground-based obstacle courses, and did away with flying almost entirely (capes rule, helicopter hats drool!). Super Mario World is the crescendo to the slow build in technology and game design that started with Super Mario Bros. Let Super Mario World’s placement on this list be a challenge to future game developers. We dare you to make a better game: Puzzling, but not opaque; tough but not intimidating; beautiful, funny, joyful, and universally recognizable. - Samuel Claiborn"
+    },
+    {
+        "id": 3,
+        "title": "Portal 2",
+        "tags":[
+            "cool", "puzzles", "3D"
+        ],
+        "userid": 1,
+        "img": "/images/img3.png",
+        "text": "Portal undoubtedly came out of nowhere and shattered the mold, but Portal 2 took that raw and incredible concept and managed to shape it into a more polished and impressive package. It cranked the dials up on just about everything that made the original so special. The mind-bending puzzles, the surprisingly dark story, and the ridiculous humor that balanced it out - each piece of that picture was refined and refreshed to build a sequel that actually surpassed the ambition of an already extremely ambitious game, making something both familiar and altogether new. It gave us a deeper look into the wonderful world of Aperture Science without completely dragging all of its mysteries out into the light. It also mixed its “thinking with portals” puzzles up even further by weaving in gel mechanics that felt entirely fresh and completely natural at the same time - while simultaneously and subtly using them to tie gameplay mechanics into the story, patiently waiting until its incredible finale to pay off those setups with one of the weirdest and most spectacular video game endings around. Couple that with a seriously good co-op campaign and even a full-on custom level builder and sharing systems added post-launch and Portal 2 has stayed the high bar by which all first-person puzzle games should be measured, even nearly a decade later. - Tom Marks"
+    },
+    {
+        "id": 4,
+        "title": "Super Metroid",
+        "tags":[
+            "2D", "action"
+        ],
+        "userid": 1,
+        "img": "/images/img4.png",
+        "text": "Super Metroid’s minimalistic environmental storytelling set a bar, way back in 1994, that I believe has still yet to be eclipsed. The planet Zebes is atmospheric, oppressive, and extremely lethal. At first glance, there doesn’t even appear to be any story. But then you start to look more closely. The parasite-riddled dead soldier outside of an early boss room. The crashed, half-submerged alien spaceship that may or may not be haunted. It’s brilliant and confident. But it’s Super Metroid’s ability to consistently invite the player to be curious – and then rewarding that curiosity – that makes it one of the greatest video games ever made. It’s not just that there are secrets hidden everywhere (although there are, and it’s awesome) – it’s that the game teases you with tantalizing clues – items, always just out of reach. Super Metroid is an impeccable action-platformer – that’s the “easy” part. What makes it truly special is its genius combination of puzzle-solving, atmosphere, storytelling, exploration, game design, and gameplay. There’s nothing else like it. - Justin Davis"
+    },
+    {
+        "id": 5,
+        "title": "Mass Effect 2",
+        "tags":[
+            "3D", "action"
+        ],
+        "userid": 1,
+        "img": "/images/img5.png",
+        "text": "Where Mass Effect set the stage for a futuristic Milky Way, Mass Effect 2 let you explore and experience so much more of it. As Commander Shepard, I traveled the galaxy on the best recruitment trip I could have wished for, and experienced possibly one of the most heart-wrenching stories – but whether or not the game ends in tears is entirely up to you. As you head out for a suicide mission, you’ll meet some of the best-written characters that feel original and have the power to evoke true emotions. Perhaps one of the best parts about earning the loyalty of each of the companions was discovering more about their respective species and seeing how they’re surviving in a violent galaxy. Maximum loyalty for my companions in Mass Effect 2 was not an option; for my heart’s own good, it was a requirement. - Miranda Sanchez"
+    },
+    {
+        "id": 6,
+        "title": "The Legend of Zelda: A Link to the Past",
+        "tags":[
+            "2D", "action", "puzzles", "open world"
+        ],
+        "userid": 1,
+        "img": "/images/img6.png",
+        "text": "From it’s unforgettable beginnings guiding a swordless Link through the rain, to the final showdown with Ganon and utilizing mastery of sword and bow to defeat evil, The Legend of Zelda: Link to the Past measured out a perfect pace of dungeons, exploration, and a gripping narrative that was almost unheard of at the time. It’s open landscape was always inviting but never felt aimless – striking the perfect balance of freedom and purpose in your quest to save Princess Zelda. This iteration of Hyrule was more than just moving between enemy-filled screens, it encompassed everything an immersive experience should be: a vast open world that teased you with secrets hiding just beyond your reach, begging you to come back with new and inventive tools. Each zone – whether in the cheerful overworld, dimly lit caves, or the intimidating Dark World – was brought to life through a culmination of details like the sound of the Tempered Sword cleaving the air, the catchy jingle of a puzzle well-solved, and the ambient tunes of Koji Kondo’s score. - Brendan Graeber"
+    },
+    {
+        "id": 7,
+        "title": "Super Mario 64",
+        "tags":[
+            "3D", "puzzles", "open world", "adventure"
+        ],
+        "userid": 1,
+        "img": "/images/img7.png",
+        "text": "Mario games are synonymous with fun and innovation, and perhaps Mario 64 is the best example of the latter. It gathered the core elements of Mario’s best 2D, side-scrolling adventures and worked out how to translate them into a groundbreaking 3D world. It was still recognisably Mario – he collected mushrooms and ran and jumped his way to success, but he was forever changed. He could now long jump, triple jump, and backflip. While the underlying challenge remained the same and the locations were reassuringly familiar, the shift in perspective changed everything. What’s even more impressive is that Mario did not simply enter a new dimension with ease, he did it with style that few games unburdened with such technical challenges ever achieve. Mario 64 might now look a little blocky but it remains bold and brilliant, too. - Daniel Krupa"
+    },
+    {
+        "id": 8,
+        "title": "Red Dead Redemption 2",
+        "tags":[
+            "3D", "open world", "adventure", "action"
+        ],
+        "userid": 1,
+        "img": "/images/img8.png",
+        "text": "A sprawling Western that stands shoulder-to-shoulder with Grand Theft Auto V as one of gaming’s greatest open-world achievements, Red Dead Redemption 2 is a game of rare scope and even rarer quality. A beautiful ode to an ugly era, RDR2 combines Rockstar’s most authentic and lived-in open world ever with its most earnest storytelling to date, filling in the gaps with an astonishing array of deep systems and nearly endless emergent gameplay opportunities. Its slower pace allows us to binge on the world like a virtual museum but, when the lead starts flying, it puts the wild back in the west (and then some). Few games manage the level of uncompromising detail as Red Dead Redemption 2 does. Do we need to discuss the horse balls again? - Luke Reilly"
+    },
+    {
+        "id": 9,
+        "title": "Half-Life 2",
+        "tags":[
+            "3D", "adventure", "action", "alien"
+        ],
+        "userid": 1,
+        "img": "/images/img9.png",
+        "text": "Half-Life 2 forever changed our expectations for what a first-person shooter could be. Its richly imagined world and wonderfully paced gameplay is a delight, never letting up and brimming with invention. The Gravity Gun is obviously the poster child of Half-Life 2, turning each environment into a tactile playground in which you can create improvised weapons and solve basic but clever physics puzzles - and its importance can’t be overstated - but there’s an awful lot more here. We’re introduced to Alyx Vance, a supporting character with a rare warmth and intelligence. We’re transported to an iconic city, where Combine barricades loom with grim authority, and Striders stalk the streets with an otherworldly menace. We get to set Antlions on our enemies and in which we play fetch with a robot Dog. In short, it is a truly memorable piece of game design. - Cam Shea"
+    },
+    {
+        "id": 10,
+        "title": "Disco Elysium",
+        "tags":[
+            "3D", "adventure", "open world", "roleplay"
+        ],
+        "userid": 1,
+        "img": "/images/img10.png",
+        "text": "Simply put, there’s nothing else quite like Disco Elysium. The premise is straightforward: A body has been discovered, hanged from a looming tree in the backyard of a hostel, and it’s up to you to work out how it got there over the course of the 30-hour story. It’s a unique blend of noir detective fiction, traditional pen-and-paper RPGs, and a large helping of existentialist theory. Its twisting plot, a cast of memorable characters, and sheer depth of choice combine to create an experience that begs to be savored in a world riddled with crime, poverty, and violence. And, somehow, it manages to make all of this fun and, surprisingly often, funny. It quickly becomes clear that this isn’t simply a whodunnit, but a journey that will challenge you to solve crises on both profoundly personal and societal levels. A gorgeously designed isometric RPG that makes you think at every turn of its richly detailed streets, Disco Elysium is truly a unique experience, and one that will surely live long in the memory of any who have, for many years to come. - Simon Cardy"
+    },
+    {
+        "id": 11,
+        "title": "Super Mario Bros. 3",
+        "tags":[
+            "2D", "puzzles", "adventure"
+        ],
+        "userid": 1,
+        "img": "/images/img11.png",
+        "text": "Super Mario Bros. 3 was a game that exceeded my every hope and wish for it, and I spent hundreds of blissful afternoons defeating Koopa Kids, rescuing kings, and discovering secrets strewn throughout Mushroom World. Mario 3 earned a place on my list of favorite games way back in 1990, and 25 years of gaming progress have yet to dislodge it. Super Mario Bros. 3 is a textbook example of how to make a perfect video game sequel. It’s a mixture of the original’s best elements, combined with an almost excessive amount of imaginative new ideas. So much of what we consider so quintessentially Mario – the suits, the boos, the overworld – all actually originated here. - Justin Davis"
+    },
+    {
+        "id": 12,
+        "title": "Grand Theft Auto V",
+        "tags":[
+            "3D", "open world", "action"
+        ],
+        "userid": 1,
+        "img": "/images/img12.png",
+        "text": "If Grand Theft Auto V is anything it’s a game of immense, obsessive detail. There is no open world that feels as authentic and lived-in as Grand Theft Auto V’s Los Santos and its surrounding countryside. Turn it on and pick a street. Analyse it. Look at the unique shopfronts that aren’t repeated anywhere else. Look at the asphalt, worn and cracked; punished by the millions of cars that have hypothetically passed over it. Look at the litter, the graffiti. Grand Theft Auto V’s mad mix of high-speed chases, cinematic shootouts, and hectic heists may be outrageous at times, but the environment it unfolds within is just so real. A technical titan and an endless source of emergent fun, it’s no wonder Grand Theft Auto V is one of the most successful games ever made. No game sells over 155 million copies by accident. - Luke Reilly"
+    },
+    {
+        "id": 13,
+        "title": "Hades",
+        "tags":[
+            "3D", "action", "adventure"
+        ],
+        "userid": 1,
+        "img": "/images/img13.png",
+        "text": "Supergiant has released a string of incredible action games since its foundation, but Hades is all at once its best game, one of the finest takes on and best introductions to the roguelike genre, and a fresh, vibrant, and beautiful take on Greek mythology. As the son of the titular Hades, Zagreus, you'll try escaping the underworld again and again and again, and Hades makes that Sisyphean task constantly rewarding (and not just because Sisyphus is actually a character). Hades places as much an emphasis on the wide array of powers you earn every run, which allows for so much variety in how you approach a run, as it does on permanent progression, either in unlocking weapons, overarching stats, and more. But it doubles down on those rewards, with new bits of story, character development, and lore being just as important to every death and rebirth as the mechanical knowledge and upgrades you unlock. That's bolstered by a suite of incredible voice performances, fun twists on Greek myth, and a fantastic soundtrack that makes each attempt at breaking free memorable. - Jonathon Dornbush"
+    },
+    {
+        "id": 14,
+        "title": "Castlevania: Symphony of the Night",
+        "tags":[
+            "2D", "action", "metroidvania"
+        ],
+        "userid": 1,
+        "img": "/images/img14.png",
+        "text": "There is one specific moment in Castlevania: Symphony of the Night that elevates it from merely being a “game I love” into its position as one of the best games ever made. It’s also one of the most epic video game secrets of all time. After you’ve played through the entire game, defeating massive bosses, equipping badass loot and discovering dozens of secrets, right at the moment you think you’re about to win, you discover you’re only halfway done! Symphony’s (spoilers!) inverted second castle is much more than just a lazy way to extend the quest. It has devilish new enemy patterns, new bosses, and fantastic new equipment. Symphony of the Night is much more than just a fun side-scroller with an awesome twist, though. Art, animation, sound, gameplay, design… even replay value, thanks to multiple playable characters, all come together perfectly for one unforgettable experience that hits every note it needs to. - Justin Davis"
+    },
+    {
+        "id": 15,
+        "title": "Halo 2",
+        "tags":[
+            "3D", "action"
+        ],
+        "userid": 1,
+        "img": "/images/img15.png",
+        "text": "Few games had more of a buildup prior to their release than Halo 2, and even fewer managed to live up to them in the way that Halo 2 did. Master Chief taking the fight with the Covenant to Earth was epic, action-packed, and visually stunning on the original Xbox. Sure, the campaign didn't so much end as much as stopped, but the shocking reveal of the playable Arbiter and his story that mirrored the Chief's was a twist no one saw coming. Furthermore, and perhaps even more importantly, Halo 2 was the killer app for Xbox Live. It brought the party system and matchmaking hopper concept to consoles, instantly making every other online console game look archaic in its infrastructure by comparison. Of course, it helped that the multiplayer gameplay was, well, legendary. - Ryan McCaffrey"
+    },
+    {
+        "id": 16,
+        "title": "The Witcher 3: Wild Hunt",
+        "tags":[
+            "3D", "action", "adventure", "open world"
+        ],
+        "userid": 1,
+        "img": "/images/img16.png",
+        "text": "For all its inter-dimensional threats, monster hunts and magic powers, I’ve always thought The Witcher 3’s key achievement is in how it nails the mundane. Geralt’s fantasy world is one of mud, thatch and metal, his main quests are freelance work, and he loves a game of cards down the pub. That sense of reality is what helps you empathise with Geralt, understand the world, and really understand how bad things have gotten when the crazy shit starts popping off. An RPG with enough complexity to satisfy the urge to tinker, but enough character never to feel impersonal, Wild Hunt is a staggering achievement no matter how you look at it. Its story deftly balances cosmic threat and family drama, its choices feel truly meaningful and world-changingly effective, and it looks gorgeous in its own grubby way. Even its two DLC expansions are among the best ever released. Geralt’s final journey might be built on the mundane, but that makes it nothing short of magical. - Joe Skrebels"
+    },
+    {
+        "id": 17,
+        "title": "The Last of Us",
+        "tags":[
+            "3D", "action", "adventure"
+        ],
+        "userid": 1,
+        "img": "/images/img17.png",
+        "text": "I still think about three moments in The Last of Us at least once a week. The first is when Joel’s life changes in a moment in the game’s intro. The second moment arrived late into the game and demanded I make a certain gameplay choice because that’s how Joel would act, even if it wasn’t what I wanted to do. That dissonance struck me, but made so much sense. This was Joel and Ellie’s story I was experiencing, and those characters feel so real thanks to the script, animation, and Troy Baker and Ashley Johnson’s stellar performances. The Last of Us marries its storytelling with its gameplay, and nothing made me feel more than that last moment. The game’s final discussion between its two protagonists is filled with so much emotional weight because of their experience – because of what you experienced – that it’s difficult to think of another ending so perfectly true to this unforgettable experience. - Jonathon Dornbush"
+    },
+    {
+        "id": 18,
+        "title": "BioShock",
+        "tags":[
+            "3D", "action"
+        ],
+        "userid": 1,
+        "img": "/images/img18.png",
+        "text": "BioShock will likely always be remembered for its game-changing “Would You Kindly?” twist, but the first adventure in Rapture is so much more than a dressed-up dupe. From first encountering a splicer caring for a gun the way a mother cares for her baby to the still-enrapturing Andrew Ryan twist toward the game’s end, BioShock delivers one enrapturing setpiece after another. That’s largely in part thanks to one of the most memorable locations in gaming history. So much story is embedded in the dilapidated hallways and shuttered rooms of Rapture, a decaying underwater labyrinth that demands to be investigated. The mark of a good experience is one that you keep thinking about long after you’ve finished it. And I still haven’t stopped thinking about BioShock, its incredible location, and those awesome Plasmids. - Jonathon Dornbush"
+    },
+    {
+        "id": 19,
+        "title": "Bloodborne",
+        "tags":[
+            "3D", "action", "open world"
+        ],
+        "userid": 1,
+        "img": "/images/img19.png",
+        "text": "Bloodborne initially presents as a work of Gothic horror – you spend the opening hours inching through Yharnam’s dark alleyways and ominous churches, culling hordes of muttering werewolves – but this soon gives way to a weird tale worthy of Lovecraft himself. But its ambitious story – of religious and scientific schisms, of dreams and reality, of idiot gods and nightmare newborns – is told not in the overwritten prose favoured by Lovecraft but by an exceptionally savage third-person action game. From Software intentionally ditched Dark Souls’ trusted shield to force the player to be more aggressive. Director Hidetaka Miyazaki wanted every slash inflicted by its arsenal of gruesome weapons to feel as if you were fighting for your life. As is usually the case, his design works flawlessly. - Daniel Krupa "
+    },
+    {
+        "id": 20,
+        "title": "Undertale",
+        "tags":[
+            "2D", "adventure", "roleplay", "adventure"
+        ],
+        "userid": 1,
+        "img": "/images/img20.png",
+        "text": "A small child falls into the world of monsters and suddenly finds themselves the target of an ancient grudge that calls for their death. Undertale puts the player in a unique situation; where you'd usually kill everything in your way, Undertale gives you the option to spare every monster you meet, though it never requires it. Every monster killed or spared alters something in the world, whether it be another monster wondering what happened to their friend, an opportunity for a hilarious date, or a slightly easier time with a specific monster's bullet hell battle. Undertale is jam-packed with emotion, charm, and determination to show that your actions make a difference, no matter how small you think they may be. - Miranda Sanchez"
+    }
+]
