@@ -9,10 +9,13 @@ const Main = (props) => {
                         <a href='/'>Master Gaming</a>
                     </li>
                     <li>
-                        <a href='/posts/'>Game Posts</a>
+                        <a href='/posts/1'>Game Posts</a>
                     </li>
                     <li>
-                        <a href='/tags/'>Tags</a>
+                        <a href='/tags'>Tags</a>
+                    </li>
+                    <li>
+                        <a href='/videos/1'>Videos</a>
                     </li>
                 </ul>
             </header>

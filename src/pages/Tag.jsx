@@ -1,9 +1,9 @@
-import gamepost from '../database/gamepost.json'
+import gameposts from '../database/gameposts.json'
 import { useParams } from 'react-router-dom';
 import GamePosts from './GamePosts';
 
 const Tag = () => {
-    const posts = gamepost.slice().reverse()
+    const posts = gameposts.slice().reverse()
     let { tag } = useParams();
     
     const postsTag = posts.reduce((acc, post) => {
@@ -15,7 +15,7 @@ const Tag = () => {
 
 
     return (
-        <GamePosts postsTag={postsTag} pageTag={`tags/${tag}`}/>
+        <GamePosts postsTag={postsTag} pageTag={tag}/>
     );
 }
 

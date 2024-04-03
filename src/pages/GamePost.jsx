@@ -1,11 +1,11 @@
 import { useEffect, useState } from "react";
 // import axios from "axios";
-import gamepost from '../database/gamepost.json'
+import gameposts from '../database/gameposts.json'
 import GamePostSingle from "../components/GamePostSingle";
 import { useParams } from "react-router-dom";
 
 const GamePost = () => {
-    const posts = gamepost
+    const posts = gameposts
     let { id } = useParams();
     // const [posts, setPosts] = useState([])
     const [loading, setLoading] = useState(false)

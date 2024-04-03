@@ -1,9 +1,9 @@
 import { useEffect, useState } from 'react';
 import TagsList from '../components/TagsList';
-import gamepost from '../database/gamepost.json'
+import gameposts from '../database/gameposts.json'
 
 const Tags = () => {
-    const posts = gamepost
+    const posts = gameposts
     const [loading, setLoading] = useState(false)
     const tags = posts.reduce((acc, post) => {
         if (post.tags && Array.isArray(post.tags)) {

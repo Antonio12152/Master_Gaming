@@ -9,7 +9,7 @@ const TagsList = ({tags, loading})=> {
         <h2>All Tags</h2>
         <ul>
           {tags.map((tag, index) => (
-            <Link to={`/tags/${tag}`} key={index}>{tag} </Link>
+            <Link to={`/tags/${tag}/1`} key={index}>{tag} </Link>
           ))}
         </ul>
       </div>

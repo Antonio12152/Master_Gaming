@@ -35,7 +35,7 @@
         "tags":[
             "2D", "action"
         ],
-        "userid": 1,
+        "userid": 2,
         "img": "/images/img4.png",
         "text": "Super Metroid’s minimalistic environmental storytelling set a bar, way back in 1994, that I believe has still yet to be eclipsed. The planet Zebes is atmospheric, oppressive, and extremely lethal. At first glance, there doesn’t even appear to be any story. But then you start to look more closely. The parasite-riddled dead soldier outside of an early boss room. The crashed, half-submerged alien spaceship that may or may not be haunted. It’s brilliant and confident. But it’s Super Metroid’s ability to consistently invite the player to be curious – and then rewarding that curiosity – that makes it one of the greatest video games ever made. It’s not just that there are secrets hidden everywhere (although there are, and it’s awesome) – it’s that the game teases you with tantalizing clues – items, always just out of reach. Super Metroid is an impeccable action-platformer – that’s the “easy” part. What makes it truly special is its genius combination of puzzle-solving, atmosphere, storytelling, exploration, game design, and gameplay. There’s nothing else like it. - Justin Davis"
     },
@@ -55,7 +55,7 @@
         "tags":[
             "2D", "action", "puzzles", "open world"
         ],
-        "userid": 1,
+        "userid": 2,
         "img": "/images/img6.png",
         "text": "From it’s unforgettable beginnings guiding a swordless Link through the rain, to the final showdown with Ganon and utilizing mastery of sword and bow to defeat evil, The Legend of Zelda: Link to the Past measured out a perfect pace of dungeons, exploration, and a gripping narrative that was almost unheard of at the time. It’s open landscape was always inviting but never felt aimless – striking the perfect balance of freedom and purpose in your quest to save Princess Zelda. This iteration of Hyrule was more than just moving between enemy-filled screens, it encompassed everything an immersive experience should be: a vast open world that teased you with secrets hiding just beyond your reach, begging you to come back with new and inventive tools. Each zone – whether in the cheerful overworld, dimly lit caves, or the intimidating Dark World – was brought to life through a culmination of details like the sound of the Tempered Sword cleaving the air, the catchy jingle of a puzzle well-solved, and the ambient tunes of Koji Kondo’s score. - Brendan Graeber"
     },
@@ -85,7 +85,7 @@
         "tags":[
             "3D", "adventure", "action", "alien"
         ],
-        "userid": 1,
+        "userid": 2,
         "img": "/images/img9.png",
         "text": "Half-Life 2 forever changed our expectations for what a first-person shooter could be. Its richly imagined world and wonderfully paced gameplay is a delight, never letting up and brimming with invention. The Gravity Gun is obviously the poster child of Half-Life 2, turning each environment into a tactile playground in which you can create improvised weapons and solve basic but clever physics puzzles - and its importance can’t be overstated - but there’s an awful lot more here. We’re introduced to Alyx Vance, a supporting character with a rare warmth and intelligence. We’re transported to an iconic city, where Combine barricades loom with grim authority, and Striders stalk the streets with an otherworldly menace. We get to set Antlions on our enemies and in which we play fetch with a robot Dog. In short, it is a truly memorable piece of game design. - Cam Shea"
     },
@@ -115,7 +115,7 @@
         "tags":[
             "3D", "open world", "action"
         ],
-        "userid": 1,
+        "userid": 2,
         "img": "/images/img12.png",
         "text": "If Grand Theft Auto V is anything it’s a game of immense, obsessive detail. There is no open world that feels as authentic and lived-in as Grand Theft Auto V’s Los Santos and its surrounding countryside. Turn it on and pick a street. Analyse it. Look at the unique shopfronts that aren’t repeated anywhere else. Look at the asphalt, worn and cracked; punished by the millions of cars that have hypothetically passed over it. Look at the litter, the graffiti. Grand Theft Auto V’s mad mix of high-speed chases, cinematic shootouts, and hectic heists may be outrageous at times, but the environment it unfolds within is just so real. A technical titan and an endless source of emergent fun, it’s no wonder Grand Theft Auto V is one of the most successful games ever made. No game sells over 155 million copies by accident. - Luke Reilly"
     },
@@ -145,7 +145,7 @@
         "tags":[
             "3D", "action"
         ],
-        "userid": 1,
+        "userid": 2,
         "img": "/images/img15.png",
         "text": "Few games had more of a buildup prior to their release than Halo 2, and even fewer managed to live up to them in the way that Halo 2 did. Master Chief taking the fight with the Covenant to Earth was epic, action-packed, and visually stunning on the original Xbox. Sure, the campaign didn't so much end as much as stopped, but the shocking reveal of the playable Arbiter and his story that mirrored the Chief's was a twist no one saw coming. Furthermore, and perhaps even more importantly, Halo 2 was the killer app for Xbox Live. It brought the party system and matchmaking hopper concept to consoles, instantly making every other online console game look archaic in its infrastructure by comparison. Of course, it helped that the multiplayer gameplay was, well, legendary. - Ryan McCaffrey"
     },
@@ -185,7 +185,7 @@
         "tags":[
             "3D", "action", "open world"
         ],
-        "userid": 1,
+        "userid": 2,
         "img": "/images/img19.png",
         "text": "Bloodborne initially presents as a work of Gothic horror – you spend the opening hours inching through Yharnam’s dark alleyways and ominous churches, culling hordes of muttering werewolves – but this soon gives way to a weird tale worthy of Lovecraft himself. But its ambitious story – of religious and scientific schisms, of dreams and reality, of idiot gods and nightmare newborns – is told not in the overwritten prose favoured by Lovecraft but by an exceptionally savage third-person action game. From Software intentionally ditched Dark Souls’ trusted shield to force the player to be more aggressive. Director Hidetaka Miyazaki wanted every slash inflicted by its arsenal of gruesome weapons to feel as if you were fighting for your life. As is usually the case, his design works flawlessly. - Daniel Krupa "
     },
@@ -193,10 +193,110 @@
         "id": 20,
         "title": "Undertale",
         "tags":[
-            "2D", "adventure", "roleplay", "adventure"
+            "2D", "adventure", "roleplay"
         ],
         "userid": 1,
         "img": "/images/img20.png",
         "text": "A small child falls into the world of monsters and suddenly finds themselves the target of an ancient grudge that calls for their death. Undertale puts the player in a unique situation; where you'd usually kill everything in your way, Undertale gives you the option to spare every monster you meet, though it never requires it. Every monster killed or spared alters something in the world, whether it be another monster wondering what happened to their friend, an opportunity for a hilarious date, or a slightly easier time with a specific monster's bullet hell battle. Undertale is jam-packed with emotion, charm, and determination to show that your actions make a difference, no matter how small you think they may be. - Miranda Sanchez"
+    },
+    {
+        "id": 21,
+        "title": "Super Mario Bros.",
+        "tags":[
+            "2D", "adventure"
+        ],
+        "userid": 1,
+        "img": "/images/img21.png",
+        "text": "Mario's move out of arcades and into the Mushroom Kingdom changed our hobby and our industry as we know it, setting off a chain of events that shaped gaming as we know it today. Super Mario Bros. has been re-released many times, but there's no such thing as too many times because it's still fun and it's still some kid's first time ever playing a game. Its influence cannot be overstated. Example: literally everyone reading this can hum its theme song, right now, from memory. See? Now it's playing in your head again. You're welcome. - Ryan McCaffrey"
+    },
+    {
+        "id": 22,
+        "title": "Street Fighter II",
+        "tags":[
+            "2D", "fighting"
+        ],
+        "userid": 1,
+        "img": "/images/img22.png",
+        "text": "What can you say about the definitive fighting game, the game that has spawned countless imitators, acolytes, and sequels? Street Fighter II remains a classic in video game lore, making series mainstays Ryu, Ken, and Chun-Li as well as words like “Hadouken” part of the public lexicon. Everyone has a favorite character and that’s because of its diverse, fantastical character design. While exceptionally balanced, the imaginative design and high-end graphics for its time helped set it apart. Street Fighter II became perhaps the first fighting game global arcade smash and it is still celebrated today. - Christian Holt"
+    },
+    {
+        "id": 23,
+        "title": "Portal",
+        "tags":[
+            "3D", "adventure", "roleplay"
+        ],
+        "userid": 1,
+        "img": "/images/img23.png",
+        "text": "There's a reason first-person puzzle games far and wide are constantly compared to Portal — though a brief adventure, its gameplay, tone, writing, and structure so cohesively work together to create one of the most memorable, challenging, and fascinating puzzle games around. Arming players with the now-iconic Portal gun and the devastating - and lethal - wit of Glad0s, Valve guided players through a fantastically orchestrated and escalating set of physics-based puzzles that ended with one of the most memorable end-credits songs of all time. But for as great as its puzzles are, and the way they take the simplicity of two portals you can shoot almost anywhere into such fascinating territory, it's also Portal's world-building that equally makes the game such a memorable touchstone. - Jonathon Dornbush"
+    },
+    {
+        "id": 24,
+        "title": "Chrono Trigger",
+        "tags":[
+            "2D", "adventure", "roleplay"
+        ],
+        "userid": 1,
+        "img": "/images/img24.png",
+        "text": "Chrono Trigger is widely regarded as the greatest RPG of all time, and for good reason. What begins as a typical “day-in-the-life” adventure, quickly spirals into a sprawling, epoch jumping romp that is equally exhilarating and endearing. Created by a “dream team” at Squaresoft including Final Fantasy creator Hironobu Sakaguchi, Dragon Quest creator Yuji Horii, and character designs by Dragon Ball creator Akira Toriyama, Chrono Trigger’s pedigree was only outshined by its universal praise upon its release in the spring of 1995. Even at the twilight of the SNES’ lifespan, Chrono Trigger’s branching narrative, colorful characters and unforgettable soundtrack were more than enough to earn it a place on our list in this timeline or any other. - Zach Ryan"
+    },
+    {
+        "id": 25,
+        "title": "God of War",
+        "tags":[
+            "3D", "adventure", "action"
+        ],
+        "userid": 1,
+        "img": "/images/img25.png",
+        "text": "God of War didn't just pull off the impressive feat of reinvigorating and reinventing a franchise that had seemingly run cold, but it also smartly subverted what came before to create an adventure that both played to its past and stood on its own as one of the finest games of its generation. Nearly every facet of Sony Santa Monica's Norse epic is working in concert with one another to craft a thrilling, memorable, and engrossing adventure. From its haunting score, to the beautifully written and acted story of Kratos and Atreus, to the incredible feel of the Leviathan Axe, God of War's impressive craftsmanship shines through at every step, honoring the past while forging its own path. - Jonathon Dornbush"
+    },
+    {
+        "id": 26,
+        "title": "Half-Life: Alyx",
+        "tags":[
+            "3D", "adventure", "action"
+        ],
+        "userid": 1,
+        "img": "/images/img26.png",
+        "text": "VR is still a relatively young medium, and while plenty of games had already showed off its exciting potential, none of them had actually harnessed it so completely before Half-Life: Alyx. It raised the bar to astronomical heights – for what a VR campaign could look like, what VR shooting could feel like, and how a VR story could move you. Part of its strength comes from how completely it embraced that medium, pushing the player to investigate every corner and crevice in a way traditional 2D games simply can’t. But while that masterful design unequivocally positions it as the best VR game ever game, its incredible world, story, and encounters (and the way they set the stage for the future of Half-Life) make it a truly impressive FPS regardless of platform. - Tom Marks"
+    },
+    {
+        "id": 27,
+        "title": "Metal Gear Solid 3: Snake Eater",
+        "tags":[
+            "2D", "action"
+        ],
+        "userid": 1,
+        "img": "/images/img27.png",
+        "text": "There’s a reason a snake’s skeleton, and not a snake itself, features prominently in the title sequence of Snake Eater. This was the game that stripped the Metal Gear formula down to its very core and proved that it could still function even outside our expectations. It forced us to take what we knew about espionage and infiltration and learn how to apply it in a new, unfamiliar environment, and it did so with a bold and elegant understanding of its own systems. You could have all the stealth know-how and military training in the world, but out there in the unpredictable jungle of the Russian wilderness, you were exposed, vulnerable… a Naked Snake. And it worked. Snake Eater is arguably one of the most interesting love stories ever told in a game, one of the strangest and most exciting Cold War-era adventures, and one of the first games to truly make me reflect on my actions as a player. It manages to be tragic, sometimes devastatingly so, and yet still maintain that absurd comedic flair that I admire about this series. Any game that can make you emotional about climbing a ladder deserves some kind of recognition. - Lonnie Rad"
+    },
+    {
+        "id": 28,
+        "title": "Tetris",
+        "tags":[
+            "2D", "puzzles"
+        ],
+        "userid": 1,
+        "img": "/images/img28.png",
+        "text": "The classic Russian tile-matching puzzle game by Alexey Pajitnov blew my mind way back in the day. I still remember spending hours sitting in front of the TV with the NES sitting at my feet, rotating brightly colored puzzle pieces as they fell from the abyss, attempting to arrange them into horizontal lines that when assembled correctly would disappear and cause me to advance to the next stage. It was crazy fun, even when blocks began to fall at an alarmingly fast pace and I fell into a frenzied panic. But no matter how many times I had to start the game over, it was just too much fun to stop. There was always the chance that this time I’d get the right puzzle piece at the right time and could move on to the next stage. I never got tired of it, and even now Tetris remains one of my favorite games of all time. - Meghan Sullivan"
+    },
+    {
+        "id": 29,
+        "title": "Doom",
+        "tags":[
+            "2D", "adventure", "roleplay"
+        ],
+        "userid": 1,
+        "img": "/images/img29.png",
+        "text": "DOOM changed my life. My gaming life, at least. Having spent my entire existence up to that point playing platformers, side-scrolling action games, etc. on 8- and 16-bit consoles, DOOM's first-person shooting was a jaw-dropping paradigm shift. Everything about DOOM was incredible. The graphics were colorful and convincing. Lightning was spooky. It felt like you were on a Martian moon. It's music was memorable. Weapon design was brilliant, and enemy design even more so. From the imps to the Cacodemons to the Cyberdemon, nearly every creature in DOOM was the stuff of nightmares – and in a then-unheard-of gameplay twist, they hated each other as much as they hated you. And then there was DeathMatch. Whether you were connecting two PCs with a serial cable for one-on-one action or throwing a LAN party where four people hauled their PCs to the same place (bulky CRT monitors and all!) to chainsaw each other in the game, DOOM DeathMatch changed everything. And, incredibly, it's still fun. - Ryan McCaffrey"
+    },
+    {
+        "id": 30,
+        "title": "Final Fantasy XIV",
+        "tags":[
+            "3D", "adventure", "roleplay"
+        ],
+        "userid": 1,
+        "img": "/images/img30.png",
+        "text": "Final Fantasy 14 has long moved beyond its redemption arc and entered its dominant era. No other MMORPG has spent the past decade so consistently, releasing critically-acclaimed expansion after expansion. Square Enix’s hard work has paid off too as each year millions more players sign up to see what the buzz is about. Final Fantasy 14’s success doesn’t just hinge on its playability as an MMO, but its appeal to fans of single-player JRPGs as well. This dual-threat approach, plus a level of dedication to players’ happiness means no discussions about the best MMORPG of all time, let alone game, can be complete without talking about FF14. - Matt Kim"
     }
 ]

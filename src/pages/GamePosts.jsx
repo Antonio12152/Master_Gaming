@@ -1,19 +1,27 @@
 import { useEffect, useState } from "react";
 //import axios from "axios";
-import gamepost from '../database/gamepost.json'
+import gameposts from '../database/gameposts.json'
+import usersData from '../database/usersData.json'
 import GamePostsList from "../components/GamePostsList";
 import { useParams } from "react-router-dom";
 
 const GamePosts = ({ postsTag, pageTag }) => {
     let posts
-    let page
+    let page = ""
     if (postsTag !== undefined && postsTag) {
         posts = postsTag
-        page = pageTag
+        page = `tags/${pageTag}`
     } else {
-        posts = gamepost.slice().reverse()
+        posts = gameposts.slice().reverse()
         page = "posts"
     }
+
+    const users = new Map(usersData.map(user => [user.id, user.username]));
+
+    const postsData = posts.map(post => ({
+        ...post,
+        username: users.get(post.userid) || 'Deleted'
+    }));
 
     // const [posts, setPosts] = useState([])
     const [loading, setLoading] = useState(false)
@@ -31,7 +39,7 @@ const GamePosts = ({ postsTag, pageTag }) => {
     // useEffect(() => {
     //     const fetchPosts = async () => {
     //         setLoading(true)
-    //         const res = await axios.get(gamepost) // here your database url or server js file
+    //         const res = await axios.get(gameposts) // here your database url or server js file
     //         setPosts(res)
     //         setLoading(false)
     //     }
@@ -40,12 +48,12 @@ const GamePosts = ({ postsTag, pageTag }) => {
     const indexOfLastPost = currentPage * postsPerPage
     const indexOfFirstPost = indexOfLastPost - postsPerPage
 
-    const currentPost = posts.slice(indexOfFirstPost, indexOfLastPost)
+    const currentPost = postsData.slice(indexOfFirstPost, indexOfLastPost)
     const paginate = (pageNumber) => setCurrentPage(pageNumber)
 
     return (
         <div>
-            <GamePostsList page={page} posts={posts} currentPost={currentPost} loading={loading} postsPerPage={postsPerPage} paginate={paginate} currentPage={currentPage} />
+            <GamePostsList page={page} posts={postsData} currentPost={currentPost} loading={loading} postsPerPage={postsPerPage} paginate={paginate} currentPage={currentPage} />
         </div>
     )
 }
