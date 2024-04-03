@@ -5,15 +5,15 @@ import gameposts from '../database/gameposts.json'
 const Tags = () => {
     const posts = gameposts
     const [loading, setLoading] = useState(false)
-    const tags = posts.reduce((acc, post) => {
+    const tags = posts.reduce((arr, post) => {
         if (post.tags && Array.isArray(post.tags)) {
             post.tags.forEach(tag => {
-                if (!acc.includes(tag)) {
-                    acc.push(tag);
+                if (!arr.includes(tag)) {
+                    arr.push(tag);
                 }
             });
         }
-        return acc;
+        return arr;
     }, []);
 
     useEffect(() => {
@@ -22,7 +22,7 @@ const Tags = () => {
     }, []);
 
     return (
-        <TagsList tags={tags} loading={loading}/>
+        <TagsList tags={tags.sort()} loading={loading} />
     );
 }
 

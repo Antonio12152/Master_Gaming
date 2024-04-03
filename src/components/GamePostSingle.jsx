@@ -12,7 +12,7 @@ const GamePostSingle = ({ post, loading }) => {
             </div>
             <div>
                 <div>
-                    <h3>Creator:</h3>
+                    <h3>Added by:</h3>
                     <p>{post.username}</p>
                 </div>
                 {post.tags && post.tags.length > 0 && (

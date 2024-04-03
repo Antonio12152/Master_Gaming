@@ -6,11 +6,11 @@ const Tag = () => {
     const posts = gameposts.slice().reverse()
     let { tag } = useParams();
     
-    const postsTag = posts.reduce((acc, post) => {
+    const postsTag = posts.reduce((arr, post) => {
         if (post.tags && post.tags.includes(tag)) {
-            acc.push(post)
+            arr.push(post)
         }
-        return acc;
+        return arr;
     }, []);
 
 

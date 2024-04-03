@@ -21,34 +21,34 @@ const Pagin = ({ page, postsPerPage, TotalPosts, paginate, currentPage }) => {
         first = <li className="pag"><Link to={`/${page}/1`} className="pag" onClick={() => paginate(1)}>First</Link></li>;
     }
     if (currentPage > 1) {
-        pr = <li className="pag"><Link to={`/${page}/${currentPage - 1}`} className="pag" onClick={() => {paginate(currentPage - 1)}}>Previous</Link></li>;
+        pr = <li className="pag"><Link to={`/${page}/${currentPage - 1}`} className="pag" onClick={() => { paginate(currentPage - 1) }}>Previous</Link></li>;
     }
-    if (pageCutLow > 7) {
-        prd = <li className="pag"><Link to={`/${page}/${currentPage - 6}`} className="pag" onClick={() => {paginate(currentPage - 6)}}>{"<"}</Link></li>;
+    if (pageCutLow > 1) {
+        prd = <li className="pag"><Link to={`/${page}/${currentPage - 6}`} className="pag" onClick={() => { paginate(currentPage - 6) }}>{"<"}</Link></li>;
     }
     if (currentPage < pageNumbers.length) {
-        ne = <li className="pag"><Link to={`/${page}/${currentPage + 1}`} className="pag" onClick={() => {paginate(currentPage + 1)}}>Next</Link></li>;
+        ne = <li className="pag"><Link to={`/${page}/${currentPage + 1}`} className="pag" onClick={() => { paginate(currentPage + 1) }}>Next</Link></li>;
     }
     if (pageCutHigh < pageNumbers.length) {
-        ned = <li className="pag"><Link to={`/${page}/${currentPage + 6}`} className="pag" onClick={() => {paginate(currentPage + 6)}}>{">"}</Link></li>;
+        ned = <li className="pag"><Link to={`/${page}/${currentPage + 6}`} className="pag" onClick={() => { paginate(currentPage + 6) }}>{">"}</Link></li>;
     }
-    if (pageCutHigh < pageNumbers.length) {
-        last = <li className="pag"><Link to={`/${page}/${pageNumbers.length}`} className="pag" onClick={() => {paginate(pageNumbers.length)}}>{"Last"}</Link></li>;
+    if (currentPage < pageNumbers.length) {
+        last = <li className="pag"><Link to={`/${page}/${pageNumbers.length}`} className="pag" onClick={() => { paginate(pageNumbers.length) }}>{"Last"}</Link></li>;
     }
-
+    
     return (
         <nav className="pag nav">
             <ul className="pag">
                 {first}
-                {pr}
                 {prd}
+                {pr}
                 {pageNumbers.filter(num => num > pageCutLow + 1 && num < pageCutHigh - 1).map(num => (
                     <li key={num} className={currentPage === num ? "active pag" : "pag"}>
-                        <Link to={`/${page}/${num}`} onClick={() => { paginate(num)}}>{num}</Link>
+                        <Link to={`/${page}/${num}`} onClick={() => { paginate(num) }}>{num}</Link>
                     </li>
                 ))}
-                {ned}
                 {ne}
+                {ned}
                 {last}
             </ul>
         </nav >
