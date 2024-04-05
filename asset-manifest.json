@@ -1,15 +1,15 @@
 {
   "files": {
-    "main.css": "/Master-Gaming/static/css/main.f6aa5417.css",
-    "main.js": "/Master-Gaming/static/js/main.cbb44f55.js",
-    "static/js/453.9603adca.chunk.js": "/Master-Gaming/static/js/453.9603adca.chunk.js",
-    "index.html": "/Master-Gaming/index.html",
-    "main.f6aa5417.css.map": "/Master-Gaming/static/css/main.f6aa5417.css.map",
-    "main.cbb44f55.js.map": "/Master-Gaming/static/js/main.cbb44f55.js.map",
-    "453.9603adca.chunk.js.map": "/Master-Gaming/static/js/453.9603adca.chunk.js.map"
+    "main.css": "/static/css/main.f6aa5417.css",
+    "main.js": "/static/js/main.95f874c1.js",
+    "static/js/453.9603adca.chunk.js": "/static/js/453.9603adca.chunk.js",
+    "index.html": "/index.html",
+    "main.f6aa5417.css.map": "/static/css/main.f6aa5417.css.map",
+    "main.95f874c1.js.map": "/static/js/main.95f874c1.js.map",
+    "453.9603adca.chunk.js.map": "/static/js/453.9603adca.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.f6aa5417.css",
-    "static/js/main.cbb44f55.js"
+    "static/js/main.95f874c1.js"
   ]
 }
