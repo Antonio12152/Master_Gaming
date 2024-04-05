@@ -40,7 +40,7 @@ const GamePostsList = ({ page, posts, currentPost, loading, postsPerPage, pagina
                 </div>
             </div>
         ))}
-        <Pagin postsPerPage={postsPerPage} TotalPosts={posts.length} paginate={paginate} currentPage={currentPage} />
+        <Pagin page={page} postsPerPage={postsPerPage} TotalPosts={posts.length} paginate={paginate} currentPage={currentPage} />
     </div>)
 }
 

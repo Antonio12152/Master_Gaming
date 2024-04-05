@@ -18,7 +18,7 @@ const VideosList = ({ page, posts, currentPost, loading, postsPerPage, paginate,
                 <iframe width="560" height="315" src={`${video.video}`} title="YouTube video player" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerPolicy="strict-origin-when-cross-origin" allowFullScreen />
             </div>
         ))}
-        <Pagin postsPerPage={postsPerPage} TotalPosts={posts.length} paginate={paginate} currentPage={currentPage} />
+        <Pagin page={page} postsPerPage={postsPerPage} TotalPosts={posts.length} paginate={paginate} currentPage={currentPage} />
     </div>)
 }
 
