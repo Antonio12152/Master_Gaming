@@ -9,6 +9,13 @@ a{
     text-decoration: none;
     color: black;
 }
+li{
+    list-style-type: none;
+}
+.main{
+    position: relative;
+    min-height: 100vh;
+}
 .header{
     background-color: gray;
     border-bottom: 5px solid black;
@@ -22,4 +29,18 @@ a{
     margin: 5px;
     border: 2px solid black;
     background-color: pink;
+}
+.prop{
+    padding-bottom: 43px;
+}
+hr{
+    visibility: hidden;
+}
+.footer { 
+    position: absolute;
+    border-top: 5px solid black;
+    background-color: blue;
+    bottom: 0;
+    width: 100%;
+    height: 2.5rem;
 }

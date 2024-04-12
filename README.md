@@ -1,3 +1,8 @@
+# Master Gaming
+
+Master Gaming is a gaming news site. There are posts and videos there. Posts include tags to make it easier to search by interest.
+Site link on netlify - https://master-gaming.netlify.app/
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).

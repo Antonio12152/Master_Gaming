@@ -19,9 +19,13 @@ const Main = (props) => {
                     </li>
                 </ul>
             </header>
-            <div >
+            <div className='prop'>
                 {props.children}
             </div>
+            <hr />
+            <footer className='footer'>
+                Some text here
+            </footer>
         </div>
     )
 }

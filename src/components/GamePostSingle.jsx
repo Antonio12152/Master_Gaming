@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import '../CSS/PostImg.css'
+import '../CSS/Post.css'
 const GamePostSingle = ({ post, loading }) => {
     if (loading) {
         return <h2>loading</h2>
