@@ -5,26 +5,32 @@ const GamePostSingle = ({ post, loading }) => {
         return <h2>loading</h2>
     }
     return (<div className='div-main'>
-        <div key={post.id} className='div-post-img'>
+        <div key={post.id} className='div-post'>
             <div className='div-title'>{post.title}</div>
-            <div>
-                <img src={post.img} alt="no img" width={500} />
+            <div className='div-container'>
+                <div className='div-post-img'>
+                    <div className='div-img'>
+                        <img src={post.img} alt="no img" />
+                    </div>
+                </div>
+                <div className='div-post-inf'>
+                    <div>
+                        <h3>Added by:</h3>
+                        <p>{post.username}</p>
+                    </div>
+                    {post.tags && post.tags.length > 0 && (
+                        <div>
+                            <h3>Tags:</h3>
+                            <ul>
+                                {post.tags.map((tag, index) => (
+                                    <li key={index}><Link to={`/tags/${tag}`}>{tag} </Link></li>
+                                ))}
+                            </ul>
+                        </div>
+                    )}
+                </div>
             </div>
             <div>
-                <div>
-                    <h3>Added by:</h3>
-                    <p>{post.username}</p>
-                </div>
-                {post.tags && post.tags.length > 0 && (
-                    <div>
-                        <h3>Tags:</h3>
-                        <ul>
-                            {post.tags.map((tag, index) => (
-                                <li key={index}><Link to={`/tags/${tag}`}>{tag} </Link></li>
-                            ))}
-                        </ul>
-                    </div>
-                )}
                 <div className='div-body'>{post.text}</div>
             </div>
         </div>

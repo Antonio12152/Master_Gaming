@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import '../CSS/Post.css'
+import '../CSS/Tag.css'
 const TagsList = ({tags, loading})=> {
     if (loading) {
         return <h2>loading</h2>
@@ -7,9 +7,9 @@ const TagsList = ({tags, loading})=> {
     return (
         <div className='div-main'>
         <h2>All Tags</h2>
-        <ul>
+        <ul className='div-tags'>
           {tags.map((tag, index) => (
-            <Link to={`/tags/${tag}/1`} key={index}>{tag} </Link>
+            <li key={index}><Link to={`/tags/${tag}/1`}>{tag} </Link></li>
           ))}
         </ul>
       </div>

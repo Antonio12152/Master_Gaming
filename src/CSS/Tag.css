@@ -1,0 +1,18 @@
+.div-tags li {
+    padding: 4px;
+    background-color: #3c86b8;
+    border: 1px solid black;
+    max-width: 130px;
+    margin: 2px;
+}
+.div-tags li:hover{
+    background-color: #4ba5e1;
+    cursor: pointer;
+    transition: 0.3s;
+}
+.div-tags li>a {
+    display: block;
+    width: 100%;
+    text-decoration: none;
+    color: inherit;
+}
