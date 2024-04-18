@@ -1,15 +1,20 @@
 import '../CSS/App.css';
+import HomePV from "../components/HomePV";
+
+import gameposts from '../database/gameposts.json'
+import usersData from '../database/usersData.json'
+import videosData from '../database/videos.json'
 
 const Home = () => {
+    let post = gameposts[gameposts.length - 1]
+    const users = new Map(usersData.map(user => [user.id, user.username]));
+    const postData = { ...post, username: users.get(post.userid) || 'Deleted' };
+    let videos = videosData[videosData.length - 1]
+
+    const videoData = { ...videos, username: users.get(post.userid) || 'Deleted' };
     return (
         <div className="home">
-           <h1>Welcome to Master Gaming!</h1>
-           <h3>Here you can read news about games and watch cool videos.</h3>
-           <h4>Our last post and video:</h4>
-           <div>
-            <div>Preset Post</div>
-            <div>Preset Video</div>
-           </div>
+            <HomePV post={postData} video={videoData} />
         </div>
     )
 }

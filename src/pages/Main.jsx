@@ -24,7 +24,11 @@ const Main = (props) => {
             </div>
             <hr />
             <footer className='footer'>
-                Some text here
+                <ul className='footer__ul'>
+                    <li><a href="https://www.youtube.com/" target="_blank" rel="noreferrer"><img src="/images/youtube.png" alt="Youtube" /></a></li>
+                    <li><a href="https://twitter.com/" target="_blank" rel="noreferrer"><img src="/images/x.png" alt="X" /></a></li>
+                    <li><a href="https://github.com/" target="_blank" rel="noreferrer"><img src="/images/github.png" alt="GitHub" /></a></li>
+                </ul>
             </footer>
         </div>
     )

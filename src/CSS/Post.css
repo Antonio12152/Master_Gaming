@@ -7,13 +7,21 @@
     margin: 5px;
     padding: 2px;
     border: 2px solid black;
-    background-color: #087bc8;
+    background-color: #3c86b8;
 }
 
 .div-container {
     display: flex;
 }
 
+.div-post-home {
+    flex: 1;
+    flex-grow: 1;
+}
+.div-post-home .div-post{
+    height: 100%;
+    box-sizing: border-box;
+}
 .div-post-img {
     flex: 8;
 }
@@ -44,16 +52,18 @@
 
 .div-post-inf li {
     padding: 4px;
-    background-color: #3c86b8;
+    background-color: pink;
     border: 1px solid black;
     max-width: 130px;
     margin: 2px;
 }
-.div-post-inf li:hover{
-    background-color: #4ba5e1;
+
+.div-post-inf li:hover {
+    background-color: rgb(255, 164, 180);
     cursor: pointer;
     transition: 0.3s;
 }
+
 .div-post-inf li>a {
     display: block;
     width: 100%;

@@ -47,7 +47,7 @@ li{
 }
 
 .pag>li.active a {
-    background-color: #9AB87A;
+    background-color: pink;
 }
 
 .pag>li:first-child a {
@@ -65,7 +65,4 @@ li{
     border: 2px solid #3D315B;
     border-right: 0;
     color: white;
-}
-.active{
-    background-color:pink;
 }

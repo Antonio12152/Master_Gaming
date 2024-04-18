@@ -1,12 +1,12 @@
 .div-tags li {
     padding: 4px;
-    background-color: #3c86b8;
+    background-color: pink;
     border: 1px solid black;
     max-width: 130px;
     margin: 2px;
 }
 .div-tags li:hover{
-    background-color: #4ba5e1;
+    background-color: rgb(255, 164, 180);
     cursor: pointer;
     transition: 0.3s;
 }
