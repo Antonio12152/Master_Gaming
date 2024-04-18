@@ -7,8 +7,14 @@ const Pagin = ({ page, postsPerPage, TotalPosts, paginate, currentPage }) => {
     for (let i = 1; i <= Math.ceil(TotalPosts / postsPerPage); i++) {
         pageNumbers.push(i)
     }
+    const scroll = window.scrollTo({ top: 0, behavior: 'smooth' });
     let windowInnerWidth = document.documentElement.clientWidth
-    let wp = Math.trunc(windowInnerWidth/100)
+    let wp
+    if(Math.trunc(windowInnerWidth/90)>9){
+        wp = 9
+    }else{
+        wp = Math.trunc(windowInnerWidth/90)
+    }
     // let pr;
     // let ne;
     let prd;
@@ -20,22 +26,22 @@ const Pagin = ({ page, postsPerPage, TotalPosts, paginate, currentPage }) => {
     let pageCutHigh = currentPage + wp;
 
     if (currentPage > 1) {
-        first = <li className="pag"><Link to={`/${page}/1`} className="pag" onClick={() => paginate(1)}>First</Link></li>;
+        first = <li className="pag"><Link to={`/${page}/1`} className="pag" onClick={() => {paginate(1); scroll()}}>First</Link></li>;
     }
     // if (currentPage > 1) {
-    //     pr = <li className="pag"><Link to={`/${page}/${currentPage - 1}`} className="pag" onClick={() => { paginate(currentPage - 1) }}>Previous</Link></li>;
+    //     pr = <li className="pag"><Link to={`/${page}/${currentPage - 1}`} className="pag" onClick={() => { paginate(currentPage - 1); scroll()}}>Previous</Link></li>;
     // }
     if (pageCutLow > 1) {
-        prd = <li className="pag"><Link to={`/${page}/${currentPage - (wp-1)}`} className="pag" onClick={() => { paginate(currentPage - 6) }}>{"<"}</Link></li>;
+        prd = <li className="pag"><Link to={`/${page}/${currentPage - (wp-1)}`} className="pag" onClick={() => { paginate(currentPage - 6); scroll()}}>{"<"}</Link></li>;
     }
     // if (currentPage < pageNumbers.length) {
-    //     ne = <li className="pag"><Link to={`/${page}/${currentPage + 1}`} className="pag" onClick={() => { paginate(currentPage + 1) }}>Next</Link></li>;
+    //     ne = <li className="pag"><Link to={`/${page}/${currentPage + 1}`} className="pag" onClick={() => { paginate(currentPage + 1); scroll()}}>Next</Link></li>;
     // }
     if (pageCutHigh < pageNumbers.length) {
-        ned = <li className="pag"><Link to={`/${page}/${currentPage + (wp-1)}`} className="pag" onClick={() => { paginate(currentPage + 6) }}>{">"}</Link></li>;
+        ned = <li className="pag"><Link to={`/${page}/${currentPage + (wp-1)}`} className="pag" onClick={() => { paginate(currentPage + 6); scroll()}}>{">"}</Link></li>;
     }
     if (currentPage < pageNumbers.length) {
-        last = <li className="pag"><Link to={`/${page}/${pageNumbers.length}`} className="pag" onClick={() => { paginate(pageNumbers.length) }}>{"Last"}</Link></li>;
+        last = <li className="pag"><Link to={`/${page}/${pageNumbers.length}`} className="pag" onClick={() => { paginate(pageNumbers.length); scroll()}}>{"Last"}</Link></li>;
     }
     
     return (

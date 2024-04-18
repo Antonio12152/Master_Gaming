@@ -36,7 +36,9 @@
     font-size: 20px;
     padding: 3px;
 }
-
+.div-img{
+    margin-left: 6px;
+}
 .div-img>img {
     width: 100%;
     border: 1px solid black;
@@ -52,21 +54,22 @@
 
 .div-post-inf li {
     padding: 4px;
-    background-color: pink;
+    background-color: limegreen;
+    border-radius: 10px;
     border: 1px solid black;
-    max-width: 130px;
     margin: 2px;
+    min-width: 120px;
+    max-width: 280px;
 }
 
 .div-post-inf li:hover {
-    background-color: rgb(255, 164, 180);
+    background-color: #7FFF00;
     cursor: pointer;
     transition: 0.3s;
 }
 
 .div-post-inf li>a {
     display: block;
-    width: 100%;
     text-decoration: none;
     color: inherit;
 }
@@ -80,6 +83,7 @@
         display: flex;
         justify-content: center;
         align-items: center;
+        margin-left: 0;
     }
 
     .div-img>img {
