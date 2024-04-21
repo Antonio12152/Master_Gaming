@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-// import axios from "axios";
 import gameposts from '../database/gameposts.json'
 import usersData from '../database/usersData.json'
 import GamePostSingle from "../components/GamePostSingle";

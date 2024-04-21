@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-//import axios from "axios";
 import gameposts from '../database/gameposts.json'
 import usersData from '../database/usersData.json'
 import GamePostsList from "../components/GamePostsList";
@@ -23,7 +22,6 @@ const GamePosts = ({ postsTag, pageTag }) => {
         username: users.get(post.userid) || 'Deleted'
     }));
 
-    //const [posts, setPosts] = useState([])
     const [loading, setLoading] = useState(false)
     let [currentPage, setCurrentPage] = useState(1)
     const [postsPerPage] = useState(5)
@@ -36,15 +34,7 @@ const GamePosts = ({ postsTag, pageTag }) => {
         }
         setLoading(false);
     }, [id]);
-    // useEffect(() => {
-    //     const fetchPosts = async () => {
-    //         setLoading(true)
-    //         const res = await axios.get("http://localhost:3001/") // here your database url or server js file
-    //         setPosts(res)
-    //         setLoading(false)
-    //     }
-    //     fetchPosts()
-    // }, []);
+
     const indexOfLastPost = currentPage * postsPerPage
     const indexOfFirstPost = indexOfLastPost - postsPerPage
 
