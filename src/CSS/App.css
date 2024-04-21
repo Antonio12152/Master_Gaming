@@ -34,20 +34,18 @@ li {
 .header__ul>li {
     display: inline-block;
     margin: 5px;
-    border: 2px solid black;
-    border-radius: 10px;
-    background-color: limegreen;
 }
 
 .header__ul a {
     padding: 10px;
+    border: 2px solid black;
+    border-radius: 10px;
+    background-color: limegreen;
     text-decoration: none;
     color: inherit;
     display: block;
 }
-
-
-.header__ul>li:hover {
+.header__ul a:hover {
     background-color: #7FFF00;
     cursor: pointer;
     transition: 0.3s;

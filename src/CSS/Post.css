@@ -54,26 +54,25 @@
 
 .div-post-inf li {
     padding: 4px;
-    background-color: limegreen;
-    border-radius: 10px;
-    border: 1px solid black;
     margin: 2px;
     min-width: 120px;
     max-width: 280px;
 }
 
-.div-post-inf li:hover {
-    background-color: #7FFF00;
-    cursor: pointer;
-    transition: 0.3s;
-}
-
 .div-post-inf li>a {
+    padding: 5px;
+    background-color: limegreen;
+    border-radius: 10px;
+    border: 1px solid black;
     display: block;
     text-decoration: none;
     color: inherit;
 }
-
+.div-post-inf li>a:hover {
+    background-color: #7FFF00;
+    cursor: pointer;
+    transition: 0.3s;
+}
 @media (max-width: 768px) {
     .div-container {
         display: block;

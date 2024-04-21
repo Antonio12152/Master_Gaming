@@ -23,7 +23,7 @@ const GamePosts = ({ postsTag, pageTag }) => {
         username: users.get(post.userid) || 'Deleted'
     }));
 
-    // const [posts, setPosts] = useState([])
+    //const [posts, setPosts] = useState([])
     const [loading, setLoading] = useState(false)
     let [currentPage, setCurrentPage] = useState(1)
     const [postsPerPage] = useState(5)
@@ -39,7 +39,7 @@ const GamePosts = ({ postsTag, pageTag }) => {
     // useEffect(() => {
     //     const fetchPosts = async () => {
     //         setLoading(true)
-    //         const res = await axios.get(gameposts) // here your database url or server js file
+    //         const res = await axios.get("http://localhost:3001/") // here your database url or server js file
     //         setPosts(res)
     //         setLoading(false)
     //     }

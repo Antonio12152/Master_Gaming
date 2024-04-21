@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-//import axios from "axios";
 import videosData from '../database/videos.json'
 import usersData from '../database/usersData.json'
 import VideosList from "../components/VideosList";
