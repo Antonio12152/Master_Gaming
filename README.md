@@ -23,4 +23,4 @@ Your app is ready to be deployed!
 
 See the section about deployment for more information.
 
-Uses to push on site, like netlify.
+Used to push on site, like netlify.
