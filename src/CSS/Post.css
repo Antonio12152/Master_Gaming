@@ -61,7 +61,7 @@
 
 .div-post-inf li>a {
     padding: 5px;
-    background-color: limegreen;
+    background-color: rgb(240, 158, 6);
     border-radius: 10px;
     border: 1px solid black;
     display: block;
@@ -69,7 +69,7 @@
     color: inherit;
 }
 .div-post-inf li>a:hover {
-    background-color: #7FFF00;
+    background-color: rgb(201, 131, 0);
     cursor: pointer;
     transition: 0.3s;
 }
