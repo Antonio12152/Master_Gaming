@@ -6,7 +6,7 @@ const GamePostsList = ({ page, posts, currentPost, loading, postsPerPage, pagina
     if (loading) {
         return <h2>loading</h2>
     }
-
+    const scroll = document.getElementById("header");
     return (<div className='div-main'>
         <Pagin page={page} postsPerPage={postsPerPage} TotalPosts={posts.length} paginate={paginate} currentPage={currentPage} />
         {currentPost.map((post) => (
@@ -32,7 +32,7 @@ const GamePostsList = ({ page, posts, currentPost, loading, postsPerPage, pagina
                                 <h3>Tags:</h3>
                                 <ul>
                                     {post.tags.map((tag, index) => (
-                                        <li key={index}><Link to={`/tags/${tag}`}>{tag} </Link></li>
+                                        <li key={index} onClick={()=> scroll.scrollIntoView({behavior: "smooth"})}><Link to={`/tags/${tag}`}>{tag} </Link></li>
                                     ))}
                                 </ul>
                             </div>
