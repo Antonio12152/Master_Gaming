@@ -1,9 +1,6 @@
 import { Link } from 'react-router-dom';
 import '../CSS/Tag.css'
-const TagsList = ({tags, loading})=> {
-    if (loading) {
-        return <h2>loading</h2>
-    }
+const TagsList = ({tags})=> {
     return (
         <div className='div-main'>
         <h2>All Tags</h2>

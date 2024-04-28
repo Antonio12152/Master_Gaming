@@ -2,10 +2,7 @@ import { Link } from 'react-router-dom';
 import '../CSS/Post.css'
 import Pagin from './Pagin';
 
-const GamePostsList = ({ page, posts, currentPost, loading, postsPerPage, paginate, currentPage }) => {
-    if (loading) {
-        return <h2>loading</h2>
-    }
+const GamePostsList = ({ page, posts, currentPost, postsPerPage, paginate, currentPage }) => {
     const scroll = document.getElementById("header");
     return (<div className='div-main'>
         <Pagin page={page} postsPerPage={postsPerPage} TotalPosts={posts.length} paginate={paginate} currentPage={currentPage} />

@@ -22,17 +22,14 @@ const GamePosts = ({ postsTag, pageTag }) => {
         username: users.get(post.userid) || 'Deleted'
     }));
 
-    const [loading, setLoading] = useState(false)
     let [currentPage, setCurrentPage] = useState(1)
     const [postsPerPage] = useState(5)
 
     let { id } = useParams();
     useEffect(() => {
-        setLoading(true);
         if (id !== undefined) {
             setCurrentPage(parseInt(id));
         }
-        setLoading(false);
     }, [id]);
 
     const indexOfLastPost = currentPage * postsPerPage
@@ -43,7 +40,7 @@ const GamePosts = ({ postsTag, pageTag }) => {
 
     return (
         <div>
-            <GamePostsList page={page} posts={postsData} currentPost={currentPost} loading={loading} postsPerPage={postsPerPage} paginate={paginate} currentPage={currentPage} />
+            <GamePostsList page={page} posts={postsData} currentPost={currentPost} postsPerPage={postsPerPage} paginate={paginate} currentPage={currentPage} />
         </div>
     )
 }

@@ -14,7 +14,7 @@ const Home = () => {
     const videoData = { ...videos, username: users.get(post.userid) || 'Deleted' };
     return (
         <div className="home">
-            <HomePV post={postData} video={videoData} />
+            <HomePV post={postData} video={videoData}/>
         </div>
     )
 }

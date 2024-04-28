@@ -13,17 +13,14 @@ const Videos = () => {
         username: users.get(post.userid) || 'Deleted'
     }));
 
-    const [loading, setLoading] = useState(false)
     let [currentPage, setCurrentPage] = useState(1)
     const [postsPerPage] = useState(6)
 
     let { id } = useParams();
     useEffect(() => {
-        setLoading(true);
         if (id !== undefined) {
             setCurrentPage(parseInt(id));
         }
-        setLoading(false);
     }, [id]);
 
     const indexOfLastPost = currentPage * postsPerPage
@@ -34,7 +31,7 @@ const Videos = () => {
 
     return (
         <div>
-            <VideosList page={"videos"} posts={videoData} currentPost={currentPost} loading={loading} postsPerPage={postsPerPage} paginate={paginate} currentPage={currentPage} />
+            <VideosList page={"videos"} posts={videoData} currentPost={currentPost} postsPerPage={postsPerPage} paginate={paginate} currentPage={currentPage} />
         </div>
     )
 }

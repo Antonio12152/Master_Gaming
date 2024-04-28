@@ -1,9 +1,6 @@
 import { Link } from 'react-router-dom';
 import '../CSS/Post.css'
-const GamePostSingle = ({ post, loading }) => {
-    if (loading) {
-        return <h2>loading</h2>
-    }
+const GamePostSingle = ({ post }) => {
     return (<div className='div-main'>
         <div key={post.id} className='div-post'>
             <div className='div-title'>{post.title}</div>

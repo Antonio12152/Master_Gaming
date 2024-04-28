@@ -1,10 +1,8 @@
-import { useEffect, useState } from 'react';
 import TagsList from '../components/TagsList';
 import gameposts from '../database/gameposts.json'
 
 const Tags = () => {
     const posts = gameposts
-    const [loading, setLoading] = useState(false)
     const tags = posts.reduce((arr, post) => {
         if (post.tags && Array.isArray(post.tags)) {
             post.tags.forEach(tag => {
@@ -16,13 +14,9 @@ const Tags = () => {
         return arr;
     }, []);
 
-    useEffect(() => {
-        setLoading(true)
-        setLoading(false)
-    }, []);
 
     return (
-        <TagsList tags={tags.sort()} loading={loading} />
+        <TagsList tags={tags.sort()} />
     );
 }
 

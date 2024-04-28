@@ -2,11 +2,7 @@ import '../CSS/Video.css'
 import '../CSS/Post.css'
 import Pagin from './Pagin';
 
-const VideosList = ({ page, posts, currentPost, loading, postsPerPage, paginate, currentPage }) => {
-    if (loading) {
-        return <h2>loading</h2>
-    }
-
+const VideosList = ({ page, posts, currentPost, postsPerPage, paginate, currentPage }) => {
     return (<div className='div-main'>
         <Pagin page={page} postsPerPage={postsPerPage} TotalPosts={posts.length} paginate={paginate} currentPage={currentPage} />
         <div className='div-posts'>
