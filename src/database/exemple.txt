@@ -1,0 +1,24 @@
+gameposts
+{
+        "id": ,
+        "title": "",
+        "tags": [
+
+        ],
+        "userid": ,
+        "img": "",
+        "text": ""
+}
+usersData
+{
+        "id": ,
+        "email": "",
+        "username": ""
+}
+videos
+    {
+        "id": ,
+        "title": "",
+        "video": "",
+        "userid": 
+}
