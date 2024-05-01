@@ -31,13 +31,13 @@ const Pagin = ({ page, postsPerPage, TotalPosts, currentPage }) => {
     // if (currentPage > 1) {
     //     pr = <li className="pag"><Link to={`/${page}/${currentPage - 1}`} className="pag" onClick={() => { scroll.scrollIntoView({behavior: "smooth"})}}>Previous</Link></li>;
     // }
-    if (pageCutLow > 1) {
-        prd = <li className="pag"><Link to={`/${page}/${currentPage - (wp-1)}`} className="pag" onClick={() => {  scroll.scrollIntoView({behavior: "smooth"})}}>{"<"}</Link></li>;
+    if (pageCutLow >= 1) {
+        prd = <li className="pag"><Link to={`/${page}/${currentPage - (wp-1)}`} className="pag" onClick={() => { scroll.scrollIntoView({behavior: "smooth"})}}>{"<"}</Link></li>;
     }
     // if (currentPage < pageNumbers.length) {
     //     ne = <li className="pag"><Link to={`/${page}/${currentPage + 1}`} className="pag" onClick={() => { scroll.scrollIntoView({behavior: "smooth"})}}>Next</Link></li>;
     // }
-    if (pageCutHigh < pageNumbers.length) {
+    if (pageCutHigh <= pageNumbers.length) {
         ned = <li className="pag"><Link to={`/${page}/${currentPage + (wp-1)}`} className="pag" onClick={() => { scroll.scrollIntoView({behavior: "smooth"})}}>{">"}</Link></li>;
     }
     if (currentPage < pageNumbers.length) {
