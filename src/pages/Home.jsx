@@ -1,4 +1,3 @@
-import '../CSS/App.css';
 import HomePV from "../components/HomePV";
 
 import gameposts from '../database/gameposts.json'
