@@ -2,9 +2,9 @@ import '../CSS/Video.css'
 import '../CSS/Post.css'
 import Pagin from './Pagin';
 
-const VideosList = ({ page, TotalPosts, currentPosts, postsPerPage, paginate, currentPage }) => {
+const VideosList = ({ page, TotalPosts, currentPosts, postsPerPage, currentPage }) => {
     return (<div className='div-main'>
-        <Pagin page={page} postsPerPage={postsPerPage} TotalPosts={TotalPosts} paginate={paginate} currentPage={currentPage} />
+        <Pagin page={page} postsPerPage={postsPerPage} TotalPosts={TotalPosts}  currentPage={currentPage} />
         <div className='div-posts'>
             {currentPosts.map((video) => (
                 <div key={video.id} className='div-post-video div-post'>
@@ -17,7 +17,7 @@ const VideosList = ({ page, TotalPosts, currentPosts, postsPerPage, paginate, cu
                 </div>
             ))}
         </div>
-        <Pagin page={page} postsPerPage={postsPerPage} TotalPosts={TotalPosts} paginate={paginate} currentPage={currentPage} />
+        <Pagin page={page} postsPerPage={postsPerPage} TotalPosts={TotalPosts} currentPage={currentPage} />
     </div>)
 }
 
