@@ -32,10 +32,11 @@ const GamePosts = ({ postsTag, pageTag }) => {
         }
     }, [id]);
 
-    const indexOfLastPost = currentPage * postsPerPage
-    const indexOfFirstPost = indexOfLastPost - postsPerPage
+    const indexOfLastPost = Math.min(currentPage * postsPerPage, postsData.length);
+    const indexOfFirstPost = currentPage * postsPerPage - postsPerPage
 
     const currentPosts = postsData.slice(indexOfFirstPost, indexOfLastPost)
+
     //const paginate = (pageNumber) => setCurrentPage(pageNumber) // if paginate broke uncomment this and add in GamePostsList
 
     return (
