@@ -15,6 +15,7 @@ const Pagin = ({ page, postsPerPage, TotalPosts, currentPage }) => {
     }else{
         wp = Math.trunc(windowInnerWidth/90)
     }
+    
     // let pr;
     // let ne;
     let prd;

@@ -1,34 +1,48 @@
 import { Link } from 'react-router-dom';
 import '../CSS/Post.css'
 import '../CSS/Video.css'
-const HomePV = ({ post, video}) => {
+const HomePV = ({ post, video }) => {
     return (<div>
         <h1>Welcome to Master Gaming!</h1>
         <h3>Here you can read news about games and watch cool videos.</h3>
         <h4>Our last post and video:</h4>
         <div className='div-container'>
             <div className='div-post-home'>
-                <Link to={`/post/${post.id}`}>
-                    <div key={post.id} className='div-post'>
+                <div key={post.id} className='div-post'>
+                    <Link to={`/post/${post.id}`}>
                         <div className='div-title'>{post.title}</div>
-                        <div className='div-container'>
-                            <div className='div-post-img'>
+                    </Link>
+                    <div className='div-container'>
+                        <div className='div-post-img'>
+                            <Link to={`/post/${post.id}`}>
                                 <div className='div-img'>
                                     <img src={post.img} alt="no img" />
                                 </div>
-                            </div>
-                            <div className='div-post-inf'>
-                                <div>
-                                    <h3>Added by:</h3>
-                                    <p>{post.username}</p>
-                                </div>
-                            </div>
+                            </Link>
                         </div>
-                        <div>
-                            <div className='div-body'>{post.text && post.text.length > 400 ? `${post.text.slice(0, 400)}...` : post.text}</div>
+                        <div className='div-post-inf'>
+                            <div>
+                                <h3>Added by:</h3>
+                                <p>{post.username}</p>
+                            </div>
+                            {post.tags && post.tags.length > 0 && (
+                                <div>
+                                    <h3>Tags:</h3>
+                                    <ul>
+                                        {post.tags.map((tag, index) => (
+                                            <li key={index}><Link to={`/tags/${tag}`}>{tag} </Link></li>
+                                        ))}
+                                    </ul>
+                                </div>
+                            )}
                         </div>
                     </div>
-                </Link>
+                    <div>
+                        <Link to={`/post/${post.id}`}>
+                            <div className='div-body'>{post.text && post.text.length > 400 ? `${post.text.slice(0, 400)}...` : post.text}</div>
+                        </Link>
+                    </div>
+                </div>
             </div>
             <div className='div-post-home'>
                 <div key={video.id} className='div-post div-post-video-home'>
