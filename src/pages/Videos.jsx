@@ -26,12 +26,12 @@ const Videos = () => {
     const indexOfLastPost = currentPage * postsPerPage
     const indexOfFirstPost = indexOfLastPost - postsPerPage
 
-    const currentPost = videoData.slice(indexOfFirstPost, indexOfLastPost)
+    const currentPosts = videoData.slice(indexOfFirstPost, indexOfLastPost)
     //const paginate = (pageNumber) => setCurrentPage(pageNumber) // if paginate broke uncomment this and add in VideosList
 
     return (
         <div>
-            <VideosList page={"videos"} posts={videoData} currentPost={currentPost} postsPerPage={postsPerPage} currentPage={currentPage} />
+            <VideosList page={"videos"} posts={videoData} currentPosts={currentPosts} postsPerPage={postsPerPage} currentPage={currentPage} />
         </div>
     )
 }

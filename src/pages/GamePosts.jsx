@@ -22,7 +22,7 @@ const GamePosts = ({ postsTag, pageTag }) => {
         username: users.get(post.userid) || 'Deleted'
     }));
 
-    let [currentPage, setCurrentPage] = useState(1)
+    const [currentPage, setCurrentPage] = useState(1)
     const [postsPerPage] = useState(5)
 
     let { id } = useParams();
@@ -35,12 +35,12 @@ const GamePosts = ({ postsTag, pageTag }) => {
     const indexOfLastPost = currentPage * postsPerPage
     const indexOfFirstPost = indexOfLastPost - postsPerPage
 
-    const currentPost = postsData.slice(indexOfFirstPost, indexOfLastPost)
+    const currentPosts = postsData.slice(indexOfFirstPost, indexOfLastPost)
     //const paginate = (pageNumber) => setCurrentPage(pageNumber) // if paginate broke uncomment this and add in GamePostsList
 
     return (
         <div>
-            <GamePostsList page={page} posts={postsData} currentPost={currentPost} postsPerPage={postsPerPage} currentPage={currentPage} />
+            <GamePostsList page={page} posts={postsData} currentPosts={currentPosts} postsPerPage={postsPerPage} currentPage={currentPage} />
         </div>
     )
 }
