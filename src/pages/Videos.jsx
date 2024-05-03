@@ -31,7 +31,7 @@ const Videos = () => {
 
     return (
         <div>
-            <VideosList page={"videos"} posts={videoData} currentPosts={currentPosts} postsPerPage={postsPerPage} currentPage={currentPage} />
+            <VideosList page={"videos"} TotalPosts={videoData.length} currentPosts={currentPosts} postsPerPage={postsPerPage} currentPage={currentPage} />
         </div>
     )
 }
