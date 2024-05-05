@@ -23,8 +23,8 @@ const Videos = () => {
         }
     }, [id]);
 
-    const indexOfLastPost = currentPage * postsPerPage
-    const indexOfFirstPost = indexOfLastPost - postsPerPage
+    const indexOfLastPost = Math.min(currentPage * postsPerPage, videoData.length);
+    const indexOfFirstPost = currentPage * postsPerPage - postsPerPage
 
     const currentPosts = videoData.slice(indexOfFirstPost, indexOfLastPost)
     //const paginate = (pageNumber) => setCurrentPage(pageNumber) // if paginate broke uncomment this and add in VideosList
