@@ -3,7 +3,7 @@
 Master Gaming is a gaming news site. There are posts and videos there. Posts include tags to make it easier to search by interest.
 Site link on netlify - https://master-gaming.netlify.app/ 
 
-### Before start project, install node_modules use `npm i`.
+### Before start project, install Node.js v21.6.x and use `npm i` inside project.
 
 ### `npm start`
 
