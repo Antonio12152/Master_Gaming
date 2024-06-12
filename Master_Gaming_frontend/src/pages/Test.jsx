@@ -4,7 +4,7 @@ function Test() {
     const [data, setData] = useState([]);
 
     useEffect(() => {
-        fetch('http://localhost:5000/test')
+        fetch('http://localhost:5000/gameposts')
             .then(response => response.json())
             .then(data => setData(data))
             .catch(error => console.error('Error fetching data:', error));

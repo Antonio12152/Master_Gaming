@@ -5,7 +5,7 @@ import GamePost from './pages/GamePost'
 import Tags from './pages/Tags';
 import Tag from './pages/Tag';
 import Videos from './pages/Videos';
-
+import Test from './pages/Test';
 const BaseRoute = () => {
     return (
         <div>
@@ -19,6 +19,7 @@ const BaseRoute = () => {
                 <Route path='/tags/:tag/:id' element={<Tag />} />
                 <Route path='/videos/' element={<Videos />} />
                 <Route path='/videos/:id' element={<Videos />} />
+                <Route path='/test' element={<Test />} />
             </Routes>
         </div>
     )
