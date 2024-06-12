@@ -10,7 +10,6 @@ const GamePosts = ({ postsTag, pageTag }) => {
     const [posts, setPosts] = useState([]);
     if (postsTag !== undefined && postsTag) {
         // posts = postsTag
-        setPosts(postsTag)
         page = `tags/${pageTag}`
     } else {
         // posts = gameposts.slice().reverse()

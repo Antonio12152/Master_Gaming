@@ -1,12 +1,13 @@
 const express = require('express');
-const fs = require('fs-extra');
-const path = require('path');
+const cors = require('cors');
 const gameposts = require('./gameposts');
 const tags = require('./tags')
 const videos = require('./videos')
 
 const app = express();
 const port = 5000;
+
+app.use(cors());
 
 app.use(gameposts, tags, videos);
 
