@@ -30,3 +30,5 @@ Used to push on site, like netlify.
 ### `node app.js` inside Master_Gaming_backend
 
 Use it to connect database and site.
+
+Before start create client.js with connection to database.

@@ -3,9 +3,9 @@ import '../CSS/Post.css'
 import '../CSS/Video.css'
 const HomePV = ({ post, video }) => {
     return (<div>
-        <h1>Welcome to Master Gaming!</h1>
-        <h3>Here you can read news about games and watch cool videos.</h3>
-        <h4>Our last post and video:</h4>
+        <h1 className='h'>Welcome to Master Gaming!</h1>
+        <h3 className='h'>Here you can read news about games and watch cool videos.</h3>
+        <h4 className='h'>Our last post and video:</h4>
         <div className='div-container'>
             <div className='div-post-home'>
                 <div key={post.id} className='div-post'>
@@ -23,14 +23,16 @@ const HomePV = ({ post, video }) => {
                         <div className='div-post-inf'>
                             <div>
                                 <h3>Added by:</h3>
-                                <p>{post.username}</p>
+                                <Link to={`/users/${post.username}`}>{post.username}</Link>
+                                <h3>Created at:</h3>
+                                <p>{post.created_at}</p>
                             </div>
                             {post.tags && post.tags.length > 0 && (
                                 <div>
                                     <h3>Tags:</h3>
                                     <ul>
                                         {post.tags.map((tag, index) => (
-                                            <li key={index}><Link to={`/tags/${tag}`}>{tag} </Link></li>
+                                            <li key={index}><Link to={`/tags/${tag}/1`}>{tag} </Link></li>
                                         ))}
                                     </ul>
                                 </div>
@@ -51,7 +53,7 @@ const HomePV = ({ post, video }) => {
                         <h3>Added by:</h3>
                         <p>{video.username}</p>
                     </div>
-                    <iframe src={`${video.video}`} title="YouTube video player" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerPolicy="strict-origin-when-cross-origin" allowFullScreen />
+                    <iframe src={`${video.video === undefined ? "" : video.video}`} title="YouTube video player" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerPolicy="strict-origin-when-cross-origin" allowFullScreen />
                 </div>
             </div>
         </div>

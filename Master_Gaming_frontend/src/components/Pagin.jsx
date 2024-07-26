@@ -25,7 +25,7 @@ const Pagin = ({ page, postsPerPage, TotalPosts, currentPage }) => {
     let pageNum = parseInt(currentPage)
     let pageCutLow = pageNum - wp;
     let pageCutHigh = currentPage + wp;
-    // if pagginate will broke paginate();
+  
     if (currentPage > 1) {
         first = <li className="pag"><Link to={`/${page}/1`} className="pag" onClick={() => { scroll.scrollIntoView({behavior: "smooth"})}}>First</Link></li>;
     }

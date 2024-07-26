@@ -18,8 +18,10 @@ function Test() {
                     <li key={index}>
                         <h2>{post.title}</h2>
                         <p>Username: {post.username}</p>
+                        <p>{post.created_at}</p>
                         <p>Tags: {post.tags.join(', ')}</p>
-                        <p>Image: <img src={post.imgurl} width="300px" alt={post.title} /></p>
+                        <p>Image: <img src={post.img} width="300px" alt={post.title} /></p>
+                        <p>{post.text}</p>
                     </li>
                 ))}
             </ul>

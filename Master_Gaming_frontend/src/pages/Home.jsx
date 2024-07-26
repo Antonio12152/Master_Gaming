@@ -1,19 +1,23 @@
+import { useEffect, useState } from "react";
 import HomePV from "../components/HomePV";
 
-import gameposts from '../database/gameposts.json'
-import usersData from '../database/usersData.json'
-import videosData from '../database/videos.json'
-
 const Home = () => {
-    let post = gameposts[gameposts.length - 1]
-    const users = new Map(usersData.map(user => [user.id, user.username]));
-    const postData = { ...post, username: users.get(post.userid) || 'Deleted' };
-    let videos = videosData[videosData.length - 1]
+    const [post, setPost] = useState([]);
+    const [video, setVideo] = useState([]);
+    useEffect(() => {
+        fetch('http://localhost:5000/gameposts')
+            .then(response => response.json())
+            .then(data => setPost(data[data.length - 1]))
+            .catch(error => console.error('Error fetching data:', error));
+        fetch('http://localhost:5000/videos')
+            .then(response => response.json())
+            .then(data => setVideo(data[data.length - 1]))
+            .catch(error => console.error('Error fetching data:', error));
+    }, []);
 
-    const videoData = { ...videos, username: users.get(videos.userid) || 'Deleted' };
     return (
         <div className="home">
-            <HomePV post={postData} video={videoData}/>
+            <HomePV post={post} video={video} />
         </div>
     )
 }

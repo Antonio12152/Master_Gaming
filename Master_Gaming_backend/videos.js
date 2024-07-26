@@ -1,29 +1,39 @@
 const express = require('express');
-const fs = require('fs-extra');
-const path = require('path');
+const { client } = require('./client');
 
 const videos = express.Router();
-
-const videosPath = path.join(__dirname, 'database', 'videos.json');
-const usersDataPath = path.join(__dirname, 'database', 'usersData.json');
-
-function mergeData(posts, users) {
-    return posts.map(post => {
-        const user = users.find(user => user.id === post.userid);
-        return user ? { ...post, username: user.username } : { ...post, username: 'Deleted' };
-    });
-}
-
-videos.get('/videos', (req, res) => {
+async function getVideos() {
+    const query = `
+    SELECT 
+        videos.id as videoid, 
+        videos.user_id,
+        users.name AS username,
+        videos.title, 
+        videos.video, 
+        to_char(videos.created_at, 'yyyy/mm/dd') as created_at
+	FROM 
+        videos
+    INNER JOIN 
+        users ON videos.user_id = users.id;
+    `;
     try {
-        const videos = require(videosPath);
-        const usersData = require(usersDataPath);
-        const mergedData = mergeData(videos, usersData);
-        res.json(mergedData);
+        const result = await client.query(query);
+        return result.rows;
     } catch (err) {
-        console.error('Ошибка чтения или отправки данных:', err);
-        res.status(500).send('Ошибка чтения или отправки данных');
+        console.error('Query error', err.stack);
+        throw err;
     }
+}
+videos.get('/videos', (req, res) => {
+    (async () => {
+        try {
+            const videos = await getVideos();
+            res.json(videos)
+        } catch (err) {
+            console.error('Error fetching posts:', err);
+            res.status(500).send('Ошибка чтения или отправки данных');
+        }
+    })();
 });
 
 module.exports = videos 

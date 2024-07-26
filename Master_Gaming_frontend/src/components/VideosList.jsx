@@ -8,9 +8,9 @@ const VideosList = ({ page, TotalPosts, currentVideos, postsPerPage, currentPage
         <div className='div-posts'>
             {currentVideos.map((video) => (
                 <div key={video.id} className='div-post-video div-post'>
-                    <h2>{video.title}</h2>
+                    <h3>{video.title}</h3>
                     <div>
-                        <h3>Added by:</h3>
+                        <h4>Added by:</h4>
                         <p>{video.username}</p>
                     </div>
                     <iframe src={`${video.video}`} title="YouTube video player" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerPolicy="strict-origin-when-cross-origin" allowFullScreen />

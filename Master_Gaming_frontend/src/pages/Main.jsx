@@ -1,29 +1,15 @@
-import { Link } from 'react-router-dom';
 import '../CSS/App.css';
+import Header from '../components/Header'
 
 const Main = (props) => {
     return (
         <div className="main">
-            <header className="header" id="header">
-                <ul className='header__ul'>
-                    <li>
-                        <Link to='/'>Master Gaming</Link>
-                    </li>
-                    <li>
-                        <Link to='/posts/1'>Game Posts</Link>
-                    </li>
-                    <li>
-                        <Link to='/tags'>Tags</Link>
-                    </li>
-                    <li>
-                        <Link to='/videos/1'>Videos</Link>
-                    </li>
-                </ul>
-            </header>
+            <Header />
+
             <div className='prop'>
                 {props.children}
             </div>
-            <hr />
+            <br />
             <footer className='footer'>
                 <ul className='footer__ul'>
                     <li><a href="https://www.youtube.com/" target="_blank" rel="noreferrer"><img src="/images/youtube.png" alt="Youtube" /></a></li>

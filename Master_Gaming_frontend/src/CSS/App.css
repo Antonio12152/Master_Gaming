@@ -1,15 +1,22 @@
+:root {
+    --background-color: #087bc8;
+    --other-background-color: #142850;
+    --border: rgb(6, 0, 85);
+}
+
 * {
     margin: 0;
     padding: 0;
+    font-family: "Gill Sans", sans-serif;
 }
 
 body {
-    background-color: #087bc8;
+    background-color: var(--background-color);
 }
 
 a {
     text-decoration: none;
-    color: black;
+    color: var(--border);
 }
 
 li {
@@ -22,47 +29,123 @@ li {
 }
 
 .header {
-    background-color: #142850;
-    border-bottom: 5px solid black;
+    background-color: var(--other-background-color);
+    border-bottom: 2px solid var(--border);
+    align-items: center;
+    display: flex;
+    justify-content: space-between;
+    height: 60px;
+    padding: 0 10px;
+}
+
+.header__left {
+    display: flex;
+    align-items: center;
+    flex: 2;
+}
+
+.header__center {
+    display: flex;
+    justify-content: center;
+    flex: 1;
 }
 
 .header__ul {
     list-style-type: none;
+    display: flex;
     padding: 0;
+    margin: 0;
 }
 
 .header__ul>li {
-    display: inline-block;
     margin: 5px;
 }
 
 .header__ul a {
-    padding: 10px;
-    border: 2px solid black;
-    border-radius: 10px;
-    background-color: rgb(240, 158, 6);
+    padding: 0 10px;
+    color: white;
+    font-size: 20px;
     text-decoration: none;
-    color: inherit;
-    display: block;
 }
+
+.header__user {
+    list-style-type: none;
+    margin: 0;
+    display: flex;
+    flex: 2;
+    justify-content: right;
+}
+
+.header__user>li {
+    margin-left: 10px;
+}
+
+.menu-toggle {
+    display: none;
+    background: none;
+    border: none;
+    color: white;
+    font-size: 24px;
+    cursor: pointer;
+}
+
+@media (max-width: 1085px) {
+    .header__ul {
+        display: none;
+        flex-direction: column;
+        position: absolute;
+        top: 60px;
+        left: 0;
+        width: 100%;
+        background-color: var(--other-background-color);
+        z-index: 1;
+    }
+
+    .header__ul.open {
+        display: flex;
+    }
+
+    .menu-toggle {
+        display: block;
+    }
+
+    .searchbar {
+        width: 100%;
+        /* Чтобы searchbar был по центру и занимал всю ширину */
+    }
+}
+
+.header__user img {
+    width: 40px;
+    border-radius: 20px;
+}
+
+.header__user img:hover {
+    cursor: pointer;
+}
+
 .header__ul a:hover {
-    background-color: rgb(201, 131, 0);
     cursor: pointer;
     transition: 0.3s;
+    color: #cccccc;
 }
 
 .prop {
     padding-bottom: 44px;
 }
 
-hr {
+br {
     visibility: hidden;
+}
+
+.h {
+    padding-left: 5px;
 }
 
 .footer {
     position: absolute;
-    border-top: 5px solid black;
-    background-color: #142850;
+    border-top: 2px solid var(--border);
+    background-color: var(--other-background-color);
     bottom: 0;
     width: 100%;
     height: 2.5rem;
