@@ -24,3 +24,5 @@ yarn-error.log*
 
 # db connection
 client.js
+# Local Netlify folder
+.netlify
