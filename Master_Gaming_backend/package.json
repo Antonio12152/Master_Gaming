@@ -2,10 +2,10 @@
   "name": "master_gaming_backend",
   "version": "1.0.0",
   "description": "",
-  "main": "app.js",
+  "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node server",
+    "start": "node index",
     "build": "netlify deploy --prod",
     "dev": "nodemon server"
   },
@@ -17,8 +17,7 @@
     "cors": "^2.8.5",
     "express": "^4.19.2",
     "fs-extra": "^11.2.0",
-    "pg": "^8.12.0",
-    "serverless-http": "^3.2.0"
+    "pg": "^8.12.0"
   },
   "devDependencies": {
     "nodemon": "^3.1.0"

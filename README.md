@@ -1,9 +1,10 @@
 ### Master Gaming
 
 Master Gaming is a gaming news site. There are posts and videos there. Posts include tags to make it easier to search by interest.
-Site link on netlify - https://master-gaming.netlify.app/ 
+Old site link on netlify - https://master-gaming.netlify.app/ 
 
-Right now you can't login or create a post, but maybe I will do it.
+I didn't find any host site for node js with database for free. So you can't check new version online. *Sad face*
+Right now you can't login or create a post, but maybe I will do it. *Second sad face*
 ### Before start project, install Node.js ^v21.6.x and npm ^v8.16.x.
 
 Go inside 2 folders: Master_Gaming_backend and Master_Gaming_frontend to use "npm i"
@@ -32,7 +33,7 @@ Used to push on site, like netlify.
 
 Use it to connect database and site.
 
-Before start create client.js with connection to database and 2 functions:
+Before start create client.js with connection to database (I use aiven as db host and exemple of database files in Master_Gaming_backend/sqlfile) and 2 functions with export:
 
 async function connectClient() {
     try {
