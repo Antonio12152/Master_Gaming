@@ -29,7 +29,7 @@ See the section about deployment for more information.
 
 Used to push on site, like netlify.
 
-### `node app.js` inside Master_Gaming_backend
+### `npm start` inside Master_Gaming_backend
 
 Use it to connect database and site.
 
