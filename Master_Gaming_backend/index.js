@@ -16,6 +16,10 @@ const port = process.env.SERVER_PORT || 5000;
 app.use(cors());
 app.use(gameposts, videos, tags, users, user);
 
+app.get('/', (req, res) => {
+    res.send('Hello World!')
+})
+
 app.listen(port, () => {
   console.log(`Сервер запущен на порту ${port}`);
 });
