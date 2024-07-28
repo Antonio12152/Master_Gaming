@@ -33,22 +33,11 @@ Used to push on site, like netlify.
 
 Use it to connect database and site.
 
-Before start create client.js with connection to database (I use aiven as db host and exemple of database files in Master_Gaming_backend/sqlfile) and 2 functions with export:
-
-async function connectClient() {
-    try {
-        await client.connect();
-        console.log('Connected to the database');
-    } catch (err) {
-        console.error('Connection error', err.stack);
-    }
-}
-
-async function disconnectClient() {
-    try {
-        await client.end();
-        console.log('Disconnected from the database');
-    } catch (err) {
-        console.error('Disconnection error', err.stack);
-    }
-}
+Before start create .env file with port and db connection data (I use aiven db):
+SERVER_PORT = 5000
+USER = ""
+PASSWORD = ""
+HOST = ""
+DB_PORT = 
+DB = ""
+CA = ""

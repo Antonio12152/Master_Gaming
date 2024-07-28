@@ -7,7 +7,7 @@ const gameposts = require('./gameposts')
 const videos = require('./videos')
 const tags = require('./tags')
 const {users, user} = require('./users')
-const port = 5000;
+const port = process.env.SERVER_PORT || 5000;
 
 (async () => {
   await connectClient()
