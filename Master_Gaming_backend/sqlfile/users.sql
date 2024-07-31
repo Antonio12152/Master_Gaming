@@ -11,6 +11,8 @@ CREATE TABLE IF NOT EXISTS public.users
     created_at timestamp without time zone NOT NULL,
     img text COLLATE pg_catalog."default",
     password text COLLATE pg_catalog."default" NOT NULL,
+    is_admin BOOLEAN DEFAULT FALSE,
+    is_writer BOOLEAN DEFAULT FALSE;
     CONSTRAINT users_pkey PRIMARY KEY (id)
 )
 

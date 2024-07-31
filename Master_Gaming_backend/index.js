@@ -9,9 +9,9 @@ const tags = require('./tags')
 const {users, user} = require('./users')
 const port = process.env.SERVER_PORT || 5000;
 
-(async () => {
-  await connectClient()
-})();
+// (async () => {
+//   await connectClient()
+// })();
 
 app.use(cors());
 app.use(gameposts, videos, tags, users, user);
