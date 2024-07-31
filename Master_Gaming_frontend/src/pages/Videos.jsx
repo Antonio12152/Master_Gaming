@@ -6,7 +6,7 @@ const Videos = () => {
     const [videos, setVideos] = useState([]);
     
     useEffect(() => {
-        fetch('http://localhost:5000/videos')
+        fetch(`https://mastergaming-production.up.railway.app/videos` || 'http://localhost:5000/videos')
             .then(response => response.json())
             .then(data => setVideos(data))
             .catch(error => console.error('Error fetching data:', error));

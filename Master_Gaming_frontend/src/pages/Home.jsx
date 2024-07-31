@@ -5,11 +5,11 @@ const Home = () => {
     const [post, setPost] = useState([]);
     const [video, setVideo] = useState([]);
     useEffect(() => {
-        fetch('http://localhost:5000/gameposts')
+        fetch(`https://mastergaming-production.up.railway.app/gameposts` || 'http://localhost:5000/gameposts')
             .then(response => response.json())
             .then(data => setPost(data[data.length - 1]))
             .catch(error => console.error('Error fetching data:', error));
-        fetch('http://localhost:5000/videos')
+        fetch(`https://mastergaming-production.up.railway.app/videos` || 'http://localhost:5000/videos')
             .then(response => response.json())
             .then(data => setVideo(data[data.length - 1]))
             .catch(error => console.error('Error fetching data:', error));

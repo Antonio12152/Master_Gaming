@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from 'react';
+
 // use this excemple to join backend and frontend
 function Test() {
     const [data, setData] = useState([]);
 
     useEffect(() => {
-        fetch('http://localhost:5000/gameposts')
+        fetch(`https://mastergaming-production.up.railway.app/gameposts` || 'http://localhost:5000/gameposts')
             .then(response => response.json())
             .then(data => setData(data))
             .catch(error => console.error('Error fetching data:', error));

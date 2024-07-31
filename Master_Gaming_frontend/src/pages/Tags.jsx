@@ -5,7 +5,7 @@ const Tags = () => {
     const [tags, setTags] = useState([]);
 
     useEffect(() => {
-        fetch('http://localhost:5000/tags')
+        fetch(`https://mastergaming-production.up.railway.app/tags` || 'http://localhost:5000/tags')
             .then(response => response.json())
             .then(data => setTags(data))
             .catch(error => console.error('Error fetching data:', error));

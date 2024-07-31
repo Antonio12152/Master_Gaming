@@ -7,14 +7,14 @@ function Users() {
     const [user, setUser] = useState([]);
     let { username } = useParams();
     useEffect(() => {
-        fetch(`http://localhost:5000/users/${username}`)
+        fetch(`https://mastergaming-production.up.railway.app/users/${username}` || `http://localhost:5000/users/${username}`)
             .then(response => response.json())
             .then(data => setUser(data[0]))
             .catch(error => console.error('Error fetching data:', error));
     }, [username]);
     useEffect(() => {
         if (user.id) {
-            fetch('http://localhost:5000/gameposts')
+            fetch(`https://mastergaming-production.up.railway.app/gameposts` || 'http://localhost:5000/gameposts')
                 .then(response => response.json())
                 .then(data => setPosts(data.slice().reverse().filter(post => post.user_id === user.id)))
                 .catch(error => console.error('Error fetching data:', error));
