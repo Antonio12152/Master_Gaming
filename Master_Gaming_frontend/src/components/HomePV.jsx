@@ -9,12 +9,12 @@ const HomePV = ({ post, video }) => {
         <div className='div-container'>
             <div className='div-post-home'>
                 <div key={post.id} className='div-post'>
-                    <Link to={`/post/${post.id}`}>
+                    <Link to={`/post/${post.postid}`}>
                         <div className='div-title'>{post.title}</div>
                     </Link>
                     <div className='div-container'>
                         <div className='div-post-img'>
-                            <Link to={`/post/${post.id}`}>
+                            <Link to={`/post/${post.postid}`}>
                                 <div className='div-img'>
                                     <img src={post.img} alt="no img" />
                                 </div>
@@ -40,7 +40,7 @@ const HomePV = ({ post, video }) => {
                         </div>
                     </div>
                     <div>
-                        <Link to={`/post/${post.id}`}>
+                        <Link to={`/post/${post.postid}`}>
                             <div className='div-body'>{post.text && post.text.length > 400 ? `${post.text.slice(0, 400)}...` : post.text}</div>
                         </Link>
                     </div>
