@@ -89,7 +89,7 @@ li {
     cursor: pointer;
 }
 
-@media (max-width: 1085px) {
+@media (max-width: 1100px) {
     .header__ul {
         display: none;
         flex-direction: column;

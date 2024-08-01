@@ -1,0 +1,7 @@
+.user{
+    padding: 5px;
+}
+.user__img{
+    width: 120px;
+    border-radius: 50%;
+}

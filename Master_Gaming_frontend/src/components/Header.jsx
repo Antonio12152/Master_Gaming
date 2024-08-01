@@ -17,16 +17,16 @@ const Header = () => {
                 </button>
                 <ul className={`header__ul ${isMenuOpen ? 'open' : ''}`}>
                     <li>
-                        <Link to='/'>Master Gaming</Link>
+                        <Link to='/' onClick={toggleMenu}>Master Gaming</Link>
                     </li>
                     <li>
-                        <Link to='/posts/1'>Posts</Link>
+                        <Link to='/posts/1' onClick={toggleMenu}>Posts</Link>
                     </li>
                     <li>
-                        <Link to='/tags'>Tags</Link>
+                        <Link to='/tags' onClick={toggleMenu}>Tags</Link>
                     </li>
                     <li>
-                        <Link to='/videos/1'>Videos</Link>
+                        <Link to='/videos/1' onClick={toggleMenu}>Videos</Link>
                     </li>
                 </ul>
             </div>

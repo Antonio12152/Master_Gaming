@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import GamePosts from './GamePosts'
-
-function Users() {
+import UserI from '../components/UserI';
+const User = () =>{
     const [posts, setPosts] = useState([]);
     const [user, setUser] = useState([]);
     let { username } = useParams();
@@ -22,16 +22,10 @@ function Users() {
     }, [user.id]);
     return (
         <div>
-            <div>
-                <img src={user.user_img} alt="user img" onError={(e) => e.currentTarget.src = '/images/blank_user.png'}  width={120} />
-                {user.username}
-                {user.about}
-                {user.user_created_at}
-            </div>
-            <h2>{user.username} Posts</h2>
+            <UserI user={user}/>
             <GamePosts userPosts={posts} newpage={user.username}/>
         </div>
     );
 }
 
-export default Users;
+export default User;
