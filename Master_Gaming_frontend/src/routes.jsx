@@ -6,8 +6,8 @@ import GamePost from './pages/GamePost'
 import Tags from './pages/Tags';
 import Tag from './pages/Tag';
 import Videos from './pages/Videos';
-import Test from './pages/Test';
 import User from './pages/User';
+import CreatePost from './pages/CreatePost';
 const BaseRoute = () => {
     return (
         <div>
@@ -23,7 +23,7 @@ const BaseRoute = () => {
                 <Route path='/videos/:id' element={<Videos />} />
                 <Route path='/search/:search' element={<Search />} />
                 <Route path='/search/:search/:id' element={<Search />} />
-                <Route path='/test' element={<Test />} />
+                <Route path='/insertPost' element={<CreatePost />} />
                 <Route path='/users/:username' element={<User />}/>
                 <Route path='/users/:username/:id' element={<User />}/>
             </Routes>

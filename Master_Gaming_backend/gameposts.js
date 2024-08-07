@@ -1,7 +1,7 @@
 const express = require('express');
 const { client } = require('./client');
 
-const gameposts = express.Router();
+const gamePosts = express.Router();
 
 async function getPosts() {
     const query = `
@@ -29,7 +29,9 @@ async function getPosts() {
         posts.title, 
         posts.img, 
         posts.text, 
-        posts.created_at;
+        posts.created_at
+    ORDER BY 
+        posts.id;
     `;
 
     try {
@@ -41,7 +43,7 @@ async function getPosts() {
     }
 }
 
-gameposts.get('/gameposts', (req, res) => {
+gamePosts.get('/gamePosts', (req, res) => {
     (async () => {
         try {
             const posts = await getPosts();
@@ -52,7 +54,9 @@ gameposts.get('/gameposts', (req, res) => {
     })();
 });
 
-// use if you want
+module.exports = gamePosts
+
+// use if you really want
 // async function getPostsWithTag(tag) {
 //     const query = `
 //     SELECT 
@@ -97,12 +101,12 @@ gameposts.get('/gameposts', (req, res) => {
 //         throw err;
 //     }
 // }
-
-// gamepostsTag.get('/gameposts/:tag_id', (req, res) => {
+//
+// gamePostsTag.get('/gamePosts/:tag_id', (req, res) => {
 //     (async () => {
 //         try {
 //             const tag = req.params.tag_id;
-
+//
 //             const posts = await getPostsWithTag(tag);
 //             res.json(posts)
 //         } catch (err) {
@@ -111,5 +115,3 @@ gameposts.get('/gameposts', (req, res) => {
 //         }
 //     })();
 // });
-
-module.exports = gameposts

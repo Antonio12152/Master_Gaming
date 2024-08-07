@@ -6,7 +6,7 @@ const Tag = () => {
     const [posts, setPosts] = useState([]);
     let { tag } = useParams();
     useEffect(() => {
-        fetch(`https://mastergaming-production.up.railway.app/gameposts` || 'http://localhost:5000/gameposts')
+        fetch(`https://mastergaming-production.up.railway.app/gamePosts` || 'http://localhost:5000/gamePosts')
             .then(response => response.json())
             .then(data => setPosts(data.slice().reverse()))
             .catch(error => console.error('Error fetching data:', error));

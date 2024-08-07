@@ -7,7 +7,7 @@ const GamePost = () => {
     let { id } = useParams();
     
     useEffect(() => {
-        fetch(`https://mastergaming-production.up.railway.app/gameposts` || 'http://localhost:5000/gameposts')
+        fetch(`https://mastergaming-production.up.railway.app/gamePosts` || 'http://localhost:5000/gamePosts')
             .then(response => response.json())
             .then(data => {
                 const post = data.find(post => Number(post.postid) === Number(id));
