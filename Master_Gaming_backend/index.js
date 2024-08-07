@@ -4,7 +4,7 @@ const bodyParser = require('body-parser');
 const app = express();
 
 const { connectClient, disconnectClient } = require('./client');
-const gamePosts = require('./gamePosts')
+const gamePosts = require('./gameposts')
 const videos = require('./videos')
 const tags = require('./tags')
 const {users, user} = require('./users')
