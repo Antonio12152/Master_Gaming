@@ -1,7 +1,10 @@
 import { Link } from 'react-router-dom';
 import '../CSS/Post.css'
 import '../CSS/Video.css'
-const HomePV = ({ post, video }) => {
+const HomePV = ({ post, video, loading}) => {
+    if (loading) {
+        return <div>Loading...</div>;
+    }
     return (<div>
         <h1 className='h'>Welcome to Master Gaming!</h1>
         <h3 className='h'>Here you can read news about games and watch cool videos.</h3>

@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import axios from 'axios';
 
 const CreatePost = () => {
     const [title, setTitle] = useState('');
@@ -45,15 +46,9 @@ const CreatePost = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
 
-        const postData = { title, img, text, tags };
-
         try {
-            const response = await fetch('http://localhost:5000/insertPost', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify(postData),
+            const response = await axios.post('http://localhost:5000/insertPost', {
+                title: `${title}`, img:`${img}`, text:`${text}`, tags:`${tags}`
             });
 
             const data = await response.text();

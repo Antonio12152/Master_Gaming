@@ -85,6 +85,7 @@ insert.post('/insertpost', async (req, res) => {
         .filter(tag => tag.length > 0);
 
     try {
+        
         res.status(201).send('Post and tags inserted successfully');
     } catch (err) {
         if (err.message.includes('A post with this title already exists.')) {

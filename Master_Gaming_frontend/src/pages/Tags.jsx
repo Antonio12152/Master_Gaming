@@ -1,29 +1,34 @@
 import { useEffect, useState } from 'react';
 import TagsList from '../components/TagsList';
+import axios from 'axios';
 
 const Tags = () => {
     const [tags, setTags] = useState([]);
+    const [loading, setLoading] = useState(true);
 
     useEffect(() => {
-        fetch(`https://mastergaming-production.up.railway.app/tags` || 'http://localhost:5000/tags')
-            .then(response => response.json())
-            .then(data => setTags(data))
-            .catch(error => console.error('Error fetching data:', error));
+        axios.get(`https://mastergaming-production.up.railway.app/tags` || 'http://localhost:5000/tags')
+            .then(res => {
+                const data = res.data
+                setTags(data)
+                setLoading(false)
+            })
+            .catch(error => { console.error('Error fetching data:', error); setLoading(false)});
     }, []);
     tags.sort((a, b) => {
         const taga = a.name.toUpperCase();
         const tagb = b.name.toUpperCase();
         if (taga < tagb) {
-          return -1;
+            return -1;
         }
         if (taga > tagb) {
-          return 1;
+            return 1;
         }
-      
+
         return 0;
-      });
+    });
     return (
-        <TagsList tags={tags.sort()} />
+        <TagsList tags={tags.sort()} loading={loading}/>
     );
 }
 

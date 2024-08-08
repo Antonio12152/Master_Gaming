@@ -1,15 +1,20 @@
 import { useEffect, useState } from "react";
 import VideosList from "../components/VideosList";
 import { useParams } from "react-router-dom";
+import axios from 'axios';
 
 const Videos = () => {
     const [videos, setVideos] = useState([]);
-    
+    const [loading, setLoading] = useState(true);
+
     useEffect(() => {
-        fetch(`https://mastergaming-production.up.railway.app/videos` || 'http://localhost:5000/videos')
-            .then(response => response.json())
-            .then(data => setVideos(data))
-            .catch(error => console.error('Error fetching data:', error));
+        axios.get(`https://mastergaming-production.up.railway.app/videos` || 'http://localhost:5000/videos')
+            .then(res => {
+                const data = res.data
+                setVideos(data.slice().reverse())
+                setLoading(false)
+            })
+            .catch(error => {console.error('Error fetching data:', error); setLoading(false)});
     }, []);
 
     let [currentPage, setCurrentPage] = useState(1)
@@ -28,7 +33,7 @@ const Videos = () => {
 
     return (
         <div>
-            <VideosList page={"videos"} TotalPosts={videos.length} currentVideos={currentVideos} postsPerPage={postsPerPage} currentPage={currentPage} />
+            <VideosList page={"videos"} TotalPosts={videos.length} currentVideos={currentVideos} postsPerPage={postsPerPage} currentPage={currentPage} loading={loading}/>
         </div>
     )
 }

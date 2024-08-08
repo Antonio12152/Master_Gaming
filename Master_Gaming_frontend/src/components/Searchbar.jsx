@@ -16,7 +16,7 @@ const SearchBar = () => {
         e.preventDefault();
         const trimmedText = searchText.trim();
         if (trimmedText) {
-            navigate(`/search/${trimmedText}`);
+            navigate(`/search/${trimmedText}/1`);
         }
     };
 

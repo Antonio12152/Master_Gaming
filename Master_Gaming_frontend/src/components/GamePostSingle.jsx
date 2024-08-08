@@ -1,7 +1,10 @@
 import { Link } from 'react-router-dom';
 import '../CSS/Post.css'
 
-const GamePostSingle = ({ post }) => {
+const GamePostSingle = ({ post, loading }) => {
+    if (loading) {
+        return <div>Loading...</div>;
+    }
     return (<div key={post.postid} className='div-post'>
         <Link to={`/post/${post.postid}`}>
             <div className='div-title'>{post.title}</div>
@@ -40,6 +43,5 @@ const GamePostSingle = ({ post }) => {
         </div>
     </div>)
 }
-
 
 export default GamePostSingle;
