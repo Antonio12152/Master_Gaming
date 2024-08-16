@@ -37,7 +37,7 @@ async function pushUser(name, email, password, img, about) {
     }
 }
 
-createUser.insert('/createuser', (req, res) => {
+createUser.post('/createuser', (req, res) => {
     (async () => {
         const { name, email, password, img, about } = req.body;
         if (!name || !email || !password) {
