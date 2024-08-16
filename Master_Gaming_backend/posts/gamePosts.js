@@ -1,7 +1,7 @@
 const express = require('express');
-const { client } = require('./client');
+const { client } = require('../client');
 
-const gameposts = express.Router();
+const gamePosts = express.Router();
 
 async function getPosts() {
     const query = `
@@ -43,7 +43,7 @@ async function getPosts() {
     }
 }
 
-gameposts.get('/gameposts', (req, res) => {
+gamePosts.get('/gameposts', (req, res) => {
     (async () => {
         try {
             const posts = await getPosts();
@@ -54,7 +54,7 @@ gameposts.get('/gameposts', (req, res) => {
     })();
 });
 
-module.exports = gameposts
+module.exports = gamePosts
 
 // use if you really want
 // async function getPostsWithTag(tag) {
