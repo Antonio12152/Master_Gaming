@@ -44,7 +44,7 @@ createUser.post('/createuser', (req, res) => {
             return res.status(400).json({ message: 'Name, email, and password are required' });
         }
         try {
-            const user = await pushUser(name, email, password, img, about);
+//            const user = await pushUser(name, email, password, img, about);
             res.status(201).json(user);
         } catch (err) {
             console.error('Error adding user:', err);
