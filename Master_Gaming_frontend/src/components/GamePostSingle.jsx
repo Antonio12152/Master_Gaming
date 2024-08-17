@@ -1,11 +1,19 @@
+import React from 'react';
 import { Link } from 'react-router-dom';
 import '../CSS/Post.css'
 
-const GamePostSingle = ({ post, loading }) => {
+const GamePostSingle = ({ post, loading, isSinglePost }) => {
+    const scroll = document.getElementById("header");
     if (loading) {
         return <div>Loading...</div>;
     }
-    return (<div key={post.postid} className='div-post'>
+    const maxLength = 400;
+
+    const trimmedText = post.text.length > maxLength && !isSinglePost
+        ? post.text.substring(0, maxLength) + "..."
+        : post.text;
+
+    return (<div className='div-post'>
         <Link to={`/post/${post.postid}`}>
             <div className='div-title'>{post.title}</div>
         </Link>
@@ -20,25 +28,28 @@ const GamePostSingle = ({ post, loading }) => {
             <div className='div-post-inf'>
                 <div>
                     <h3>Added by:</h3>
-                    <Link to={`/users/${post.username}`}>{post.username}</Link>
+                    <Link onClick={() => scroll.scrollIntoView({ behavior: "smooth" })} to={`/users/${post.username}/1`}>{post.username}</Link>
                     <h3>Created at:</h3>
                     <p>{post.created_at}</p>
                 </div>
                 {post.tags && post.tags.length > 0 && (
                     <div>
                         <h3>Tags:</h3>
-                        <ul>
-                            {post.tags.map((tag, index) => (
-                                <li key={index}><Link to={`/tags/${tag}/1`}>{tag} </Link></li>
-                            ))}
-                        </ul>
+                        {post.tags.map((tag, index) => (
+                            <React.Fragment key={index}>
+                                <Link to={`/tags/${tag}/1`} onClick={() => scroll.scrollIntoView({ behavior: "smooth" })}>
+                                    {tag}
+                                </Link>
+                                {index < post.tags.length - 1 && " | "}
+                            </React.Fragment>
+                        ))}
                     </div>
                 )}
             </div>
         </div>
         <div>
             <Link to={`/post/${post.postid}`}>
-                <div className='div-body'>{post.text}</div>
+                <div className='div-body'>{trimmedText}</div>
             </Link>
         </div>
     </div>)

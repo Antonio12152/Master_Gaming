@@ -20,7 +20,7 @@ const GamePost = () => {
     }, [id]);
     return (
         <div>
-            <GamePostSingle post={post} loading={loading} />
+            <GamePostSingle post={post} loading={loading} isSinglePost={true}/>
         </div>
     )
 }

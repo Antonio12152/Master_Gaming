@@ -9,20 +9,41 @@ const CreateUser = () => {
     const [about, setAbout] = useState('');
     const [error, setError] = useState('');
     const [loading, setLoading] = useState(false);
+    
+    const validateForm = () => {
+        if (!name.trim()) {
+            setError('Name is required.');
+            return false;
+        }
+        if (!email.trim() || !/^\S+@\S+\.\S+$/.test(email)) {
+            setError('Valid email is required.');
+            return false;
+        }
+        if (password.length < 6) {
+            setError('Password must be at least 6 characters long.');
+            return false;
+        }
+        setError(''); 
+        return true;
+    };
+
     const handleSubmit = async (e) => {
         e.preventDefault();
-        setLoading(true);
+
+        if (!validateForm()) {
+            return;
+        }
+
         try {
-            const response = await axios.post('http://localhost:5000/adduser', {
-                name: `${name}`, email:`${email}`, password:`${password}`, img:`${img}`, about:`${about}`
+            const response = await axios.post('http://localhost:5000/createuser', {
+                name,
+                email,
+                password,
+                img,
+                about
             });
 
-            const data = await response.text();
-            if (!response.ok) {
-                throw new Error(data);
-            }
-
-            alert(`User ${name} created succesful.`);
+            alert(response.data);
             setName('');
             setEmail('');
             setPassword('');
@@ -30,7 +51,7 @@ const CreateUser = () => {
             setAbout('');
             setError('');
         } catch (err) {
-            setError(err.message);
+            setError(err.response?.data?.message || 'Something went wrong');
         } finally {
             setLoading(false);
         }
@@ -52,14 +73,14 @@ const CreateUser = () => {
                     <input type="text" value={password} onChange={(e) => setPassword(e.target.value)} required />
                 </div>
                 <div>
-                    <label>Image URL:</label>
+                    <label>Image URL (optional):</label>
                     <input type="text" value={img} onChange={(e) => setImg(e.target.value)} />
                 </div>
                 <div>
-                    <label>About:</label>
+                    <label>About (optional):</label>
                     <textarea value={about} onChange={(e) => setAbout(e.target.value)} />
                 </div>
-                
+
                 {error && <p style={{ color: 'red' }}>{error}</p>}
                 <button type="submit" disabled={loading}>
                     {loading ? 'Loading...' : 'Submit'}

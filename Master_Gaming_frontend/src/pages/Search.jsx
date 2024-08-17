@@ -11,12 +11,12 @@ const Search = () => {
         axios.get(`https://mastergaming-production.up.railway.app/gamePosts` || 'http://localhost:5000/gamePosts')
             .then(res => {
                 const data = res.data
-                setPosts(data.slice().reverse().filter(post => post.title.toString().toLowerCase().includes(`${search}`) && post.text.toString().toLowerCase().includes(`${search}`)))
+                setPosts(data.slice().reverse().filter(post => post.title.toString().toLowerCase().includes(`${search.toLowerCase()}`) && post.text.toString().toLowerCase().includes(`${search.toLowerCase()}`)))
             })
             .catch(error => { console.error('Error fetching data:', error); });
     }, [search]);
     return (
-        <GamePosts postsSearch={posts} newpage={search}/>
+        <GamePosts postsSearch={posts} newpage={search.toLowerCase()}/>
     );
 }
 

@@ -9,7 +9,7 @@ const HomePV = ({ post, video, loading}) => {
         <h1 className='h'>Welcome to Master Gaming!</h1>
         <h3 className='h'>Here you can read news about games and watch cool videos.</h3>
         <h4 className='h'>Our last post and video:</h4>
-        <div className='div-container'>
+        <div className='div-container-home'>
             <div className='div-post-home'>
                 <div key={post.id} className='div-post'>
                     <Link to={`/post/${post.postid}`}>
