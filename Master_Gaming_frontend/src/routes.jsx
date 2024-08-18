@@ -8,7 +8,8 @@ import Tag from './pages/Tag';
 import Videos from './pages/Videos';
 import User from './pages/User';
 import CreatePost from './pages/CreatePost';
-import CreateUser from './pages/CreateUser';
+import Register from './pages/Register';
+import Login from './pages/Login';
 const BaseRoute = () => {
     return (
         <div>
@@ -27,7 +28,8 @@ const BaseRoute = () => {
                 <Route path='/videos/:id' element={<Videos />} />
                 <Route path='/users/:username' element={<User />}/>
                 <Route path='/users/:username/:id' element={<User />}/>
-                <Route path='/createUser' element={<CreateUser />}/>
+                <Route path='/register' element={<Register />}/>
+                <Route path='/login' element={<Login />}/>
             </Routes>
         </div>
     )

@@ -1,7 +1,9 @@
+import React from 'react';
 import { Link } from 'react-router-dom';
 import '../CSS/Post.css'
 import '../CSS/Video.css'
-const HomePV = ({ post, video, loading}) => {
+
+const HomePV = ({ post, video, loading }) => {
     if (loading) {
         return <div>Loading...</div>;
     }
@@ -33,11 +35,14 @@ const HomePV = ({ post, video, loading}) => {
                             {post.tags && post.tags.length > 0 && (
                                 <div>
                                     <h3>Tags:</h3>
-                                    <ul>
-                                        {post.tags.map((tag, index) => (
-                                            <li key={index}><Link to={`/tags/${tag}/1`}>{tag} </Link></li>
-                                        ))}
-                                    </ul>
+                                    {post.tags.map((tag, index) => (
+                                        <React.Fragment key={index}>
+                                            <Link to={`/tags/${tag}/1`}>
+                                                {tag}
+                                            </Link>
+                                            {index < post.tags.length - 1 && " | "}
+                                        </React.Fragment>
+                                    ))}
                                 </div>
                             )}
                         </div>

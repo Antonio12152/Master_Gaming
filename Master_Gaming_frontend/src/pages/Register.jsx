@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 
-const CreateUser = () => {
+const Register = () => {
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
@@ -35,7 +35,7 @@ const CreateUser = () => {
         }
 
         try {
-            const response = await axios.post('http://localhost:5000/createuser', {
+            const response = await axios.post('http://localhost:5000/register', {
                 name,
                 email,
                 password,
@@ -90,4 +90,4 @@ const CreateUser = () => {
     );
 };
 
-export default CreateUser;
+export default Register;
