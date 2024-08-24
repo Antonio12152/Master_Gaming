@@ -13,11 +13,6 @@ async function hashPassword(password) {
     return hash;
 }
 
-async function verifyPassword(password, hash) {
-    const match = await bcrypt.compare(password, hash);
-    return match;
-}
-
 async function pushUser(name, email, password, img, about) {
     try {
         const userCheckByNameQuery = `
@@ -59,8 +54,8 @@ register.post('/register', (req, res) => {
             return res.status(400).json({ message: 'Username, email, and password are required' });
         }
         try {
-            // await pushUser(name, email, password, img, about);
-            // res.status(201).send(`Account ${name} created successfully! You can login now.`);
+            //await pushUser(name, email, password, img, about);
+            res.status(201).send(`Account ${name} created successfully! You can login now.`);
         } catch (err) {
             console.error('Error adding user:', err);
             res.status(500).json({ message: err.message });

@@ -33,11 +33,11 @@ login.post('/login', async (req, res) => {
     }
 
     try {
-        // const user = await loginUser(name, password);
+        const user = await loginUser(name, password);
 
-        // req.session.user = { id: user.id, name: user.name };
+        req.session.user = { id: user.id }
 
-        // res.status(200).json({ message: `Welcome, ${user.name}!` });
+        res.status(200).json({ message: `Welcome, ${user.name}!` });
     } catch (err) {
         console.error('Error logging in user:', err);
         res.status(401).json({ message: err.message });

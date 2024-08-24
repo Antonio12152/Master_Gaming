@@ -48,10 +48,10 @@ app.use(session({
     resave: false,
     saveUninitialized: false,
     cookie: {
-        secure: process.env.NODE_ENV === 'production',
-        httpOnly: true,
+        secure: false,
         sameSite: 'Lax',
-        maxAge: 24 * 60 * 60 * 1000
+        maxAge: 24 * 60 * 60 * 1000,
+        httpOnly: true,
     }
 }));
 app.use(gamePosts, videos, tags, users, user, insert, register, login);
@@ -68,37 +68,3 @@ app.get('/', (req, res) => {
 app.listen(port, () => {
     console.log(`Server start on port ${port}`);
 });
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// const cors = require('cors');
-// const gameposts = require('./gameposts');
-// const tags = require('./tags')
-// const videos = require('./videos')
-
-// const app = express();
-// const port = 5000;
-
-// app.use(cors());
-
-// app.use(gameposts, tags, videos);
-
-// app.use('/images/posts', express.static('images'));
-// app.use('/images/users', express.static('images'));
-
-// app.listen(port, () => {
-//   console.log(`Сервер запущен на порту ${port}`);
-// });
