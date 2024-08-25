@@ -13,7 +13,7 @@ async function getPosts() {
         posts.img, 
         posts.text, 
         to_char(posts.created_at, 'yyyy/mm/dd') as created_at,
-        posts.isDelete,
+        posts.is_deleted,
         COALESCE(array_agg(tags.name) FILTER (WHERE tags.name IS NOT NULL), '{}') AS tags
     FROM 
         posts
@@ -24,7 +24,7 @@ async function getPosts() {
     LEFT JOIN 
         tags ON post_tags.tag_id = tags.id
     WHERE
-        posts.isDelete = False
+        posts.is_deleted = False
     GROUP BY 
         posts.id, 
         posts.user_id, 
