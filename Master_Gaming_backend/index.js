@@ -2,19 +2,18 @@ const express = require('express');
 const cors = require('cors');
 const bodyParser = require('body-parser');
 const session = require('express-session');
-const crypto = require('crypto');
 const cookieParser = require('cookie-parser');
+require('dotenv').config();
 
 const gamePosts = require('./posts/gamePosts')
-const videos = require('./videos')
-const tags = require('./tags')
+const videos = require('./posts/videos')
+const tags = require('./posts/tags')
 const users = require('./users/users')
 const user = require('./users/user')
 const register = require('./users/register')
 const insert = require('./posts/insertPost')
 const login = require('./users/login')
 const port = process.env.SERVER_PORT || 5000;
-const secret = crypto.randomBytes(64).toString('hex');
 
 const app = express();
 // use it to connect with aiven. don't use it on railway!
@@ -40,29 +39,13 @@ const corsOptions = {
 
 app.use(cors(corsOptions));
 app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
+app.use(express.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 app.use(cookieParser());
-app.use(session({
-    secret: secret,
-    resave: false,
-    saveUninitialized: false,
-    cookie: {
-        secure: false,
-        sameSite: 'Lax',
-        maxAge: 24 * 60 * 60 * 1000,
-        httpOnly: true,
-    }
-}));
 app.use(gamePosts, videos, tags, users, user, insert, register, login);
 
 app.get('/', (req, res) => {
-    if (!req.session.views) {
-        req.session.views = 1;
-    } else {
-        req.session.views++;
-    }
-    res.send(`Number of views: ${req.session.views}`);
+    res.json("Hello world!")
 });
 
 app.listen(port, () => {

@@ -4,7 +4,7 @@ import '../CSS/Login.css'
 import axios from 'axios';
 
 const Login = () => {
-    const [name, setName] = useState('');
+    const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
 
     const [error, setError] = useState('');
@@ -13,7 +13,7 @@ const Login = () => {
 
     useEffect(() => {
         setError('');
-    }, [name, password])
+    }, [email, password])
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -21,7 +21,7 @@ const Login = () => {
 
         try {
             const response = await axios.post(`http://localhost:5000/login`,
-                JSON.stringify({ name, password }),
+                JSON.stringify({ email, password }),
                 {
                     headers: { 'Content-Type': 'application/json' },
                     withCredentials: true
@@ -30,21 +30,21 @@ const Login = () => {
 
             console.log(JSON.stringify(response?.data));
             const accessToken = response?.data?.accessToken;
-            const roles = response?.data?.roles;
+            const user = response?.data?.user;
             
             setSuccess(true);
-            setName('');
+            setEmail('');
             setPassword('');
             setError('');
         } catch (err) {
             if (!err?.response) {
-                setErrMsg('No Server Response');
+                setError('No Server Response');
             } else if (err.response?.status === 400) {
-                setErrMsg('Missing Username or Password');
+                setError('Missing Email or Password');
             } else if (err.response?.status === 401) {
-                setErrMsg('Unauthorized');
+                setError('Unauthorized');
             } else {
-                setErrMsg('Login Failed');
+                setError('Login Failed');
             }
         } finally {
             setLoading(false);
@@ -65,13 +65,13 @@ const Login = () => {
                     <p className={error ? "errmsg" : "offscreen"} aria-live="assertive">{error}</p>
                     <h1>Sign In</h1>
                     <form onSubmit={handleSubmit} className='login__form'>
-                        <label htmlFor="username">Username:</label>
+                        <label htmlFor="email">Email:</label>
                         <input
                             type="text"
-                            id="username"
+                            id="email"
                             autoComplete="off"
-                            onChange={(e) => setName(e.target.value)}
-                            value={name}
+                            onChange={(e) => setEmail(e.target.value)}
+                            value={email}
                             required
                         />
 
@@ -83,7 +83,7 @@ const Login = () => {
                             value={password}
                             required
                         />
-                        <button disabled={loading || !name || !password}>Sign In</button>
+                        <button disabled={loading || !email || !password}>Sign In</button>
                     </form>
                     <p>
                         Need an Account?<br />

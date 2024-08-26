@@ -55,7 +55,7 @@ register.post('/register', (req, res) => {
         }
         try {
             //await pushUser(name, email, password, img, about);
-            res.status(201).send(`Account ${name} created successfully! You can login now.`);
+            res.status(201).send({ message: `Account ${name} created successfully! You can login now.` });
         } catch (err) {
             console.error('Error adding user:', err);
             res.status(500).json({ message: err.message });

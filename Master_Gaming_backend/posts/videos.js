@@ -1,5 +1,5 @@
 const express = require('express');
-const { client } = require('./client');
+const { client } = require('../client');
 
 const videos = express.Router();
 async function getVideos() {
