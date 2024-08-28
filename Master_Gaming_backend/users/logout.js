@@ -16,7 +16,7 @@ logout.post('/logout', async (req, res) => {
     const userResult = await client.query(userQuery, [refreshToken]);
 
     if (userResult.rows.length === 0) {
-        res.clearCookie('jwt', { httpOnly: false, secure: false, sameSite: 'None' }); // change on true true
+        res.clearCookie('jwt', { httpOnly: true, secure: true, sameSite: 'None' }); // change on true true
         return res.sendStatus(204);
     }
 
@@ -29,7 +29,8 @@ logout.post('/logout', async (req, res) => {
     `;
 
     await client.query(deleteRefreshToken, [foundUser.id]);
-    res.clearCookie('jwt', { httpOnly: false, secure: false, sameSite: 'None' }); // change on true true
+    console.log('success')
+    res.clearCookie('jwt', { httpOnly: true, secure: true, sameSite: 'None' }); // change on true true
     res.sendStatus(204);
 });
 

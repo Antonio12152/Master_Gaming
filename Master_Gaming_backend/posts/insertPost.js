@@ -1,6 +1,6 @@
 const express = require('express');
 const { client } = require('../client');
-const authenticateToken = require('./middleware/authenticateToken');
+const authenticateToken = require('../middleware/authenticateToken');
 
 const insert = express.Router();
 
@@ -93,6 +93,7 @@ insert.post('/insertpost', authenticateToken, async (req, res) => {
         if (!req.user.roles.writer) return res.status(403).send('No access to make posts.');
         const userId = req.user.id;
         await insertPostWithTags(userId, title, img, text, tagsArray);
+        console.log('success')
         res.status(201).send('Post and tags inserted successfully');
     } catch (err) {
         if (err.message.includes('A post with this title already exists.')) {

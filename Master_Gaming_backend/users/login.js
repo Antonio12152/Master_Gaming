@@ -43,7 +43,7 @@ async function createJWT(user, res) {
     `;
 
     await client.query(saveRefreshToken, [refreshToken, user.id]);
-    res.cookie('jwt', refreshToken, { httpOnly: false, secure: false, sameSite: 'None', maxAge: 24 * 60 * 60 * 1000 }); // change on true true
+    res.cookie('jwt', refreshToken, { httpOnly: true, secure: true, sameSite: 'None', maxAge: 24 * 60 * 60 * 1000 }); // change on true true
     return { accessToken, refreshToken }
 }
 
@@ -81,7 +81,7 @@ login.post('/login', async (req, res) => {
     try {
         const { user, tokens } = await loginUser(email, password, res);
         delete user.password;
-
+        console.log('success')
         res.json({
             user: {
                 id: user.id,
