@@ -9,10 +9,11 @@ async function verifyPassword(password, hash) {
     return await bcrypt.compare(password, hash);
 }
 
-async function createJWT(user){
+async function createJWT(user, res) {
     const accessToken = jwt.sign(
         {
-            "UserInfo": {
+            "user": {
+                "id": user.id,
                 "name": user.name,
                 "roles": {
                     "admin": user.is_admin,
@@ -21,15 +22,20 @@ async function createJWT(user){
             }
         },
         process.env.ACCESS_TOKEN_SECRET,
-        { expiresIn: '60s' }
+        { expiresIn: '15m' }
     );
 
     const refreshToken = jwt.sign(
-        { "name": user.name },
+        {
+            "user": {
+                "id": user.id,
+                "name": user.name
+            }
+        },
         process.env.REFRESH_TOKEN_SECRET,
         { expiresIn: '1d' }
     );
-    
+
     const saveRefreshToken = `
         UPDATE users
         SET refresh_token = $1
@@ -37,13 +43,13 @@ async function createJWT(user){
     `;
 
     await client.query(saveRefreshToken, [refreshToken, user.id]);
-    res.cookie('jwt', refreshToken, { httpOnly: true, secure: true, sameSite: 'None', maxAge: 24 * 60 * 60 * 1000 });
-    return {refreshToken, accessToken}
+    res.cookie('jwt', refreshToken, { httpOnly: false, secure: false, sameSite: 'None', maxAge: 24 * 60 * 60 * 1000 }); // change on true true
+    return { accessToken, refreshToken }
 }
 
-async function loginUser(email, password) {
+async function loginUser(email, password, res) {
     const userQuery = `
-        SELECT id, name, email, password, is_admin, is_writer, is_delete
+        SELECT id, name, email, password, img, is_admin, is_writer, is_delete
         FROM users
         WHERE email = $1;
     `;
@@ -52,15 +58,15 @@ async function loginUser(email, password) {
         throw new Error('User not found');
     }
     const user = userResult.rows[0];
-    if (user.is_delete){
+    if (user.is_delete) {
         throw new Error('The user was deleted earlier');
     }
     const isMatch = await verifyPassword(password, user.password);
     if (!isMatch) {
         throw new Error('Invalid password');
     }
-    const tokens = await createJWT(user);
-    return {user, tokens};
+    const tokens = await createJWT(user, res);
+    return { user, tokens };
 }
 
 
@@ -69,17 +75,21 @@ login.post('/login', async (req, res) => {
     const { email, password } = req.body;
 
     if (!email || !password) {
-        return res.status(400).json({ message: 'Email and password are required' });
+        return res.status(400).json({ message: req.body });
     }
 
     try {
-        const data = await loginUser(email, password);
+        const { user, tokens } = await loginUser(email, password, res);
+        delete user.password;
 
-        res.cookie('jwt', data.tokens.refreshToken, { httpOnly: true, secure: true, sameSite: 'None', maxAge: 24 * 60 * 60 * 1000 });
-        let user = data.user
-        let acc = data.tokens.accessToken
-
-        res.json({ user, acc });
+        res.json({
+            user: {
+                id: user.id,
+                name: user.name,
+                img: user.img,
+            },
+            accessToken: tokens.accessToken
+        });
     } catch (err) {
         console.error('Error logging in user:', err);
         res.status(401).json({ message: err.message });

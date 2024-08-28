@@ -1,5 +1,6 @@
 const express = require('express');
 const { client } = require('../client');
+const authenticateToken = require('./middleware/authenticateToken');
 
 const insert = express.Router();
 
@@ -50,6 +51,12 @@ async function insertPostWithTags(userid, title, img, text, tagsArray) {
             throw new Error('A post with this title already exists.');
         }
 
+        for (const tag of tagsArray) {
+            if (hasSpecialChars(tag)) {
+                throw new Error(`Tag "${tag}" contains special characters.`);
+            }
+        }
+
         const postInsertQuery = `
             INSERT INTO posts (user_id, title, img, text, created_at)
             VALUES ($1, $2, $3, $4, CURRENT_TIMESTAMP)
@@ -59,9 +66,6 @@ async function insertPostWithTags(userid, title, img, text, tagsArray) {
         const postId = postResult.rows[0].id;
 
         for (const tag of tagsArray) {
-            if (hasSpecialChars(tag)) {
-                throw new Error(`Tag "${tag}" contains special characters.`);
-            }
             const tagId = await insertTagAndReturnId(tag);
 
             const postTagInsertQuery = `
@@ -71,21 +75,24 @@ async function insertPostWithTags(userid, title, img, text, tagsArray) {
             await client.query(postTagInsertQuery, [postId, tagId]);
         }
 
-        console.log('Post and tags inserted successfully');
+        console.log('Post inserted successfully');
     } catch (err) {
-        console.error('Error inserting post and tags:', err);
+        console.error('Error inserting post:', err);
         throw err;
     }
 }
-insert.post('/insertpost', async (req, res) => {
+insert.post('/insertpost', authenticateToken, async (req, res) => {
     const { title, img, text, tags } = req.body;
-    const userid = 1;
+
     const tagsArray = tags.split(',')
         .map(tag => tag.trim())
         .filter(tag => tag.length > 0);
 
     try {
-        // await insertPostWithTags(userid, title, img, text, tagsArray);
+        if (!req.user) return res.status(403).send('No access, please login.');
+        if (!req.user.roles.writer) return res.status(403).send('No access to make posts.');
+        const userId = req.user.id;
+        await insertPostWithTags(userId, title, img, text, tagsArray);
         res.status(201).send('Post and tags inserted successfully');
     } catch (err) {
         if (err.message.includes('A post with this title already exists.')) {
@@ -93,7 +100,7 @@ insert.post('/insertpost', async (req, res) => {
         } else if (err.message.includes('contains special characters')) {
             res.status(400).send(err.message);
         } else {
-            res.status(500).send('Error inserting post and tags');
+            res.status(500).send('Error inserting post and tags', err.message);
         }
     }
 });

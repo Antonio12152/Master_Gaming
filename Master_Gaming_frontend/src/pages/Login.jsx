@@ -62,7 +62,7 @@ const Login = () => {
                 </section>
             ) : (
                 <section className='login__section'>
-                    <p className={error ? "errmsg" : "offscreen"} aria-live="assertive">{error}</p>
+                    <p className={error ? "error" : "offscreen"} aria-live="assertive">{error}</p>
                     <h1>Sign In</h1>
                     <form onSubmit={handleSubmit} className='login__form'>
                         <label htmlFor="email">Email:</label>

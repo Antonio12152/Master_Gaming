@@ -1,7 +1,6 @@
 const express = require('express');
 const cors = require('cors');
 const bodyParser = require('body-parser');
-const session = require('express-session');
 const cookieParser = require('cookie-parser');
 require('dotenv').config();
 
@@ -13,10 +12,12 @@ const user = require('./users/user')
 const register = require('./users/register')
 const insert = require('./posts/insertPost')
 const login = require('./users/login')
+const logout = require('./users/logout')
+const updateAccessToken = require('./controllers/updateAccessToken')
 const port = process.env.SERVER_PORT || 5000;
 
 const app = express();
-// use it to connect with aiven. don't use it on railway!
+// use it to connect with aiven or other db without url. don't use it on railway!
 // (async () => {
 //   await connectClient()
 // })();
@@ -39,10 +40,11 @@ const corsOptions = {
 
 app.use(cors(corsOptions));
 app.use(express.json());
-app.use(express.urlencoded({ extended: false }));
 app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
+
 app.use(cookieParser());
-app.use(gamePosts, videos, tags, users, user, insert, register, login);
+app.use(gamePosts, videos, tags, users, user, insert, register, login, logout, updateAccessToken);
 
 app.get('/', (req, res) => {
     res.json("Hello world!")
