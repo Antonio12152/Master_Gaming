@@ -2,8 +2,11 @@ import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import '../CSS/Login.css'
 import axios from 'axios';
+import useAuth from '../hooks/useAuth';
+import { jwtDecode } from "jwt-decode";
 
 const Login = () => {
+    const { setAuth } = useAuth();
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
 
@@ -27,11 +30,19 @@ const Login = () => {
                     withCredentials: true
                 }
             );
+            const accessToken = response?.data.accessToken;
+            const info = jwtDecode(accessToken)
+            const user = {
+                img: response.data.img,
+                id: info.user.id,
+                name: info.user.name,
+                roles: {
+                    admin: info.user.roles.admin,
+                    writer: info.user.roles.writer
+                }
+            };
 
-            console.log(JSON.stringify(response?.data));
-            const accessToken = response?.data?.accessToken;
-            const user = response?.data?.user;
-            
+            setAuth({ user, accessToken });
             setSuccess(true);
             setEmail('');
             setPassword('');

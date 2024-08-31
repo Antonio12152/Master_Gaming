@@ -34,14 +34,10 @@ updateAccessToken.get('/updateaccessnoken', async (req, res) => {
                     }
                 },
                 process.env.ACCESS_TOKEN_SECRET,
-                { expiresIn: '15m' }
+                { expiresIn: '1h' }
             );
             res.json({
-                user: {
-                    id: user.id,
-                    name: user.name,
-                    img: user.img
-                },
+                img: user.img,
                 accessToken
             })
         }

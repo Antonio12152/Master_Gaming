@@ -1,20 +1,42 @@
-import React, { useState } from 'react';
-import axios from 'axios';
+import React, { useEffect, useState } from 'react';
+import useRefreshToken from '../hooks/useRefreshToken';
+import useAxiosPrivate from '../hooks/useAxiosPrivate';
+import useAuth from '../hooks/useAuth';
 
 const CreatePost = () => {
+    const { auth } = useAuth();
+    const refresh = useRefreshToken();
+    const axiosPrivate = useAxiosPrivate();
+
     const [title, setTitle] = useState('');
     const [img, setImg] = useState('');
     const [text, setText] = useState('');
     const [tags, setTags] = useState('');
     const [error, setError] = useState('');
     const [loading, setLoading] = useState(false);
-    
+    const [token, setToken] = useState(false);
+
+    useEffect(() => {
+        const verifyToken = async () => {
+            if (!auth?.accessToken) {
+                const newAccessToken = await refresh();
+                if (newAccessToken) {
+                    setToken(true);
+                }
+            } else {
+                setToken(true);
+            }
+        };
+
+        verifyToken();
+    }, [auth?.accessToken, refresh]);
+
     const handleSubmit = async (e) => {
         e.preventDefault();
         setLoading(true);
         try {
-            const response = await axios.post('http://localhost:5000/insertPost', {
-                title: `${title}`, img:`${img}`, text:`${text}`, tags:`${tags}`
+            const response = await axiosPrivate.post('/insertPost', {
+                title: `${title}`, img: `${img}`, text: `${text}`, tags: `${tags}`, user: `${auth.user}`
             });
 
             const data = await response.text();
@@ -34,7 +56,9 @@ const CreatePost = () => {
             setLoading(false);
         }
     };
-
+    if (!token) return (
+        <div>No access, please log in.</div>
+    )
     return (
         <div>
             <form onSubmit={handleSubmit}>

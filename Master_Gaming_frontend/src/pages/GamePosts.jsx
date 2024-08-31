@@ -1,11 +1,12 @@
 import { useEffect, useMemo, useState } from "react";
 import GamePostsList from "../components/GamePostsList";
 import { useParams } from "react-router-dom";
-import axios from 'axios';
+import useAxiosPrivate from '../hooks/useAxiosPrivate';
 
-const GamePosts = ({ postsTag, postsSearch, userPosts, newpage}) => {
+const GamePosts = ({ postsTag, postsSearch, userPosts, newpage }) => {
     const [posts, setPosts] = useState([]);
     const [loading, setLoading] = useState(true);
+    const axiosPrivate = useAxiosPrivate();
 
     let page = useMemo(() => {
         if (postsTag !== undefined && postsTag) {
@@ -30,15 +31,15 @@ const GamePosts = ({ postsTag, postsSearch, userPosts, newpage}) => {
         } else if (userPosts !== undefined && userPosts) {
             setPosts(userPosts)
         } else {
-            axios.get(`https://mastergaming-production.up.railway.app/gamePosts` || 'http://localhost:5000/gamePosts')
+            axiosPrivate.get(`/gamePosts`)
                 .then(res => {
                     const data = res.data
                     setPosts(data.slice().reverse())
                     setLoading(false)
                 })
-                .catch(error => {console.error('Error fetching data:', error); setLoading(false)});
+                .catch(error => { console.error('Error fetching data:', error); setLoading(false) });
         }
-    }, [postsTag, postsSearch, userPosts]);
+    }, [axiosPrivate, postsTag, postsSearch, userPosts]);
 
     const [currentPage, setCurrentPage] = useState(1)
     const [postsPerPage] = useState(5)
@@ -57,7 +58,7 @@ const GamePosts = ({ postsTag, postsSearch, userPosts, newpage}) => {
 
     return (
         <div>
-            <GamePostsList page={page} TotalPosts={posts.length} currentPosts={currentPosts} postsPerPage={postsPerPage} currentPage={currentPage} loading={loading}/>
+            <GamePostsList page={page} TotalPosts={posts.length} currentPosts={currentPosts} postsPerPage={postsPerPage} currentPage={currentPage} loading={loading} />
         </div>
     )
 }

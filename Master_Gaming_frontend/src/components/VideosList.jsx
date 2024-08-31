@@ -10,7 +10,7 @@ const VideosList = ({ page, TotalPosts, currentVideos, postsPerPage, currentPage
         <Pagin page={page} postsPerPage={postsPerPage} TotalPosts={TotalPosts}  currentPage={currentPage} />
         <div className='div-posts'>
             {currentVideos.map((video) => (
-                <div key={video.id} className='div-post-video div-post'>
+                <div key={video.videoid} className='div-post-video div-post'>
                     <h3>{video.title}</h3>
                     <div>
                         <h4>Added by:</h4>

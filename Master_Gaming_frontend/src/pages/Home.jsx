@@ -1,27 +1,28 @@
 import { useEffect, useState } from "react";
 import HomePV from "../components/HomePV";
-import axios from 'axios';
+import useAxiosPrivate from '../hooks/useAxiosPrivate';
 
 const Home = () => {
     const [post, setPost] = useState([]);
     const [video, setVideo] = useState([]);
     const [loading, setLoading] = useState(true);
-    
+    const axiosPrivate = useAxiosPrivate();
+
     useEffect(() => {
-        axios.get(`https://mastergaming-production.up.railway.app/gamePosts` || 'http://localhost:5000/gamePosts')
+        axiosPrivate.get(`/gamePosts`)
             .then(res => {
                 const data = res.data
                 setPost(data[data.length - 1])
             })
             .catch(error => { console.error('Error fetching data:', error); setLoading(false) });
-        axios.get(`https://mastergaming-production.up.railway.app/videos` || 'http://localhost:5000/videos')
+            axiosPrivate.get(`/videos`)
             .then(res => {
                 const data = res.data
                 setVideo(data[data.length - 1])
             })
             .catch(error => { console.error('Error fetching data:', error); setLoading(false) });
         setLoading(false)
-    }, []);
+    }, [axiosPrivate]);
 
     return (
         <div className="home">

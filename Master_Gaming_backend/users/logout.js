@@ -29,7 +29,7 @@ logout.post('/logout', async (req, res) => {
     `;
 
     await client.query(deleteRefreshToken, [foundUser.id]);
-    console.log('success')
+
     res.clearCookie('jwt', { httpOnly: true, secure: true, sameSite: 'None' }); // change on true true
     res.sendStatus(204);
 });

@@ -1,20 +1,21 @@
 import { useEffect, useState } from 'react';
 import TagsList from '../components/TagsList';
-import axios from 'axios';
+import useAxiosPrivate from '../hooks/useAxiosPrivate';
 
 const Tags = () => {
     const [tags, setTags] = useState([]);
     const [loading, setLoading] = useState(true);
+    const axiosPrivate = useAxiosPrivate();
 
     useEffect(() => {
-        axios.get(`https://mastergaming-production.up.railway.app/tags` || 'http://localhost:5000/tags')
+        axiosPrivate.get(`/tags`)
             .then(res => {
                 const data = res.data
                 setTags(data)
                 setLoading(false)
             })
             .catch(error => { console.error('Error fetching data:', error); setLoading(false)});
-    }, []);
+    }, [axiosPrivate]);
     tags.sort((a, b) => {
         const taga = a.name.toUpperCase();
         const tagb = b.name.toUpperCase();

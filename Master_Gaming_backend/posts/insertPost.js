@@ -89,11 +89,11 @@ insert.post('/insertpost', authenticateToken, async (req, res) => {
         .filter(tag => tag.length > 0);
 
     try {
-        if (!req.user) return res.status(403).send('No access, please login.');
-        if (!req.user.roles.writer) return res.status(403).send('No access to make posts.');
+        if (!req.user) return res.status(303).send('No access, please login.');
+        if (!req.user.roles.writer) return res.status(303).send('No access to make posts.');
         const userId = req.user.id;
         await insertPostWithTags(userId, title, img, text, tagsArray);
-        console.log('success')
+
         res.status(201).send('Post and tags inserted successfully');
     } catch (err) {
         if (err.message.includes('A post with this title already exists.')) {

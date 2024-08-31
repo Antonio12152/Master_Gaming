@@ -54,7 +54,7 @@ register.post('/register', (req, res) => {
             return res.status(400).json({ message: 'Username, email, and password are required' });
         }
         try {
-            //await pushUser(name, email, password, img, about);
+            await pushUser(name, email, password, img, about);
             res.status(201).send({ message: `Account ${name} created successfully! You can login now.` });
         } catch (err) {
             console.error('Error adding user:', err);

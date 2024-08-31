@@ -1,21 +1,23 @@
 import { useEffect, useState } from "react";
 import VideosList from "../components/VideosList";
 import { useParams } from "react-router-dom";
-import axios from 'axios';
+import useAxiosPrivate from '../hooks/useAxiosPrivate';
+
 
 const Videos = () => {
     const [videos, setVideos] = useState([]);
     const [loading, setLoading] = useState(true);
+    const axiosPrivate = useAxiosPrivate();
 
     useEffect(() => {
-        axios.get(`https://mastergaming-production.up.railway.app/videos` || 'http://localhost:5000/videos')
+        axiosPrivate.get(`/videos`)
             .then(res => {
                 const data = res.data
                 setVideos(data.slice().reverse())
                 setLoading(false)
             })
             .catch(error => {console.error('Error fetching data:', error); setLoading(false)});
-    }, []);
+    }, [axiosPrivate]);
 
     let [currentPage, setCurrentPage] = useState(1)
     const [postsPerPage] = useState(6)

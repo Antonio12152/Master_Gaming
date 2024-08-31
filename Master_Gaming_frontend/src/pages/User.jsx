@@ -2,31 +2,32 @@ import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import GamePosts from './GamePosts'
 import UserI from '../components/UserI';
-import axios from 'axios';
+import useAxiosPrivate from '../hooks/useAxiosPrivate';
 
 const User = () => {
     const [posts, setPosts] = useState([]);
     const [user, setUser] = useState([]);
     let { username } = useParams();
+    const axiosPrivate = useAxiosPrivate();
 
     useEffect(() => {
-        axios.get(`https://mastergaming-production.up.railway.app/users/${username}` || `http://localhost:5000/users/${username}`)
+        axiosPrivate.get(`/${username}`)
             .then(res => {
                 const data = res.data
                 setUser(data[0])
             })
             .catch(error => { console.error('Error fetching data:', error);});
-    }, [username]);
+    }, [axiosPrivate,username]);
     useEffect(() => {
         if (user.id) {
-            axios.get(`https://mastergaming-production.up.railway.app/gamePosts` || 'http://localhost:5000/gamePosts')
+            axiosPrivate.get(`/gamePosts`)
                 .then(res => {
                     const data = res.data
                     setPosts(data.slice().reverse().filter(post => post.user_id === user.id))
                 })
                 .catch(error => { console.error('Error fetching data:', error);});
         }
-    }, [user.id]);
+    }, [axiosPrivate,user.id]);
     return (
         <div>
             <UserI user={user} />
