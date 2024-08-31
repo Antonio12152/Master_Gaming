@@ -15,7 +15,7 @@ const Tags = () => {
                 setLoading(false)
             })
             .catch(error => { console.error('Error fetching data:', error); setLoading(false)});
-    }, [axiosPrivate]);
+    }, []);
     tags.sort((a, b) => {
         const taga = a.name.toUpperCase();
         const tagb = b.name.toUpperCase();
