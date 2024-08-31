@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import '../CSS/Login.css'
+import { BASE_URL } from '../api/axios';
 import axios from 'axios';
 import useAuth from '../hooks/useAuth';
 import { jwtDecode } from "jwt-decode";
@@ -23,7 +24,7 @@ const Login = () => {
         setLoading(true);
 
         try {
-            const response = await axios.post(`http://localhost:5000/login`,
+            const response = await axios.post(`${BASE_URL}/login`,
                 JSON.stringify({ email, password }),
                 {
                     headers: { 'Content-Type': 'application/json' },

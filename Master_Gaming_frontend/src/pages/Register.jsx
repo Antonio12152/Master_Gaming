@@ -3,7 +3,8 @@ import { Link } from 'react-router-dom';
 import { faCheck, faTimes, faInfoCircle } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import '../CSS/Register.css'
-import axios from "axios";
+import { BASE_URL } from '../api/axios';
+import axios from 'axios';
 
 const USER_REGEX = /^[A-z][A-z0-9-_]{3,23}$/;
 const EMAIL_REGEX = /^\S+@\S+\.\S+$/;
@@ -60,7 +61,7 @@ const Register = () => {
             return;
         }
         try {
-            await axios.post(`http://localhost:5000/register`,
+            await axios.post(`${BASE_URL}/register`,
                 JSON.stringify({
                     name,
                     email,

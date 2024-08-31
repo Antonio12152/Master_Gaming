@@ -1,14 +1,14 @@
 import { useEffect, useState } from 'react';
 import TagsList from '../components/TagsList';
-import useAxiosPrivate from '../hooks/useAxiosPrivate';
+import { BASE_URL } from '../api/axios';
+import axios from 'axios';
 
 const Tags = () => {
     const [tags, setTags] = useState([]);
     const [loading, setLoading] = useState(true);
-    const axiosPrivate = useAxiosPrivate();
 
     useEffect(() => {
-        axiosPrivate.get(`/tags`)
+        axios.get(`${BASE_URL}/tags`)
             .then(res => {
                 const data = res.data
                 setTags(data)
