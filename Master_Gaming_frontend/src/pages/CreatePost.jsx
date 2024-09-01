@@ -39,9 +39,8 @@ const CreatePost = () => {
                 title: `${title}`, img: `${img}`, text: `${text}`, tags: `${tags}`, user: `${auth.user}`
             });
 
-            const data = await response.text();
-            if (!response.ok) {
-                throw new Error(data);
+            if (response.status !== 201) {
+                throw new Error(response.data || 'Error inserting post');
             }
 
             alert('Post and tags inserted successfully');

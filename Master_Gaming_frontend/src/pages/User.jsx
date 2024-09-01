@@ -11,13 +11,13 @@ const User = () => {
     const axiosPrivate = useAxiosPrivate();
 
     useEffect(() => {
-        axiosPrivate.get(`/${username}`)
+        axiosPrivate.get(`users/${username}`)
             .then(res => {
                 const data = res.data
                 setUser(data[0])
             })
             .catch(error => { console.error('Error fetching data:', error);});
-    }, [axiosPrivate,username]);
+    }, [axiosPrivate, username]);
     useEffect(() => {
         if (user.id) {
             axiosPrivate.get(`/gamePosts`)

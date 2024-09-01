@@ -15,7 +15,7 @@ const useRefreshToken = () => {
                 withCredentials: true
             });
             const info = jwtDecode(response.data.accessToken);
-            setAuth(prev => ({
+            await setAuth(prev => ({
                 ...prev,
                 user: {
                     img: response.data.img,
@@ -28,7 +28,7 @@ const useRefreshToken = () => {
                 },
                 accessToken: response.data.accessToken
             }));
-            return response.data.accessToken;
+            return await response.data.accessToken;
         } catch (err) {
             console.error("Failed to refresh token", err);
             return null;

@@ -10,7 +10,7 @@ import User from './pages/User';
 import CreatePost from './pages/CreatePost';
 import Register from './pages/Register';
 import Login from './pages/Login';
-import Test from './hooks/Test';
+
 const BaseRoute = () => {
     return (
         <div>
@@ -31,7 +31,6 @@ const BaseRoute = () => {
                 <Route path='/users/:username/:id' element={<User />}/>
                 <Route path='/register' element={<Register />}/>
                 <Route path='/login' element={<Login />}/>
-                <Route path='/test' element={<Test />}/>
             </Routes>
         </div>
     )
