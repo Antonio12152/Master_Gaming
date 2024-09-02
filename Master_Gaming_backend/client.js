@@ -7,7 +7,16 @@ const connectionString = process.env.POOL
 const client = new Pool({
     connectionString
 });
+// aiven
+// const client = new Pool({
+//     connectionString: process.env.connectionString,
+//     ssl: {
+//         ca: process.env.CA,
+//         rejectUnauthorized: true 
+//     },
+// });
 
+// old aiven
 // const config_aiven = {
 //     user: process.env.USER,
 //     password: process.env.PASSWORD,
