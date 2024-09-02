@@ -1,12 +1,14 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import SearchBar from './Searchbar'; // Предполагается, что у вас есть компонент SearchBar
+import SearchBar from './Searchbar';
 import useAuth from '../hooks/useAuth';
+import { BASE_URL } from '../api/axios';
+import axios from 'axios';
 
 const Header = () => {
     const [isMenuOpen, setMenuOpen] = useState(false);
     const [isUserMenuOpen, setUserMenuOpen] = useState(false);
-    const { auth } = useAuth()
+    const { auth, setAuth } = useAuth()
 
     const toggleMenu = () => {
         setMenuOpen(!isMenuOpen);
@@ -18,37 +20,17 @@ const Header = () => {
         setMenuOpen(false);
     };
 
-    let userHeader;
-    if (!auth || auth.user === undefined) {
-        userHeader = <div className='header__user'>
-            <img src="/images/blank_user.png" alt="User" />
-            <ul className={`header__user__ul ${isUserMenuOpen ? 'open' : ''}`}>
-                <li>
-                    <Link to='/login' onClick={toggleUserMenu}>Login</Link>
-                </li>
-                <li>
-                    <Link to='/register' onClick={toggleUserMenu}>Register</Link>
-                </li>
-            </ul>
-        </div>
-    } else {
-        userHeader = <div className='header__user'>
-            <img src={auth.user.img} alt="User" onClick={toggleUserMenu} onError={(e) => e.currentTarget.src = '/images/blank_user.png'} />
-            <ul className={`header__user__ul ${isUserMenuOpen ? 'open' : ''}`}>
-                <li>
-                    <Link to={`/users/${auth.user.name}`} onClick={toggleUserMenu}>Account</Link>
-                </li>
-                {auth.user.roles.writer && (
-                    <li>
-                        <Link to='/insertpost' onClick={toggleUserMenu}>Write Post</Link>
-                    </li>
-                )}
-                <li>
-                    <Link to='/logout' onClick={toggleUserMenu}>Logout</Link>
-                </li>
-            </ul>
-        </div>
+    const handleLogout = async (e) => {
+        e.preventDefault();
+        await axios.post(`${BASE_URL}/logout`,
+            {
+                headers: { 'Content-Type': 'application/json' },
+                withCredentials: true
+            }
+        );
+        setAuth({})
     }
+
     return (
         <header className="header" id="header">
             <div className="header__left">
@@ -71,7 +53,37 @@ const Header = () => {
                 </ul>
             </div>
             <SearchBar className="header__center" />
-            {userHeader}
+            {!auth || auth.user === undefined ? (
+                <div className='header__user'>
+                    <img src="/images/blank_user.png" alt="User" />
+                    <ul className={`header__user__ul ${isUserMenuOpen ? 'open' : ''}`}>
+                        <li>
+                            <Link to='/login' onClick={toggleUserMenu}>Login</Link>
+                        </li>
+                        <li>
+                            <Link to='/register' onClick={toggleUserMenu}>Register</Link>
+                        </li>
+                    </ul>
+                </div>
+            ) :
+                (
+                    <div className='header__user'>
+                        <img src={auth.user.img} alt="User" onClick={toggleUserMenu} onError={(e) => e.currentTarget.src = '/images/blank_user.png'} />
+                        <ul className={`header__user__ul ${isUserMenuOpen ? 'open' : ''}`}>
+                            <li>
+                                <Link to={`/users/${auth.user.name}`} onClick={toggleUserMenu}>Account</Link>
+                            </li>
+                            {auth.user.roles.writer && (
+                                <li>
+                                    <Link to='/insertpost' onClick={toggleUserMenu}>Write Post</Link>
+                                </li>
+                            )}
+                            <li>
+                                <a href='/' onClick={handleLogout}>Logout</a>
+                            </li>
+                        </ul>
+                    </div>
+                )}
         </header>
     );
 };

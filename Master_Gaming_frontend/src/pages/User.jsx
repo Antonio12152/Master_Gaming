@@ -11,7 +11,7 @@ const User = () => {
     const axiosPrivate = useAxiosPrivate();
 
     useEffect(() => {
-        axiosPrivate.get(`users/${username}`)
+        axiosPrivate.get(`/users/${username}`)
             .then(res => {
                 const data = res.data
                 setUser(data[0])

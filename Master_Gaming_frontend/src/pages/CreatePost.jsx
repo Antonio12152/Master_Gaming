@@ -27,7 +27,6 @@ const CreatePost = () => {
                 setToken(true);
             }
         };
-
         verifyToken();
     }, [auth?.accessToken, refresh]);
 
@@ -59,29 +58,45 @@ const CreatePost = () => {
         <div>No access, please log in.</div>
     )
     return (
-        <div>
-            <form onSubmit={handleSubmit}>
-                <div>
-                    <label>Title:</label>
-                    <input type="text" value={title} onChange={(e) => setTitle(e.target.value)} required />
-                </div>
-                <div>
-                    <label>Image URL:</label>
-                    <input type="text" value={img} onChange={(e) => setImg(e.target.value)} required />
-                </div>
-                <div>
-                    <label>Text:</label>
-                    <textarea value={text} onChange={(e) => setText(e.target.value)} required />
-                </div>
-                <div>
-                    <label>Tags (comma separated):</label>
-                    <input type="text" value={tags} onChange={(e) => setTags(e.target.value)} />
-                </div>
-                {error && <p style={{ color: 'red' }}>{error}</p>}
-                <button type="submit" disabled={loading}>
-                    {loading ? 'Loading...' : 'Submit'}
-                </button>
-            </form>
+        <div className='cpost__main'>
+            <section className='cpost__section'>
+                <p className={error ? "error" : "offscreen"} aria-live="assertive">{error}</p>
+                <h1>Create Post</h1>
+                <form onSubmit={handleSubmit} className='cpost__form'>
+                    <label htmlFor="title">Title:</label>
+                    <input
+                        type="text"
+                        id="title"
+                        value={title}
+                        onChange={(e) => setTitle(e.target.value)}
+                        required
+                    />
+                    <label htmlFor="img">Image URL:</label>
+                    <input
+                        type="text"
+                        id="img"
+                        value={img}
+                        onChange={(e) => setImg(e.target.value)}
+                        required
+                    />
+                    <label htmlFor="text">Text:</label>
+                    <input
+                        type="text"
+                        id="text"
+                        value={text}
+                        onChange={(e) => setText(e.target.value)}
+                        required
+                    />
+                    <label htmlFor="tags">Tags (comma separated):</label>
+                    <input
+                        type="text"
+                        id='tags'
+                        value={tags}
+                        onChange={(e) => setTags(e.target.value)}
+                    />
+                    <button disabled={loading || !title || !img || !text}>Create Post</button>
+                </form>
+            </section>
         </div>
     );
 };

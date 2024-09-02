@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import '../CSS/Login.css'
 import { BASE_URL } from '../api/axios';
 import axios from 'axios';
@@ -13,7 +13,7 @@ const Login = () => {
 
     const [error, setError] = useState('');
     const [loading, setLoading] = useState(false);
-    const [success, setSuccess] = useState(false);
+    const navigate = useNavigate();
 
     useEffect(() => {
         setError('');
@@ -44,10 +44,11 @@ const Login = () => {
             };
 
             setAuth({ user, accessToken });
-            setSuccess(true);
             setEmail('');
             setPassword('');
             setError('');
+            navigate('/')
+
         } catch (err) {
             if (!err?.response) {
                 setError('No Server Response');
@@ -64,47 +65,37 @@ const Login = () => {
     };
     return (
         <div className='login__main'>
-            {success ? (
-                <section>
-                    <h1>You are logged in!</h1>
-                    <br />
-                    <p>
-                        <Link to='/'>Go to Home</Link>
-                    </p>
-                </section>
-            ) : (
-                <section className='login__section'>
-                    <p className={error ? "error" : "offscreen"} aria-live="assertive">{error}</p>
-                    <h1>Sign In</h1>
-                    <form onSubmit={handleSubmit} className='login__form'>
-                        <label htmlFor="email">Email:</label>
-                        <input
-                            type="text"
-                            id="email"
-                            autoComplete="off"
-                            onChange={(e) => setEmail(e.target.value)}
-                            value={email}
-                            required
-                        />
+            <section className='login__section'>
+                <p className={error ? "error" : "offscreen"} aria-live="assertive">{error}</p>
+                <h1>Sign In</h1>
+                <form onSubmit={handleSubmit} className='login__form'>
+                    <label htmlFor="email">Email:</label>
+                    <input
+                        type="text"
+                        id="email"
+                        autoComplete="off"
+                        onChange={(e) => setEmail(e.target.value)}
+                        value={email}
+                        required
+                    />
 
-                        <label htmlFor="password">Password:</label>
-                        <input
-                            type="password"
-                            id="password"
-                            onChange={(e) => setPassword(e.target.value)}
-                            value={password}
-                            required
-                        />
-                        <button disabled={loading || !email || !password}>Sign In</button>
-                    </form>
-                    <p>
-                        Need an Account?<br />
-                        <span className="line">
-                            <Link to='/register'>Sign Up</Link>
-                        </span>
-                    </p>
-                </section>
-            )}
+                    <label htmlFor="password">Password:</label>
+                    <input
+                        type="password"
+                        id="password"
+                        onChange={(e) => setPassword(e.target.value)}
+                        value={password}
+                        required
+                    />
+                    <button disabled={loading || !email || !password}>Sign In</button>
+                </form>
+                <p>
+                    Need an Account?<br />
+                    <span className="line">
+                        <Link to='/register'>Sign Up</Link>
+                    </span>
+                </p>
+            </section>
         </div>
     );
 };

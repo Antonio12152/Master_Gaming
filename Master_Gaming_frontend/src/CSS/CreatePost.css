@@ -6,7 +6,7 @@
     box-sizing: border-box;
 }
 
-.login__main {
+.cpost__main {
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -16,7 +16,7 @@
     color: white;
 }
 
-.login__section {
+.cpost__section {
     border-radius: 5px;
     width: 100%;
     max-width: 420px;
@@ -28,14 +28,14 @@
     background-color: rgba(0, 0, 0, 0.4);
 }
 
-.login__form {
+.cpost__form {
     display: flex;
     flex-direction: column;
     justify-content: space-evenly;
     flex-grow: 1;
     padding-bottom: 1rem;
 }
-.login__main{
+.cpost__main{
     input[type="text"],
     input[type="password"],
     button,
@@ -47,8 +47,8 @@
     }
 }
 
-.login__main label,
-.login__main button {
+.cpost__main label,
+.cpost__main button {
     margin-top: 1rem;
 }
 

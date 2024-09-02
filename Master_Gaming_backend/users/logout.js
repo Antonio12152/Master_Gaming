@@ -4,7 +4,7 @@ const logout = express.Router();
 
 logout.post('/logout', async (req, res) => {
     const cookies = req.cookies;
-    if (!cookies?.jwt) return res.sendStatus(204); // No Content
+    if (!cookies?.jwt) return res.sendStatus(204);
     const refreshToken = cookies.jwt;
 
     const userQuery = `
@@ -16,7 +16,7 @@ logout.post('/logout', async (req, res) => {
     const userResult = await client.query(userQuery, [refreshToken]);
 
     if (userResult.rows.length === 0) {
-        res.clearCookie('jwt', { httpOnly: true, secure: true, sameSite: 'None' }); // change on true true
+        res.clearCookie('jwt', { httpOnly: true, secure: true, sameSite: 'None' });
         return res.sendStatus(204);
     }
 
@@ -30,7 +30,7 @@ logout.post('/logout', async (req, res) => {
 
     await client.query(deleteRefreshToken, [foundUser.id]);
 
-    res.clearCookie('jwt', { httpOnly: true, secure: true, sameSite: 'None' }); // change on true true
+    res.clearCookie('jwt', { httpOnly: true, secure: true, sameSite: 'None' });
     res.sendStatus(204);
 });
 
