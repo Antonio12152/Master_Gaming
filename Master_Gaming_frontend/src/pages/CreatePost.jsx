@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import useRefreshToken from '../hooks/useRefreshToken';
 import useAxiosPrivate from '../hooks/useAxiosPrivate';
 import useAuth from '../hooks/useAuth';
+import '../CSS/CreatePost.css'
 
 const CreatePost = () => {
     const { auth } = useAuth();

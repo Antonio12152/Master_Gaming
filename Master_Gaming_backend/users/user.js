@@ -34,11 +34,11 @@ async function getUserById(id) {
     FROM 
         users
     WHERE
-        users.id = ${parseInt(id)}
+        users.id = $1
     `;
 
     try {
-        const result = await client.query(query);
+        const result = await client.query(query, [id]);
         return result.rows;
     } catch (err) {
         console.error('Query error', err.stack);

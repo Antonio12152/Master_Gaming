@@ -37,7 +37,6 @@
 }
 .cpost__main{
     input[type="text"],
-    input[type="password"],
     button,
     textarea {
         font-family: 'Nunito', sans-serif;
@@ -52,7 +51,7 @@
     margin-top: 1rem;
 }
 
-.login__main button {
+.cpost__main button {
     padding: 0.5rem;
 }
 

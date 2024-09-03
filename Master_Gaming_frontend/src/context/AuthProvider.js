@@ -1,9 +1,12 @@
-import { createContext, useState } from "react";
+import { createContext, useEffect, useState } from "react";
+import axios from 'axios';
+import { BASE_URL } from '../api/axios';
 
 const AuthContext = createContext({});
 
 export const AuthProvider = ({ children }) => {
     const [auth, setAuth] = useState({});
+    const [checked, setChecked] = useState(false);
     const [loading, setLoading] = useState(true);
     const [err, setErr] = useState(false);
 
@@ -31,7 +34,7 @@ export const AuthProvider = ({ children }) => {
     }
 
     return (
-        <AuthContext.Provider value={{ auth, setAuth }}>
+        <AuthContext.Provider value={{ auth, setAuth, checked, setChecked }}>
             {children}
         </AuthContext.Provider>
     );

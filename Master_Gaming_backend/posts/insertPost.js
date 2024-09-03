@@ -51,6 +51,22 @@ async function insertPostWithTags(userid, title, img, text, tagsArray) {
             throw new Error('A post with this title already exists.');
         }
 
+        const userQuery = `
+        SELECT 
+            users.id, 
+            users.is_writer,
+            users.is_admin
+        FROM 
+            users
+        WHERE
+            users.id = $1
+        `;
+        const userQueryResult = await client.query(userQuery, [userid]);
+
+        if (!userQueryResult.rows.is_admin || !userQueryResult.rows.is_writer) {
+            throw new Error('No access to insert post.');
+        }
+
         for (const tag of tagsArray) {
             if (hasSpecialChars(tag)) {
                 throw new Error(`Tag "${tag}" contains special characters.`);

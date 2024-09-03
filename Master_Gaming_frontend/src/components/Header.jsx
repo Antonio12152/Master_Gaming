@@ -55,7 +55,7 @@ const Header = () => {
             <SearchBar className="header__center" />
             {!auth || auth.user === undefined ? (
                 <div className='header__user'>
-                    <img src="/images/blank_user.png" alt="User" />
+                    <img src="/images/blank_user.png" alt="User" onClick={toggleUserMenu}/>
                     <ul className={`header__user__ul ${isUserMenuOpen ? 'open' : ''}`}>
                         <li>
                             <Link to='/login' onClick={toggleUserMenu}>Login</Link>
