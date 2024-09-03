@@ -2,10 +2,15 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import '../CSS/Post.css'
 import useAuth from '../hooks/useAuth';
+import useAxiosPrivate from '../hooks/useAxiosPrivate';
+import { useNavigate } from 'react-router-dom';;
 
 const GamePostSingle = ({ post, loading, isSinglePost }) => {
     const scroll = document.getElementById("header");
     const { auth } = useAuth()
+    const axiosPrivate = useAxiosPrivate();
+    const navigate = useNavigate()
+
     if (loading) {
         return <div>Loading...</div>;
     }
@@ -14,6 +19,30 @@ const GamePostSingle = ({ post, loading, isSinglePost }) => {
     const trimmedText = post.text.length > maxLength && !isSinglePost
         ? post.text.substring(0, maxLength) + "..."
         : post.text;
+
+
+    const handleDelete = async (e) => {
+        e.preventDefault();
+
+        if (!auth.user.roles.is_admin && post.user_id !== auth.user.id) {
+            console.log('no access')
+            return;
+        }
+
+        try {
+            await axiosPrivate.put(`/deletepost`, { id: `${post.postid}` });
+
+            alert('Post deleted successfully');
+            navigate('/');
+
+        } catch (err) {
+            if (!err?.response) {
+                console.log('No Server Response');
+            } else {
+                console.log('Failed Delete');
+            }
+        }
+    }
 
     return (
         <div className='div-post'>
@@ -55,9 +84,9 @@ const GamePostSingle = ({ post, loading, isSinglePost }) => {
                     <div className='div-body'>{trimmedText}</div>
                 </Link>
             </div>
-            {auth.user && (auth.user.roles.is_admin || post.user_id === auth.user.id) && (
-                <div>
-                    <button>Delete</button>
+            {auth.user && isSinglePost && (auth.user.roles.is_admin || post.user_id === auth.user.id) && (
+                <div className='post-div-delete'>
+                    <button className='post-delete' onClick={handleDelete}>Delete</button>
                 </div>
             )}
         </div>

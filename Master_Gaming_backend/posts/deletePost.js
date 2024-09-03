@@ -6,6 +6,7 @@ const deletePost = express.Router();
 
 async function deletePostbyId(userid, id) {
     try {
+        // Проверка существования поста
         const idCheckQuery = `
             SELECT id, user_id
             FROM posts
@@ -13,35 +14,38 @@ async function deletePostbyId(userid, id) {
         `;
         const idCheckResult = await client.query(idCheckQuery, [id]);
 
-        if (idCheckResult.rows.length > 0) {
+        if (idCheckResult.rows.length === 0) {
             throw new Error('A post does not exist.');
         }
 
+        const post = idCheckResult.rows[0];
+
         const userQuery = `
-        SELECT 
-            users.id, 
-            users.is_writer,
-            users.is_admin
-        FROM 
-            users
-        WHERE
-            users.id = $1
+            SELECT 
+                id, 
+                is_writer,
+                is_admin
+            FROM 
+                users
+            WHERE
+                id = $1
         `;
         const userQueryResult = await client.query(userQuery, [userid]);
 
-        if (idCheckResult.rows.user_id !== userid || !userQueryResult.rows.is_admin) {
+        const user = userQueryResult.rows[0];
+
+        if (post.user_id !== userid && !user.is_admin) {
             throw new Error('No access to delete this post.');
         }
 
+        // Удаление поста
         const deletePostQuery = `
             UPDATE posts
-            SET is_deleted = True
-            WHERE posts.id = $1
+            SET is_deleted = TRUE
+            WHERE id = $1;
         `;
 
-        console.log(idCheckResult.rows, userQueryResult.rows)
-
-        //await client.query(deletePostQuery, [id]);
+        await client.query(deletePostQuery, [id]);
 
         console.log('Post deleted successfully');
     } catch (err) {
@@ -50,25 +54,18 @@ async function deletePostbyId(userid, id) {
     }
 }
 
-deletePost.post('/deletepost', authenticateToken, async (req, res) => {
+deletePost.put('/deletepost', authenticateToken, async (req, res) => {
     const { id } = req.body;
 
     try {
         if (!req.user) return res.status(303).send('No access, please login.');
-        if (!req.user.roles.writer) return res.status(303).send('No access to make posts.');
         const userId = req.user.id;
         await deletePostbyId(userId, id);
 
-        res.status(201).send('Post and tags inserted successfully');
+        res.status(200).send('Post deleted successfully');
     } catch (err) {
-        if (err.message.includes('A post with this title already exists.')) {
-            res.status(400).send(err.message);
-        } else if (err.message.includes('contains special characters')) {
-            res.status(400).send(err.message);
-        } else {
-            res.status(500).send('Error inserting post and tags', err.message);
-        }
+        res.status(400).send(`Error deleting post: ${err.message}`);
     }
 });
 
-module.exports = deletePost 
+module.exports = deletePost;
