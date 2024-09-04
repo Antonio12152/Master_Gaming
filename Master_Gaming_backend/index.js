@@ -5,6 +5,7 @@ const cookieParser = require('cookie-parser');
 require('dotenv').config();
 
 const posts = require('./posts/posts')
+const post = require('./posts/post')
 const videos = require('./posts/videos')
 const tags = require('./posts/tags')
 const deletePost = require('./posts/deletePost')
@@ -45,7 +46,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
 app.use(cookieParser());
-app.use(posts, videos, tags, users, user, insert, register, login, logout, updateAccessToken, deletePost);
+app.use(posts, post, videos, tags, users, user, insert, register, login, logout, updateAccessToken, deletePost);
 
 app.get('/', (req, res) => {
     res.json("Hello world!")
