@@ -6,45 +6,40 @@ const post = express.Router();
 async function getPost(id) {
     const query = `
         SELECT 
-        posts.id AS postid, 
-        posts.user_id, 
-        users.name AS username, 
-        posts.title, 
-        posts.img, 
-        posts.text, 
-        to_char(posts.created_at, 'yyyy/mm/dd') as created_at,
-        posts.is_deleted,
-        COALESCE(array_agg(DISTINCT tags.name) FILTER (WHERE tags.name IS NOT NULL), '{}') AS tags,
-        COALESCE(json_agg(json_build_object(
-            'id', comments.id,
-            'text', comments.text,
-            'created_at', to_char(comments.created_at, 'yyyy/mm/dd'),
-            'author_name', comment_users.name
-        )) FILTER (WHERE comments.id IS NOT NULL), '[]') AS comments
-    FROM 
-        posts
-    INNER JOIN 
-        users ON posts.user_id = users.id
-    LEFT JOIN 
-        post_tags ON posts.id = post_tags.post_id
-    LEFT JOIN 
-        tags ON post_tags.tag_id = tags.id
-    LEFT JOIN 
-        comments ON posts.id = comments.post_id
-    LEFT JOIN 
-        users AS comment_users ON comments.user_id = comment_users.id
-    WHERE
-        posts.is_deleted = False AND posts.id = $1
-    GROUP BY 
-        posts.id, 
-        posts.user_id, 
-        users.name, 
-        posts.title, 
-        posts.img, 
-        posts.text, 
-        posts.created_at
-    ORDER BY 
-        posts.id;
+            posts.id AS postid, 
+            posts.user_id, 
+            users.name AS username, 
+            posts.title, 
+            posts.img, 
+            posts.text, 
+            to_char(posts.created_at, 'yyyy/mm/dd') AS created_at,
+            posts.is_deleted,
+            COALESCE(array_agg(DISTINCT tags.name) FILTER (WHERE tags.name IS NOT NULL), '{}') AS tags,
+            COALESCE(json_agg(DISTINCT jsonb_build_object(
+                'comment_id', comments.id, 
+                'comment_text', comments.text, 
+                'comment_created_at', comments.created_at,
+                'comment_author_name', comment_author.name
+            )) FILTER (WHERE comments.id IS NOT NULL), '[]') AS comments
+        FROM 
+            posts
+        INNER JOIN 
+            users ON posts.user_id = users.id
+        LEFT JOIN 
+            post_tags ON posts.id = post_tags.post_id
+        LEFT JOIN 
+            tags ON post_tags.tag_id = tags.id
+        LEFT JOIN 
+            comments ON posts.id = comments.post_id
+        LEFT JOIN 
+            users AS comment_author ON comments.user_id = comment_author.id
+        WHERE
+            posts.is_deleted = FALSE AND posts.id = $1
+        GROUP BY 
+            posts.id, 
+            users.name
+        ORDER BY 
+            posts.id;
     `;
 
     try {
@@ -56,7 +51,7 @@ async function getPost(id) {
 
         return result.rows[0];
     } catch (err) {
-        console.error('Error querying post with comments and tags:', err);
+        console.error('Error get posts:', err);
         throw err;
     }
 }
