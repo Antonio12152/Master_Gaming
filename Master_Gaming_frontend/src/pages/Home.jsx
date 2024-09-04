@@ -9,13 +9,13 @@ const Home = () => {
     const axiosPrivate = useAxiosPrivate();
 
     useEffect(() => {
-        axiosPrivate.get(`/gamePosts`)
+        axiosPrivate.get(`/posts`)
             .then(res => {
                 const data = res.data
                 setPost(data[data.length - 1])
             })
             .catch(error => { console.error('Error fetching data:', error); setLoading(false) });
-            axiosPrivate.get(`/videos`)
+        axiosPrivate.get(`/videos`)
             .then(res => {
                 const data = res.data
                 setVideo(data[data.length - 1])

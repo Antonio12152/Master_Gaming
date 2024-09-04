@@ -31,7 +31,7 @@ const GamePosts = ({ postsTag, postsSearch, userPosts, newpage }) => {
         } else if (userPosts !== undefined && userPosts) {
             setPosts(userPosts)
         } else {
-            axiosPrivate.get(`/gamePosts`)
+            axiosPrivate.get(`/posts`)
                 .then(res => {
                     const data = res.data
                     setPosts(data.slice().reverse())

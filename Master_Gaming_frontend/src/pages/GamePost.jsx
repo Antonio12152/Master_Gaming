@@ -10,11 +10,10 @@ const GamePost = () => {
     const axiosPrivate = useAxiosPrivate();
 
     useEffect(() => {
-        axiosPrivate.get(`/gamePosts`)
+        axiosPrivate.get(`/post/${id}`)
             .then(res => {
                 const data = res.data
-                const post = data.find(post => Number(post.postid) === Number(id));
-                setPost(post)
+                setPost(data)
                 setLoading(false)
             })
             .catch(error => { console.error('Error fetching data:', error); setLoading(false) });

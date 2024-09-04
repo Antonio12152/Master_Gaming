@@ -9,7 +9,7 @@ const Search = () => {
     const axiosPrivate = useAxiosPrivate();
     
     useEffect(() => {
-        axiosPrivate.get(`/gamePosts`)
+        axiosPrivate.get(`/posts`)
             .then(res => {
                 const data = res.data
                 setPosts(data.slice().reverse().filter(post => post.title.toString().toLowerCase().includes(`${search.toLowerCase()}`) && post.text.toString().toLowerCase().includes(`${search.toLowerCase()}`)))

@@ -1,7 +1,7 @@
 const express = require('express');
 const { client } = require('../client');
 
-const gamePosts = express.Router();
+const posts = express.Router();
 
 async function getPosts() {
     const query = `
@@ -46,15 +46,16 @@ async function getPosts() {
     }
 }
 
-gamePosts.get('/gameposts', (req, res) => {
+posts.get('/posts', (req, res) => {
     (async () => {
         try {
             const posts = await getPosts();
             res.json(posts)
         } catch (err) {
             console.error('Error fetching posts:', err);
+            res.status(500).json({ error: err.message });
         }
     })();
 });
 
-module.exports = gamePosts
+module.exports = posts

@@ -20,7 +20,7 @@ const User = () => {
     }, [axiosPrivate, username]);
     useEffect(() => {
         if (user.id) {
-            axiosPrivate.get(`/gamePosts`)
+            axiosPrivate.get(`/posts`)
                 .then(res => {
                     const data = res.data
                     setPosts(data.slice().reverse().filter(post => post.user_id === user.id))

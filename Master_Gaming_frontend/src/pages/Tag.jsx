@@ -9,7 +9,7 @@ const Tag = () => {
 
     let { tag } = useParams();
     useEffect(() => {
-        axiosPrivate.get(`/gamePosts`)
+        axiosPrivate.get(`/posts`)
             .then(res => {
                 const data = res.data
                 setPosts(data.slice().reverse())
