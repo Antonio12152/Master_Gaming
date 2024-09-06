@@ -8,7 +8,7 @@ async function getPost(id) {
         SELECT 
             posts.id AS postid, 
             posts.user_id, 
-            users.name AS username, 
+            post_user.name AS username, 
             posts.title, 
             posts.img, 
             posts.text, 
@@ -19,14 +19,14 @@ async function getPost(id) {
                 'comment_id', comments.id, 
                 'comment_text', comments.text, 
                 'comment_created_at', to_char(comments.created_at, 'yyyy/mm/dd'),
-                'comment_author_id', users.id
-                'comment_author_name', users.name
-                'comment_author_img', users.img
+                'comment_author_id', comment_user.id,
+                'comment_author_name', comment_user.name,
+                'comment_author_img', comment_user.img
             )) FILTER (WHERE comments.id IS NOT NULL), '[]') AS comments
         FROM 
             posts
         INNER JOIN 
-            users ON posts.user_id = users.id
+            users AS post_user ON posts.user_id = post_user.id  -- Автор поста
         LEFT JOIN 
             post_tags ON posts.id = post_tags.post_id
         LEFT JOIN 
@@ -34,12 +34,12 @@ async function getPost(id) {
         LEFT JOIN 
             comments ON posts.id = comments.post_id
         LEFT JOIN 
-            users ON comments.user_id = users.id
+            users AS comment_user ON comments.user_id = comment_user.id  -- Автор комментария
         WHERE
             posts.is_deleted = FALSE AND posts.id = $1
         GROUP BY 
             posts.id, 
-            users.name
+            post_user.name
         ORDER BY 
             posts.id;
     `;
