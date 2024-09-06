@@ -13,8 +13,8 @@ const GamePostSingle = ({ post, loading, isSinglePost }) => {
         return <div>Loading...</div>;
     }
     const maxLength = 400;
-
-    const trimmedText = post.text.length > maxLength && !isSinglePost
+    
+    const trimmedText = !isSinglePost && post.text.length > maxLength
         ? post.text.substring(0, maxLength) + "..."
         : post.text;
 

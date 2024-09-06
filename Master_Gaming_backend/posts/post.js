@@ -19,9 +19,9 @@ async function getPost(id) {
                 'comment_id', comments.id, 
                 'comment_text', comments.text, 
                 'comment_created_at', to_char(comments.created_at, 'yyyy/mm/dd'),
-                'comment_author_id', comment_author.id
-                'comment_author_name', comment_author.name
-                'comment_author_img', comment_author.img
+                'comment_author_id', users.id
+                'comment_author_name', users.name
+                'comment_author_img', users.img
             )) FILTER (WHERE comments.id IS NOT NULL), '[]') AS comments
         FROM 
             posts
@@ -34,7 +34,7 @@ async function getPost(id) {
         LEFT JOIN 
             comments ON posts.id = comments.post_id
         LEFT JOIN 
-            users AS comment_author ON comments.user_id = comment_author.id
+            users ON comments.user_id = users.id
         WHERE
             posts.is_deleted = FALSE AND posts.id = $1
         GROUP BY 
