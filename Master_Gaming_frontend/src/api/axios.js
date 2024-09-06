@@ -1,5 +1,5 @@
 import axios from 'axios';
-export const BASE_URL = 'https://master-gaming-zeta.vercel.app'; //https://master-gaming-zeta.vercel.app http://localhost:5000
+export const BASE_URL = 'http://localhost:5000'; //https://master-gaming-zeta.vercel.app http://localhost:5000
 
 export default axios.create({
     baseURL: BASE_URL

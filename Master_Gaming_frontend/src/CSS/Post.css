@@ -206,6 +206,10 @@
     border: 1px solid black;
     border-radius: 0.5rem;
 }
+.comment-single img {
+    width: 40px;
+    border-radius: 20px;
+}
 @media (max-width: 768px) {
 
     .div-container,

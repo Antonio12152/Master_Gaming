@@ -21,7 +21,7 @@ async function createComment(comment, post_id, userid) {
         const userQuery = `
         SELECT 
             users.id, 
-            users.is_deleted
+            users.is_delete
         FROM 
             users
         WHERE
@@ -29,7 +29,7 @@ async function createComment(comment, post_id, userid) {
         `;
         const userQueryResult = await client.query(userQuery, [userid]);
 
-        if (userQueryResult.rows.is_deleted) {
+        if (userQueryResult.rows.is_delete) {
             throw new Error('This user has been deleted');
         }
 
@@ -48,6 +48,9 @@ async function createComment(comment, post_id, userid) {
 comment.post('/createcomment', authenticateToken, async (req, res) => {
     const { comment, post_id } = req.body;
 
+    if (!comment || !post_id) {
+        return res.status(400).json({ message: 'Missing data' });
+    }
 
     try {
         if (!req.user) return res.status(303).send('No access, please login.');
@@ -56,7 +59,7 @@ comment.post('/createcomment', authenticateToken, async (req, res) => {
 
         res.status(201).send('Comment has created successfully');
     } catch (err) {
-        res.status(500).send('Error creating comment', err.message);
+        res.status(400).send('Error creating comment', err.message);
     }
 });
 

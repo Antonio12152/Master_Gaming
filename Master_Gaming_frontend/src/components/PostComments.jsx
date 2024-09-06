@@ -28,7 +28,7 @@ const PostComments = ({ post }) => {
                 throw new Error(response.data || 'Error comment post');
             }
 
-            alert('Comment has been added');
+            alert('Comment created successfully');
             setComment('');
         } catch (err) {
             console.log(err)
@@ -56,10 +56,12 @@ const PostComments = ({ post }) => {
                 </form>
                 {post.comments && (
                     <div className='comment-list'>
-                        {post.comments.map((comment) => (
-                            <div className='comment-single'>
-                                {comment.comment_author_img}
-                                <Link to={`/users/${comment.comment_author_name}/1`}>{comment.comment_author_name}</Link>
+                        {post.comments.map((comment, index) => (
+                            <div className='comment-single' key={index}>
+                                <Link to={`/users/${comment.comment_author_name}/1`}>
+                                    <img src={comment.comment_author_img} alt='img' onError={(e) => e.currentTarget.src = '/images/blank_user.png'} />
+                                    {comment.comment_author_name}
+                                </Link>
                                 {comment.comment_text}
                                 {comment.comment_created_at}
                                 {auth.user && auth.user.id === comment.comment_author_id && (
