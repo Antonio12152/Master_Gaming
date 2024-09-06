@@ -14,7 +14,7 @@ updateAccessToken.get('/updateaccessnoken', async (req, res) => {
         WHERE refresh_token = $1;
     `;
     const userResult = await client.query(userQuery, [refreshToken]);
-    if (userResult.rows.length === 0) return res.sendStatus(403); //Forbidden 
+    if (userResult.rows.length === 0) return res.sendStatus(403); 
     const user = userResult.rows[0];
 
     jwt.verify(

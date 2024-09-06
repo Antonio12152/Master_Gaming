@@ -186,7 +186,7 @@ br {
 .footer__ul>li {
     display: inline-block;
     align-items: center;
-    padding: 2px;
+    padding: 2px 2px 0 2px;
 }
 
 .footer__ul img {

@@ -9,6 +9,7 @@ const post = require('./posts/post')
 const videos = require('./posts/videos')
 const tags = require('./posts/tags')
 const deletePost = require('./posts/deletePost')
+const comment = require('./posts/createComment')
 const users = require('./users/users')
 const user = require('./users/user')
 const register = require('./users/register')
@@ -46,7 +47,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
 app.use(cookieParser());
-app.use(posts, post, videos, tags, users, user, insert, register, login, logout, updateAccessToken, deletePost);
+app.use(posts, post, videos, tags, users, user, insert, register, login, logout, updateAccessToken, deletePost, comment);
 
 app.get('/', (req, res) => {
     res.json("Hello world!")

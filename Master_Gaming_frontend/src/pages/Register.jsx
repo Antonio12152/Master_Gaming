@@ -34,6 +34,14 @@ const Register = () => {
 
     const [success, setSuccess] = useState(false);
 
+    const [textareaHeight] = useState('auto');
+
+    const handleInput = (e) => {
+        setAbout(e.target.value);
+        e.target.style.height = 'auto';
+        e.target.style.height = `${e.target.scrollHeight}px`;
+    };
+
     useEffect(() => {
         setValidName(USER_REGEX.test(name));
     }, [name])
@@ -194,7 +202,7 @@ const Register = () => {
                         <input type="text" value={img} onChange={(e) => setImg(e.target.value)} />
 
                         <label>About (optional):</label>
-                        <textarea value={about} onChange={(e) => setAbout(e.target.value)} />
+                        <textarea value={about} onInput={handleInput} style={{ height: textareaHeight }} onChange={(e) => setAbout(e.target.value)} />
 
                         <button disabled={loading || !validName || !validPwd || !validMatch ? true : false}>Sign Up</button>
                     </form>

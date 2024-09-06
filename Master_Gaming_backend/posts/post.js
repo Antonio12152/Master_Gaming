@@ -12,14 +12,16 @@ async function getPost(id) {
             posts.title, 
             posts.img, 
             posts.text, 
-            to_char(posts.created_at, 'yyyy/mm/dd') AS created_at,
+            to_char(posts.created_at, 'yyyy/mm/dd') as created_at,
             posts.is_deleted,
             COALESCE(array_agg(DISTINCT tags.name) FILTER (WHERE tags.name IS NOT NULL), '{}') AS tags,
             COALESCE(json_agg(DISTINCT jsonb_build_object(
                 'comment_id', comments.id, 
                 'comment_text', comments.text, 
-                'comment_created_at', comments.created_at,
+                'comment_created_at', to_char(comments.created_at, 'yyyy/mm/dd'),
+                'comment_author_id', comment_author.id
                 'comment_author_name', comment_author.name
+                'comment_author_img', comment_author.img
             )) FILTER (WHERE comments.id IS NOT NULL), '[]') AS comments
         FROM 
             posts
@@ -46,7 +48,7 @@ async function getPost(id) {
         const result = await client.query(query, [id]);
 
         if (result.rows.length === 0) {
-            throw new Error('Post not found');
+            throw new Error('Post not found or has been deleted');
         }
 
         return result.rows[0];

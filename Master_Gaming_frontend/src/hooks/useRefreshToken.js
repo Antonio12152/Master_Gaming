@@ -36,7 +36,6 @@ const useRefreshToken = () => {
 
             return response.data.accessToken;
         } catch (err) {
-            console.error("Failed to refresh token", err);
             setChecked(true);
             return null;
         }
