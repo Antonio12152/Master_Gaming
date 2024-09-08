@@ -4,7 +4,6 @@ const authenticateToken = require('../middleware/authenticateToken');
 
 const comment = express.Router();
 
-
 async function createComment(comment, post_id, userid) {
     try {
         const idCheckQuery = `
@@ -45,7 +44,7 @@ async function createComment(comment, post_id, userid) {
         throw err;
     }
 }
-comment.post('/createcomment', authenticateToken, async (req, res) => {
+comment.post('/comment', authenticateToken, async (req, res) => {
     const { comment, post_id } = req.body;
 
     if (!comment || !post_id) {

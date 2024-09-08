@@ -10,6 +10,7 @@ const videos = require('./posts/videos')
 const tags = require('./posts/tags')
 const deletePost = require('./posts/deletePost')
 const comment = require('./posts/createComment')
+const deleteComment = require('./posts/deleteComment')
 const users = require('./users/users')
 const user = require('./users/user')
 const register = require('./users/register')
@@ -20,7 +21,7 @@ const updateAccessToken = require('./controllers/updateAccessToken')
 const port = process.env.SERVER_PORT || 5000;
 
 const app = express();
-// use it to connect with aiven or other db without url. don't use it on railway!
+// use it to connect db without url.
 // (async () => {
 //   await connectClient()
 // })();
@@ -47,7 +48,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
 app.use(cookieParser());
-app.use(posts, post, videos, tags, users, user, insert, register, login, logout, updateAccessToken, deletePost, comment);
+app.use(posts, post, videos, tags, users, user, insert, register, login, logout, updateAccessToken, deletePost, comment, deleteComment);
 
 app.get('/', (req, res) => {
     res.json("Hello world!")

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import useAuth from '../hooks/useAuth';
 import useAxiosPrivate from '../hooks/useAxiosPrivate';
 
@@ -9,6 +9,12 @@ const PostComments = ({ post }) => {
     const [textareaHeight] = useState('auto');
     const axiosPrivate = useAxiosPrivate();
     const { auth } = useAuth()
+
+    const [showModal, setShowModal] = useState(false);
+    const navigate = useNavigate()
+
+    const openModal = () => setShowModal(true);
+    const closeModal = () => setShowModal(false);
 
     const handleInput = (e) => {
         setComment(e.target.value);
@@ -20,7 +26,7 @@ const PostComments = ({ post }) => {
         e.preventDefault();
         setLoadingComment(true);
         try {
-            const response = await axiosPrivate.post('/createComment', {
+            const response = await axiosPrivate.post('/Comment', {
                 comment: `${comment}`, post_id: `${post.postid}`, user: `${auth.user}`
             });
 
@@ -36,6 +42,30 @@ const PostComments = ({ post }) => {
             setLoadingComment(false);
         }
     };
+
+    const handleDelete = async (commentId) => {
+        if (!auth.user.roles.is_admin && post.user_id !== auth.user.id) {
+            console.log('No access');
+            return;
+        }
+
+        try {
+            await axiosPrivate.put(`/comment`, { id: commentId, user: auth.user });
+
+            alert('Post deleted successfully');
+            navigate('/');
+
+        } catch (err) {
+            if (!err?.response) {
+                console.log('No Server Response');
+            } else {
+                console.log('Failed Delete');
+            }
+        } finally {
+            closeModal();
+        }
+    };
+
     return (
         <div className='div-post-comments'>
             <div className='comment__main'>
@@ -74,7 +104,23 @@ const PostComments = ({ post }) => {
                                 </div>
                                 {auth.user && auth.user.id === comment.comment_author_id && (
                                     <div className='post-div-delete'>
-                                        <button className='post-delete'>Delete Comment</button>
+                                        <div className='post-div-delete-button'>
+                                            <button className='post-delete' onClick={openModal}>Delete Post</button>
+                                        </div>
+
+                                        <Modal
+                                            isOpen={showModal}
+                                            onRequestClose={closeModal}
+                                            contentLabel="Confirm Delete"
+                                            className="post-delete-modal"
+                                            overlayClassName="post-delete-modal-overlay"
+                                        >
+                                            <h2>Are you sure you want to delete this comment?</h2>
+                                            <div className="post-delete-modal-buttons">
+                                                <button onClick={() => handleDelete(comment.comment_id)}>Yes, Delete</button>
+                                                <button className="post-delete-modal-button-cancel" onClick={closeModal}>Cancel</button>
+                                            </div>
+                                        </Modal>
                                     </div>
                                 )}
                             </div>
