@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import useAuth from '../hooks/useAuth';
 import useAxiosPrivate from '../hooks/useAxiosPrivate';
+import Modal from 'react-modal';
 
 const PostComments = ({ post }) => {
     const [comment, setComment] = useState();
@@ -26,7 +27,7 @@ const PostComments = ({ post }) => {
         e.preventDefault();
         setLoadingComment(true);
         try {
-            const response = await axiosPrivate.post('/Comment', {
+            const response = await axiosPrivate.post('/comment', {
                 comment: `${comment}`, post_id: `${post.postid}`, user: `${auth.user}`
             });
 
@@ -69,21 +70,29 @@ const PostComments = ({ post }) => {
     return (
         <div className='div-post-comments'>
             <div className='comment__main'>
-                <p>Make a comment:</p>
-                <form onSubmit={handleSubmit} className='comment__form'>
-                    <textarea
-                        id="comment"
-                        autoComplete="off"
-                        onInput={handleInput}
-                        value={comment}
-                        placeholder="Comment..."
-                        style={{ height: textareaHeight }}
-                        required
-                    />
-                    <button disabled={loadingComment || !comment || !auth.user}>
-                        Send
-                    </button>
-                </form>
+                {auth.user ? (
+                    <>
+                        <p>Write a comment:</p>
+                        <form onSubmit={handleSubmit} className='comment__form'>
+                            <textarea
+                                id="comment"
+                                autoComplete="off"
+                                onInput={handleInput}
+                                value={comment}
+                                placeholder="Comment..."
+                                style={{ height: textareaHeight }}
+                                disabled={loadingComment || !auth.user}
+                                required
+                            />
+                            <button disabled={loadingComment || !comment || !auth.user}>
+                                Send
+                            </button>
+                        </form>
+                    </>
+                ) : (
+                    <div><Link to={"/login"}>No access to write comment, please log in.</Link></div>
+                )}
+
                 {post.comments && (
                     <div className='comment-list'>
                         {post.comments.map((comment, index) => (
@@ -102,10 +111,10 @@ const PostComments = ({ post }) => {
                                         {comment.comment_text}
                                     </div>
                                 </div>
-                                {auth.user && auth.user.id === comment.comment_author_id && (
+                                {Number(auth.user.id) === Number(comment.comment_author_id) && (
                                     <div className='post-div-delete'>
                                         <div className='post-div-delete-button'>
-                                            <button className='post-delete' onClick={openModal}>Delete Post</button>
+                                            <button className='post-delete' onClick={openModal}>Delete comment</button>
                                         </div>
 
                                         <Modal

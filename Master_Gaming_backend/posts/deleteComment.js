@@ -51,7 +51,6 @@ async function deleteCommentById(userId, commentId) {
     }
 }
 
-// Роут для удаления комментария
 deleteComment.put('/comment', authenticateToken, async (req, res) => {
     const { commentId } = req.body;
 
