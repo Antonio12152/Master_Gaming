@@ -50,7 +50,7 @@ async function saveRefreshToken(userId, refreshToken) {
 
 async function loginUser(email, password) {
     const userQuery = `
-        SELECT id, name, email, password, img, is_admin, is_writer, is_delete
+        SELECT id, name, email, password, img, is_admin, is_writer, is_deleted
         FROM users
         WHERE email = $1;
     `;
@@ -62,7 +62,7 @@ async function loginUser(email, password) {
 
     const user = userResult.rows[0];
 
-    if (user.is_delete) {
+    if (user.is_deleted) {
         throw new Error('The user was deleted earlier');
     }
 

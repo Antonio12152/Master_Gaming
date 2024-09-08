@@ -6,7 +6,6 @@ const deletePost = express.Router();
 
 async function deletePostbyId(userid, id) {
     try {
-        // Проверка существования поста
         const idCheckQuery = `
             SELECT id, user_id
             FROM posts
@@ -38,7 +37,6 @@ async function deletePostbyId(userid, id) {
             throw new Error('No access to delete this post.');
         }
 
-        // Удаление поста
         const deletePostQuery = `
             UPDATE posts
             SET is_deleted = TRUE

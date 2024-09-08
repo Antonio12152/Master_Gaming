@@ -201,12 +201,14 @@
     margin-top: 10px;
 }
 .comment-single{
+    display: flex;
+    flex-direction: column;
     padding: 20px;
     margin: 10px;
     border: 1px solid black;
     border-radius: 0.5rem;
 }
-.comment-single img {
+.comment-single>a>img {
     width: 40px;
     border-radius: 20px;
 }

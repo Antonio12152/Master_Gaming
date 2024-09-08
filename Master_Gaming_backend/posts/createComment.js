@@ -21,7 +21,7 @@ async function createComment(comment, post_id, userid) {
         const userQuery = `
         SELECT 
             users.id, 
-            users.is_delete
+            users.is_deleted
         FROM 
             users
         WHERE
@@ -29,7 +29,7 @@ async function createComment(comment, post_id, userid) {
         `;
         const userQueryResult = await client.query(userQuery, [userid]);
 
-        if (userQueryResult.rows.is_delete) {
+        if (userQueryResult.rows.is_deleted) {
             throw new Error('This user has been deleted');
         }
 
