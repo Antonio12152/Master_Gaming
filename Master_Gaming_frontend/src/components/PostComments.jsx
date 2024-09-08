@@ -57,13 +57,21 @@ const PostComments = ({ post }) => {
                 {post.comments && (
                     <div className='comment-list'>
                         {post.comments.map((comment, index) => (
-                            <div className='comment-single' key={index}>
+                            <div className="comment-single" key={index}>
                                 <Link to={`/users/${comment.comment_author_name}/1`}>
                                     <img src={comment.comment_author_img} alt='img' onError={(e) => e.currentTarget.src = '/images/blank_user.png'} />
-                                    {comment.comment_author_name}
                                 </Link>
-                                {comment.comment_text}
-                                {comment.comment_created_at}
+                                <div className="comment-data">
+                                    <div className="comment-author">
+                                        <Link to={`/users/${comment.comment_author_name}/1`}>
+                                            <div>{comment.comment_author_name}</div>
+                                        </Link>
+                                        <div className="comment-created">{comment.comment_created_at}</div>
+                                    </div>
+                                    <div className='comment-text'>
+                                        {comment.comment_text}
+                                    </div>
+                                </div>
                                 {auth.user && auth.user.id === comment.comment_author_id && (
                                     <div className='post-div-delete'>
                                         <button className='post-delete'>Delete Comment</button>

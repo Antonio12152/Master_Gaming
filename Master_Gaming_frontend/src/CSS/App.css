@@ -16,7 +16,7 @@ body {
 
 a {
     text-decoration: none;
-    color: var(--border);
+    color: black;
 }
 
 li {

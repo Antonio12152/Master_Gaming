@@ -110,6 +110,10 @@
     cursor: pointer;
 }
 
+.post-delete:hover {
+    background-color: #fe2929;
+}
+
 .post-delete-modal {
     position: fixed;
     top: 50%;
@@ -137,6 +141,7 @@
     display: flex;
     justify-content: center;
     margin-top: 10px;
+
     button {
         margin: 5px;
         background-color: red;
@@ -148,7 +153,8 @@
         cursor: pointer;
         margin: 0 20px 0 20px;
     }
-    .post-delete-modal-button-cancel{
+
+    .post-delete-modal-button-cancel {
         background-color: rgb(213, 213, 213);
         border: 1px solid black;
     }
@@ -164,7 +170,6 @@
 
 .comment__form {
     display: flex;
-    flex-direction: row;
 
     input[type="text"],
     button,
@@ -197,21 +202,49 @@
         opacity: 0.5;
     }
 }
-.comment-list{
-    margin-top: 10px;
-}
-.comment-single{
+
+.comment-single {
     display: flex;
-    flex-direction: column;
-    padding: 20px;
-    margin: 10px;
+    align-items: flex-start;
+    margin: 15px;
+    padding: 10px;
     border: 1px solid black;
-    border-radius: 0.5rem;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
-.comment-single>a>img {
-    width: 40px;
-    border-radius: 20px;
+
+.comment-single img {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    margin-right: 10px;
 }
+
+.comment-data {
+    flex-grow: 1;
+}
+
+.comment-author {
+    display: flex;
+    align-items: center;
+    margin-bottom: 5px;
+}
+
+.comment-author a {
+    text-decoration: none;
+    font-weight: bold;
+    margin-right: 10px;
+}
+
+.comment-created {
+    font-size: 0.8em;
+}
+
+.comment-text {
+    font-size: 1em;
+    margin-top: 5px;
+}
+
 @media (max-width: 768px) {
 
     .div-container,
