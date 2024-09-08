@@ -22,11 +22,11 @@ async function getPost(id) {
                 'comment_author_id', comment_user.id,
                 'comment_author_name', comment_user.name,
                 'comment_author_img', comment_user.img
-            )) FILTER (WHERE comments.id IS NOT NULL), '[]') AS comments
+            )) FILTER (WHERE comments.id IS NOT NULL AND comments.is_deleted = FALSE), '[]') AS comments
         FROM 
             posts
         INNER JOIN 
-            users AS post_user ON posts.user_id = post_user.id  -- Автор поста
+            users AS post_user ON posts.user_id = post_user.id
         LEFT JOIN 
             post_tags ON posts.id = post_tags.post_id
         LEFT JOIN 
@@ -34,15 +34,15 @@ async function getPost(id) {
         LEFT JOIN 
             comments ON posts.id = comments.post_id
         LEFT JOIN 
-            users AS comment_user ON comments.user_id = comment_user.id  -- Автор комментария
+            users AS comment_user ON comments.user_id = comment_user.id
         WHERE
-            posts.is_deleted = FALSE AND posts.id = $1
+            posts.id = $1 AND posts.is_deleted = FALSE
         GROUP BY 
             posts.id, 
             post_user.name
         ORDER BY 
             posts.id;
-    `;
+            `;
 
     try {
         const result = await client.query(query, [id]);

@@ -51,12 +51,13 @@ async function deleteCommentById(userId, commentId) {
     }
 }
 
-deleteComment.put('/comment', authenticateToken, async (req, res) => {
+deleteComment.put('/deletecomment', authenticateToken, async (req, res) => {
     const { commentId } = req.body;
 
     try {
         if (!req.user) return res.status(403).send('No access, please login.');
         const userId = req.user.id;
+        
         await deleteCommentById(userId, commentId);
 
         res.status(200).send('Comment deleted successfully');

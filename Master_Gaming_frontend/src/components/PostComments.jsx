@@ -1,21 +1,29 @@
 import React, { useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import useAuth from '../hooks/useAuth';
 import useAxiosPrivate from '../hooks/useAxiosPrivate';
 import Modal from 'react-modal';
 
 const PostComments = ({ post }) => {
     const [comment, setComment] = useState();
+
     const [loadingComment, setLoadingComment] = useState(false);
     const [textareaHeight] = useState('auto');
     const axiosPrivate = useAxiosPrivate();
     const { auth } = useAuth()
 
     const [showModal, setShowModal] = useState(false);
-    const navigate = useNavigate()
+    const [selectedCommentId, setSelectedCommentId] = useState(null);
 
-    const openModal = () => setShowModal(true);
-    const closeModal = () => setShowModal(false);
+    const openModal = (commentId) => {
+        setSelectedCommentId(commentId);
+        setShowModal(true);
+    };
+
+    const closeModal = () => {
+        setShowModal(false);
+        setSelectedCommentId(null);
+    };
 
     const handleInput = (e) => {
         setComment(e.target.value);
@@ -26,6 +34,7 @@ const PostComments = ({ post }) => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         setLoadingComment(true);
+
         try {
             const response = await axiosPrivate.post('/comment', {
                 comment: `${comment}`, post_id: `${post.postid}`, user: `${auth.user}`
@@ -44,18 +53,16 @@ const PostComments = ({ post }) => {
         }
     };
 
-    const handleDelete = async (commentId) => {
+    const handleDelete = async (e) => {
+        e.preventDefault();
         if (!auth.user.roles.is_admin && post.user_id !== auth.user.id) {
             console.log('No access');
             return;
         }
 
         try {
-            await axiosPrivate.put(`/comment`, { id: commentId, user: auth.user });
-
-            alert('Post deleted successfully');
-            navigate('/');
-
+            await axiosPrivate.put(`/deletecomment`, { commentId: selectedCommentId, user: auth.user });
+            alert('Comment deleted successfully');
         } catch (err) {
             if (!err?.response) {
                 console.log('No Server Response');
@@ -111,10 +118,10 @@ const PostComments = ({ post }) => {
                                         {comment.comment_text}
                                     </div>
                                 </div>
-                                {Number(auth.user.id) === Number(comment.comment_author_id) && (
+                                {auth.user && Number(auth.user.id) === Number(comment.comment_author_id) && (
                                     <div className='post-div-delete'>
                                         <div className='post-div-delete-button'>
-                                            <button className='post-delete' onClick={openModal}>Delete comment</button>
+                                            <button className='post-delete' onClick={() => openModal(comment.comment_id)}>Delete comment</button>
                                         </div>
 
                                         <Modal
@@ -126,7 +133,7 @@ const PostComments = ({ post }) => {
                                         >
                                             <h2>Are you sure you want to delete this comment?</h2>
                                             <div className="post-delete-modal-buttons">
-                                                <button onClick={() => handleDelete(comment.comment_id)}>Yes, Delete</button>
+                                                <button onClick={handleDelete}>Yes, Delete</button>
                                                 <button className="post-delete-modal-button-cancel" onClick={closeModal}>Cancel</button>
                                             </div>
                                         </Modal>
