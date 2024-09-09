@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import useRefreshToken from '../hooks/useRefreshToken';
 import useAxiosPrivate from '../hooks/useAxiosPrivate';
 import useAuth from '../hooks/useAuth';
@@ -16,6 +16,15 @@ const CreatePost = () => {
     const [error, setError] = useState('');
     const [loading, setLoading] = useState(false);
     const [token, setToken] = useState(false);
+
+    const textareaRef = useRef(null);
+
+    const handleTextareaChange = (e) => {
+        const textarea = textareaRef.current;
+        textarea.style.height = "auto";
+        textarea.style.height = `${textarea.scrollHeight}px`; 
+        setText(e.target.value);
+    }
 
     useEffect(() => {
         const verifyToken = async () => {
@@ -80,20 +89,21 @@ const CreatePost = () => {
                         onChange={(e) => setImg(e.target.value)}
                         required
                     />
-                    <label htmlFor="text">Text:</label>
-                    <input
-                        type="text"
-                        id="text"
-                        value={text}
-                        onChange={(e) => setText(e.target.value)}
-                        required
-                    />
                     <label htmlFor="tags">Tags (comma separated):</label>
                     <input
                         type="text"
                         id='tags'
                         value={tags}
                         onChange={(e) => setTags(e.target.value)}
+                    />
+                    <label htmlFor="text">Text:</label>
+                    <textarea
+                        type="text"
+                        id="text"
+                        ref={textareaRef}
+                        value={text}
+                        onChange={handleTextareaChange}
+                        required
                     />
                     <button disabled={loading || !title || !img || !text}>Create Post</button>
                 </form>

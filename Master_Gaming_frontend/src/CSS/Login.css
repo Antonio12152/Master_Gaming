@@ -1,11 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Nunito&display=swap');
 
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-
 .login__main {
     display: flex;
     flex-direction: column;
@@ -45,6 +39,16 @@
         padding: 0.25rem;
         border-radius: 0.5rem;
     }
+    
+    textarea {
+        flex: 1;
+        resize: none;
+        padding: 10px;
+        font-size: 16px;
+        box-sizing: border-box;
+        margin-right: 10px;
+    }
+
 }
 
 .login__main label,

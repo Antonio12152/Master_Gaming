@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 import useAuth from '../hooks/useAuth';
 import useAxiosPrivate from '../hooks/useAxiosPrivate';
@@ -8,7 +8,6 @@ const PostComments = ({ post }) => {
     const [comment, setComment] = useState();
 
     const [loadingComment, setLoadingComment] = useState(false);
-    const [textareaHeight] = useState('auto');
     const axiosPrivate = useAxiosPrivate();
     const { auth } = useAuth()
 
@@ -25,11 +24,14 @@ const PostComments = ({ post }) => {
         setSelectedCommentId(null);
     };
 
-    const handleInput = (e) => {
+    const textareaRef = useRef(null);
+
+    const handleTextareaChange = (e) => {
+        const textarea = textareaRef.current;
+        textarea.style.height = "auto";
+        textarea.style.height = `${textarea.scrollHeight}px`; 
         setComment(e.target.value);
-        e.target.style.height = 'auto';
-        e.target.style.height = `${e.target.scrollHeight}px`;
-    };
+    }
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -83,11 +85,10 @@ const PostComments = ({ post }) => {
                         <form onSubmit={handleSubmit} className='comment__form'>
                             <textarea
                                 id="comment"
-                                autoComplete="off"
-                                onInput={handleInput}
+                                ref={textareaRef}
+                                onInput={handleTextareaChange}
                                 value={comment}
                                 placeholder="Comment..."
-                                style={{ height: textareaHeight }}
                                 disabled={loadingComment || !auth.user}
                                 required
                             />

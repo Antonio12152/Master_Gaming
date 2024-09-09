@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { Link } from 'react-router-dom';
 import { faCheck, faTimes, faInfoCircle } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -34,13 +34,14 @@ const Register = () => {
 
     const [success, setSuccess] = useState(false);
 
-    const [textareaHeight] = useState('auto');
+    const textareaRef = useRef(null);
 
-    const handleInput = (e) => {
+    const handleTextareaChange = (e) => {
+        const textarea = textareaRef.current;
+        textarea.style.height = "auto";
+        textarea.style.height = `${textarea.scrollHeight}px`; 
         setAbout(e.target.value);
-        e.target.style.height = 'auto';
-        e.target.style.height = `${e.target.scrollHeight}px`;
-    };
+    }
 
     useEffect(() => {
         setValidName(USER_REGEX.test(name));
@@ -178,7 +179,6 @@ const Register = () => {
                             Allowed special characters: <span aria-label="exclamation mark">!</span> <span aria-label="at symbol">@</span> <span aria-label="hashtag">#</span> <span aria-label="dollar sign">$</span> <span aria-label="percent">%</span>
                         </p>
 
-
                         <label htmlFor="confirm_pwd">
                             Confirm Password:
                             <FontAwesomeIcon icon={faCheck} className={validMatch && matchPwd ? "valid" : "hide"} />
@@ -202,7 +202,11 @@ const Register = () => {
                         <input type="text" value={img} onChange={(e) => setImg(e.target.value)} />
 
                         <label>About (optional):</label>
-                        <textarea value={about} onInput={handleInput} style={{ height: textareaHeight }} onChange={(e) => setAbout(e.target.value)} />
+                        <textarea 
+                            ref={textareaRef}
+                            value={about} 
+                            onChange={handleTextareaChange}
+                        />
 
                         <button disabled={loading || !validName || !validPwd || !validMatch ? true : false}>Sign Up</button>
                     </form>
