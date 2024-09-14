@@ -1,11 +1,12 @@
 ### Master Gaming
 
-Master Gaming is a gaming news site. There are posts and videos there. Posts include tags to make it easier to search by interest.
+Master Gaming is a gaming news site. There are posts and videos there. Posts include tags to make it easier to search by interest. \
 Link on netlify - https://master-gaming.netlify.app/ 
 
-Due to some issues, I return to aiven database and make serverless on vercel.
-Right now you can't create a post, but maybe I will do it. *Sad face*
-You can login, but I fixing some of the part.
+Due to some issues, I return to aiven database (maybe I will change due to small space, but it will be np) and make serverless on vercel. \
+You can login and write comment. To make post you need to have permission. \
+I don't have to much to update, just make some more buttons. \
+
 ### Before start project, install Node.js ^v21.6.x and npm ^v8.16.x.
 
 Go inside 2 folders: Master_Gaming_backend and Master_Gaming_frontend to use "npm i"
@@ -34,14 +35,6 @@ Used to push on site, like netlify.
 
 Use it to connect database and site.
 
-Before start create .env file in backend with port and db connection data (If use aiven db):
+Before start create .env file in backend with port and db connection data:
 SERVER_PORT = 5000
-USER = ""
-PASSWORD = ""
-HOST = ""
-DB_PORT = 
-DB = ""
-CA = ""
-(If use railway db):
-SERVER_PORT = 5000
-POOL = ""
+POOL = connention URL with password and else
