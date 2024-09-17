@@ -63,7 +63,7 @@ async function insertPostWithTags(userid, title, img, text, tagsArray) {
         `;
         const userQueryResult = await client.query(userQuery, [userid]);
 
-        if (!userQueryResult.rows.is_admin || !userQueryResult.rows.is_writer) {
+        if (!userQueryResult.rows[0].is_admin || !userQueryResult.rows[0].is_writer) {
             throw new Error('No access to insert post.');
         }
 
@@ -117,7 +117,7 @@ insert.post('/insertpost', authenticateToken, async (req, res) => {
         } else if (err.message.includes('contains special characters')) {
             res.status(400).send(err.message);
         } else {
-            res.status(500).send('Error inserting post and tags', err.message);
+            res.status(500).send(`Error inserting post and tags: ${err.message}`);
         }
     }
 });

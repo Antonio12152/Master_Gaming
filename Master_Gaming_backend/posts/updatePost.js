@@ -106,7 +106,7 @@ update.put('/updatepost/:id', authenticateToken, async (req, res) => {
         const userId = req.user.id;
         await updatePostWithTags(userId, id, title, img, text, tagsArray);
 
-        res.status(200).send('Post and tags updated successfully');
+        res.status(201).send('Post and tags updated successfully');
     } catch (err) {
         if (err.message.includes('Post not found.')) {
             res.status(404).send(err.message);

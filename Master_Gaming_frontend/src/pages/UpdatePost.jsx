@@ -30,7 +30,7 @@ const UpdatePost = () => {
     const textareaRef = useRef(null);
 
     let { id } = useParams();
-
+    console.log(tags)
     const handleTextareaChange = (e) => {
         const textarea = textareaRef.current;
         textarea.style.height = "auto";
@@ -68,7 +68,7 @@ const UpdatePost = () => {
                     setTitle(data.title);
                     setImg(data.img);
                     setText(data.text);
-                    setTags(data.tags);
+                    setTags(data.tags.join(', '));
 
                     if (textareaRef.current) {
                         handleTextareaChange({ target: { value: data.text } });
