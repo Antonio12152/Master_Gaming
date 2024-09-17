@@ -35,7 +35,9 @@
     flex-grow: 1;
     padding-bottom: 1rem;
 }
-.register__main{
+
+.register__main {
+
     input[type="text"],
     input[type="password"],
     button,
@@ -45,6 +47,7 @@
         padding: 0.25rem;
         border-radius: 0.5rem;
     }
+
     textarea {
         flex: 1;
         resize: none;
@@ -52,6 +55,7 @@
         font-size: 16px;
         margin-right: 10px;
         overflow: hidden;
+        border: 2px inset black;
     }
 }
 
@@ -105,7 +109,7 @@
     margin-bottom: 0.5rem;
 }
 
-.line a{
+.line a {
     color: white;
     display: inline-block;
     text-decoration: underline;

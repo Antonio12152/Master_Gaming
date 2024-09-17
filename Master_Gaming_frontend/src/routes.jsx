@@ -10,6 +10,7 @@ import User from './pages/User';
 import CreatePost from './pages/CreatePost';
 import Register from './pages/Register';
 import Login from './pages/Login';
+import UpdatePost from './pages/UpdatePost';
 
 const BaseRoute = () => {
     return (
@@ -20,6 +21,7 @@ const BaseRoute = () => {
                 <Route path='/posts/:id' element={<GamePosts />} />
                 <Route path='/post/:id' element={<GamePost />} />
                 <Route path='/insertPost' element={<CreatePost />} />
+                <Route path='/post/update/:id' element={<UpdatePost />}/>
                 <Route path='/search/:search' element={<Search />} />
                 <Route path='/search/:search/:id' element={<Search />} />
                 <Route path='/tags/' element={<Tags />} />

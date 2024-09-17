@@ -11,6 +11,7 @@ const tags = require('./posts/tags')
 const deletePost = require('./posts/deletePost')
 const comment = require('./posts/createComment')
 const deleteComment = require('./posts/deleteComment')
+const update = require('./posts/updatePost')
 const users = require('./users/users')
 const user = require('./users/user')
 const register = require('./users/register')
@@ -48,7 +49,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
 app.use(cookieParser());
-app.use(posts, post, videos, tags, users, user, insert, register, login, logout, updateAccessToken, deletePost, comment, deleteComment);
+app.use(posts, post, videos, tags, users, user, insert, register, login, logout, updateAccessToken, deletePost, comment, deleteComment, update);
 
 app.get('/', (req, res) => {
     res.json("Hello world!")

@@ -47,7 +47,7 @@ const Login = () => {
             setEmail('');
             setPassword('');
             setError('');
-            navigate('/')
+            navigate('/');
 
         } catch (err) {
             if (!err?.response) {

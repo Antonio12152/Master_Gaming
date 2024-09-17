@@ -5,15 +5,16 @@ import { faCheck, faTimes, faInfoCircle } from "@fortawesome/free-solid-svg-icon
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import useAuth from '../hooks/useAuth';
 import '../CSS/Post.css'
-import { useNavigate } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 
 const TITLE_REGEX = /^.{4,60}$/;
 
-const CreatePost = () => {
+const UpdatePost = () => {
     const { auth } = useAuth();
     const refresh = useRefreshToken();
     const axiosPrivate = useAxiosPrivate();
-    const navigate = useNavigate();
+
+    const [oldPost, setOldPost] = useState('');
 
     const [title, setTitle] = useState('');
     const [validTitle, setValidTitle] = useState(false);
@@ -27,6 +28,8 @@ const CreatePost = () => {
 
     const textareaRef = useRef(null);
 
+    let { id } = useParams();
+
     const handleTextareaChange = (e) => {
         const textarea = textareaRef.current;
         textarea.style.height = "auto";
@@ -37,9 +40,14 @@ const CreatePost = () => {
     useEffect(() => {
         const verifyToken = async () => {
             if (!auth?.accessToken) {
-                const newAccessToken = await refresh();
-                if (newAccessToken) {
-                    setToken(true);
+                try {
+                    const newAccessToken = await refresh();
+                    if (newAccessToken) {
+                        setToken(true);
+                    }
+                } catch (error) {
+                    console.error('Error refreshing token:', error);
+                    setToken(false);
                 }
             } else {
                 setToken(true);
@@ -49,14 +57,40 @@ const CreatePost = () => {
     }, [auth?.accessToken, refresh]);
 
     useEffect(() => {
+        if (token) {
+            setLoading(true);
+            axiosPrivate.get(`/post/${id}`)
+                .then(res => {
+                    const data = res.data;
+                    setOldPost(data);
+
+                    setTitle(data.title);
+                    setImg(data.img);
+                    setText(data.text);
+                    setTags(data.tags);
+
+                    if (textareaRef.current) {
+                        handleTextareaChange({ target: { value: data.text } });
+                    }
+
+                    setLoading(false);
+                })
+                .catch(error => {
+                    console.error('Error fetching data:', error);
+                    setLoading(false);
+                });
+        }
+    }, [axiosPrivate, id, token]);
+
+    useEffect(() => {
         setValidTitle(TITLE_REGEX.test(title));
-    }, [title])
+    }, [title]);
 
     const handleSubmit = async (e) => {
         e.preventDefault();
         setLoading(true);
         try {
-            const response = await axiosPrivate.post('/insertPost', {
+            const response = await axiosPrivate.put(`/updatepost/${id}`, {
                 title, img, text, tags, user: auth.user
             });
 
@@ -64,27 +98,30 @@ const CreatePost = () => {
                 throw new Error(response.data || 'Error inserting post');
             }
 
-            alert('Post and tags inserted successfully');
+            alert('Post updated successfully');
             setTitle('');
             setImg('');
             setText('');
             setTags('');
             setError('');
-            navigate('/');
+            navigate(`/post/${id}`);
         } catch (err) {
             setError(err.message);
         } finally {
             setLoading(false);
         }
     };
-    if (!token) return (
-        <div>No access, please log in.</div>
-    )
+
+    if (!oldPost) return <div>Loading data...</div>;
+    if (!token || auth.user.id !== oldPost.user_id) return (
+        <div>No access to change this post.</div>
+    );
+    
     return (
         <div className='cpost__main'>
             <section className='cpost__section'>
                 <p className={error ? "error" : "offscreen"} aria-live="assertive">{error}</p>
-                <h1>Create Post</h1>
+                <h1>Update Post</h1>
                 <form onSubmit={handleSubmit} className='cpost__form'>
                     <label htmlFor="title">
                         Title:
@@ -127,11 +164,11 @@ const CreatePost = () => {
                         onChange={handleTextareaChange}
                         required
                     />
-                    <button disabled={loading || !title || !img || !text}>Create Post</button>
+                    <button disabled={loading || !title || !img || !text}>Update Post</button>
                 </form>
             </section>
         </div>
     );
 };
 
-export default CreatePost;
+export default UpdatePost;

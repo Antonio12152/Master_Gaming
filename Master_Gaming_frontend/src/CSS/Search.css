@@ -14,10 +14,9 @@
     font-size: 16px;
     border-right: none; 
     outline:none;
-}
-
-.search-input::placeholder {
-    color: #cccccc; 
+    &::placeholder {
+        color: #cccccc; 
+    }
 }
 
 .search-button {
@@ -31,13 +30,11 @@
     display: flex;
     align-items: center;
     justify-content: center;
-}
-
-.search-button:hover {
-    background-color: #0059b3;
-    transition: 0.3s;
-}
-
-.search-button svg {
-    font-size: 18px;
+    &:hover {
+        background-color: #0059b3;
+        transition: 0.3s;
+    }
+    svg {
+        font-size: 18px;
+    }
 }

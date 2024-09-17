@@ -13,7 +13,7 @@ const GamePostSingle = ({ post, loading, isSinglePost }) => {
         return <div>Loading...</div>;
     }
     const maxLength = 400;
-    
+
     const trimmedText = !isSinglePost && post.text.length > maxLength
         ? post.text.substring(0, maxLength) + "..."
         : post.text;
@@ -55,9 +55,12 @@ const GamePostSingle = ({ post, loading, isSinglePost }) => {
                         <div className='div-body'>{trimmedText}</div>
                     </div>
                     {auth.user && isSinglePost && (auth.user.roles.is_admin || post.user_id === auth.user.id) && (
-                        <PostDeleteModal post={post} />
+                        <div className='post-interaction'>
+                            <Link to={`/post/update/${post.postid}`}>Update Post</Link>
+                            <PostDeleteModal post={post} />
+                        </div>
                     )}
-                    {isSinglePost && (<PostComments post={post}/>)}
+                    {isSinglePost && (<PostComments post={post} />)}
                 </div>
             ) : (
                 <div className='div-post'>
