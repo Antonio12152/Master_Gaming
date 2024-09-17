@@ -5,7 +5,7 @@ import { faCheck, faTimes, faInfoCircle } from "@fortawesome/free-solid-svg-icon
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import useAuth from '../hooks/useAuth';
 import '../CSS/Post.css'
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 
 const TITLE_REGEX = /^.{4,60}$/;
 
@@ -13,6 +13,7 @@ const UpdatePost = () => {
     const { auth } = useAuth();
     const refresh = useRefreshToken();
     const axiosPrivate = useAxiosPrivate();
+    const navigate = useNavigate();
 
     const [oldPost, setOldPost] = useState('');
 
@@ -116,7 +117,7 @@ const UpdatePost = () => {
     if (!token || auth.user.id !== oldPost.user_id) return (
         <div>No access to change this post.</div>
     );
-    
+
     return (
         <div className='cpost__main'>
             <section className='cpost__section'>

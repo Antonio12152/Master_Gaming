@@ -70,7 +70,7 @@ const CreatePost = () => {
             setText('');
             setTags('');
             setError('');
-            navigate('/');
+            navigate('/post/1');
         } catch (err) {
             setError(err.message);
         } finally {
