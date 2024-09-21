@@ -30,13 +30,22 @@ const UpdatePost = () => {
     const textareaRef = useRef(null);
 
     let { id } = useParams();
-    console.log(tags)
     const handleTextareaChange = (e) => {
         const textarea = textareaRef.current;
-        textarea.style.height = "auto";
-        textarea.style.height = `${textarea.scrollHeight}px`;
+        if (textarea) {
+            textarea.style.height = "auto";
+            textarea.style.height = `${textarea.scrollHeight}px`;
+        }
         setText(e.target.value);
     }
+
+    useEffect(() => {
+        const textarea = textareaRef.current;
+        if (textarea) {
+            textarea.style.height = "auto";
+            textarea.style.height = `${textarea.scrollHeight}px`;
+        }
+    }, [text]);
 
     useEffect(() => {
         const verifyToken = async () => {
