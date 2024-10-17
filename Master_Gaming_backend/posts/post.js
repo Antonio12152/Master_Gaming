@@ -66,7 +66,11 @@ post.get('/post/:id', async (req, res) => {
         res.json(post);
     } catch (err) {
         console.error('Error fetching post:', err);
-        res.status(500).json({ error: err.message });
+        if (err.message === 'Post not found or has been deleted') {
+            res.status(404).json({ err: 'Post not found or has been deleted' });
+        } else {
+            res.status(500).json({ err: 'Internal server error' });
+        }
     }
 });
 

@@ -63,7 +63,7 @@ async function loginUser(email, password) {
     const user = userResult.rows[0];
 
     if (user.is_deleted) {
-        throw new Error('The user was deleted earlier');
+        throw new Error('User account is deleted');
     }
 
     const isMatch = await verifyPassword(password, user.password);
@@ -102,7 +102,15 @@ login.post('/login', async (req, res) => {
         });
     } catch (err) {
         console.error('Error logging in user:', err.message);
-        res.status(401).json({ message: err.message });
+        if (err.message === 'User not found') {
+            res.status(404).json({ err: 'User not found' });
+        } else if (err.message === 'Invalid password') {
+            res.status(401).json({ err: 'Invalid password' });
+        } else if (err.message === 'User account is deleted') {
+            res.status(403).json({ err: 'User account is deleted' });
+        } else {
+            res.status(500).json({ err: 'Internal server error' });
+        }
     }
 });
 

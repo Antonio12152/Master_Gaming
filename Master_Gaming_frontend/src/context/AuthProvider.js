@@ -13,7 +13,9 @@ export const AuthProvider = ({ children }) => {
     useEffect(() => {
         const fetchAuthData = async () => {
             try {
-                await axios.get(`${BASE_URL}`);
+                const response = await axios.get(`${BASE_URL}`);
+                setAuth(response.data);
+                setChecked(true);
             } catch (error) {
                 setErr(true);
                 console.error("Failed to fetch auth data", error);

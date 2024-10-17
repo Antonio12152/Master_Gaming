@@ -28,7 +28,7 @@ async function pushUser(name, email, password, img, about) {
         let usernameCheckResult = await client.query(userCheckByNameQuery, [name]);
         let useremailCheckResult = await client.query(userCheckByEmailQuery, [email]);
         if (usernameCheckResult.rows.length > 0 || useremailCheckResult.rows.length > 0) {
-            throw new Error('Username or email already exists!');
+            throw new Error('Username or email already exists');
         }
         const hashedPassword = await hashPassword(password);
         const query = `
@@ -39,7 +39,7 @@ async function pushUser(name, email, password, img, about) {
         return result.rows[0];
     } catch (err) {
         if (err.code === '23505') {
-            throw new Error('Username or email already exists (code)!');
+            throw new Error('Username or email already exists (code)');
         } else {
             console.error('Error inserting user:', err);
             throw err;
@@ -57,8 +57,12 @@ register.post('/register', (req, res) => {
             await pushUser(name, email, password, img, about);
             res.status(201).send({ message: `Account ${name} created successfully! You can login now.` });
         } catch (err) {
-            console.error('Error adding user:', err);
-            res.status(500).json({ message: err.message });
+            console.error('Error register user:', err);
+            if (err.message === 'Username or email already exists' || err.message === 'Username or email already exists (code)') {
+                res.status(409).json({ err: 'Username or email already exists!' });
+            } else {
+                res.status(500).json({ err: 'Internal server error' });
+            }
         }
     })();
 });

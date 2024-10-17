@@ -26,7 +26,7 @@ tags.get('/tags', (req, res) => {
             res.json(tags)
         } catch (err) {
             console.error('Error fetching posts:', err);
-            res.status(500).send('Ошибка чтения или отправки данных');
+            res.status(500).json({ err: 'Internal server error' });
         }
     })();
 });
