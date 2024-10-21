@@ -1,0 +1,60 @@
+.QueryForm {
+    border: 1.5px solid rgb(6, 0, 85);
+    background-color: #3c86b8;
+    margin: 10px auto;
+    padding: 20px;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    position: relative;
+    max-width: 1000px;
+    border-radius: 4px;
+}
+
+.QueryForm label {
+    margin-right: 10px;
+}
+
+.QueryForm input[type="text"] {
+    background-color: rgb(19, 129, 240);
+    border: 1px solid rgb(6, 0, 85);;
+    border-radius: 5px;
+    padding: 8px;
+    margin-right: 10px;
+    color: white;
+    font-size: 14px;
+}
+
+.QueryForm input[type="text"]#id {
+    max-width: 80px;
+}
+
+.QueryForm input[type="submit"], .QueryForm input[type="reset"] {
+    background-color: rgb(6, 0, 85);
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-left: 10px;
+    align-self: flex-end;
+    position: static;
+    width: auto;
+    flex-basis: auto;
+    :hover{
+        background-color: #2e2e72;
+    }
+}
+
+@media (max-width: 850px) {
+    .QueryForm {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .QueryForm input[type="text"], .QueryForm label {
+        width: 100%;
+        margin-right: 0;
+        margin-bottom: 10px;
+    }
+}

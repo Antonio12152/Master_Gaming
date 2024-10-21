@@ -32,7 +32,7 @@ const GamePostSingle = ({ post, loading, isSinglePost }) => {
                         <div className='div-post-inf'>
                             <div>
                                 <h3>Added by:</h3>
-                                <Link onClick={() => scroll.scrollIntoView({ behavior: "smooth" })} to={`/users/${post.username}/1`}>{post.username}</Link>
+                                <Link onClick={() => scroll.scrollIntoView({ behavior: "smooth" })} to={`/posts?user=${post.username}&id=1`}>{post.username}</Link>
                                 <h3>Created at:</h3>
                                 <p>{post.created_at}</p>
                             </div>
@@ -41,7 +41,7 @@ const GamePostSingle = ({ post, loading, isSinglePost }) => {
                                     <h3>Tags:</h3>
                                     {post.tags.map((tag, index) => (
                                         <React.Fragment key={index}>
-                                            <Link to={`/tags/${tag}/1`} onClick={() => scroll.scrollIntoView({ behavior: "smooth" })}>
+                                            <Link to={`/posts?tags=${tag}&id=1`} onClick={() => scroll.scrollIntoView({ behavior: "smooth" })}>
                                                 {tag}
                                             </Link>
                                             {index < post.tags.length - 1 && " | "}
@@ -78,7 +78,7 @@ const GamePostSingle = ({ post, loading, isSinglePost }) => {
                         <div className='div-post-inf'>
                             <div>
                                 <h3>Added by:</h3>
-                                <Link onClick={() => scroll.scrollIntoView({ behavior: "smooth" })} to={`/users/${post.username}/1`}>{post.username}</Link>
+                                <Link onClick={() => scroll.scrollIntoView({ behavior: "smooth" })} to={`/posts?user=${post.username}&id=1`}>{post.username}</Link>
                                 <h3>Created at:</h3>
                                 <p>{post.created_at}</p>
                             </div>
@@ -87,7 +87,7 @@ const GamePostSingle = ({ post, loading, isSinglePost }) => {
                                     <h3>Tags:</h3>
                                     {post.tags.map((tag, index) => (
                                         <React.Fragment key={index}>
-                                            <Link to={`/tags/${tag}/1`} onClick={() => scroll.scrollIntoView({ behavior: "smooth" })}>
+                                            <Link to={`/posts?tags=${tag}&id=1`} onClick={() => scroll.scrollIntoView({ behavior: "smooth" })}>
                                                 {tag}
                                             </Link>
                                             {index < post.tags.length - 1 && " | "}

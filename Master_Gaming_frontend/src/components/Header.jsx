@@ -42,13 +42,13 @@ const Header = () => {
                         <Link to='/' onClick={toggleMenu}>Master Gaming</Link>
                     </li>
                     <li>
-                        <Link to='/posts/1' onClick={toggleMenu}>Posts</Link>
+                        <Link to='/posts?id=1' onClick={toggleMenu}>Posts</Link>
                     </li>
                     <li>
                         <Link to='/tags' onClick={toggleMenu}>Tags</Link>
                     </li>
                     <li>
-                        <Link to='/videos/1' onClick={toggleMenu}>Videos</Link>
+                        <Link to='/videos?id=1' onClick={toggleMenu}>Videos</Link>
                     </li>
                 </ul>
             </div>

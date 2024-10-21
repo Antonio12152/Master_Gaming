@@ -16,7 +16,7 @@ const SearchBar = () => {
         e.preventDefault();
         const trimmedText = searchText.trim();
         if (trimmedText) {
-            navigate(`/search/${trimmedText}/1`);
+            navigate(`/posts?search=${trimmedText}&id=1`);
         }
     };
 

@@ -1,66 +1,120 @@
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useState } from "react";
+import { useLocation, useNavigate } from "react-router-dom";
+import QueryParamsForm from "../components/QueryParamsForm";
 import GamePostsList from "../components/GamePostsList";
-import { useParams } from "react-router-dom";
-import useAxiosPrivate from '../hooks/useAxiosPrivate';
+import { axiosPrivate } from "../api/axios";
+import UserI from "../components/UserI";
 
-const GamePosts = ({ postsTag, postsSearch, userPosts, newpage }) => {
-    const [posts, setPosts] = useState([]);
+const Test = () => {
     const [loading, setLoading] = useState(true);
-    const axiosPrivate = useAxiosPrivate();
+    const [posts, setPosts] = useState([]);
+    const [search, setSearch] = useState('');
+    const [tags, setTags] = useState('');
+    const [id, setId] = useState('');
+    const [user, setUser] = useState('');
+    const [userInfo, setUserInfo] = useState('');
+    const [postsPerPage] = useState(5);
 
-    let page = useMemo(() => {
-        if (postsTag !== undefined && postsTag) {
-            setLoading(false)
-            return `tags/${newpage}`;
-        } else if (postsSearch !== undefined && postsSearch) {
-            setLoading(false)
-            return `search/${newpage}`;
-        } else if (userPosts !== undefined && userPosts) {
-            setLoading(false)
-            return `users/${newpage}`;
-        } else {
-            return "posts";
-        }
-    }, [postsTag, postsSearch, userPosts, newpage]);
+    const navigate = useNavigate();
+    const location = useLocation();
 
     useEffect(() => {
-        if (postsTag !== undefined && postsTag) {
-            setPosts(postsTag)
-        } else if (postsSearch !== undefined && postsSearch) {
-            setPosts(postsSearch)
-        } else if (userPosts !== undefined && userPosts) {
-            setPosts(userPosts)
-        } else {
-            axiosPrivate.get(`/posts`)
-                .then(res => {
-                    const data = res.data
-                    setPosts(data.slice().reverse())
-                    setLoading(false)
-                })
-                .catch(error => { console.error('Error fetching data:', error); setLoading(false) });
-        }
-    }, [axiosPrivate, postsTag, postsSearch, userPosts]);
+        const queryParams = new URLSearchParams(location.search);
+        setSearch(queryParams.get('search') || '');
+        setTags(queryParams.get('tags') || '');
+        setId(queryParams.get('id') || '1');
+        setUser(queryParams.get('user') || '');
+    }, [location.search]);
 
-    const [currentPage, setCurrentPage] = useState(1)
-    const [postsPerPage] = useState(5)
+    const updateUrl = (searchValue, tagsValue, idValue) => {
+        const params = new URLSearchParams();
+        if (searchValue) params.set('search', searchValue);
+        if (tagsValue) params.set('tags', tagsValue);
+        if (idValue) params.set('id', idValue);
+        if (user) params.set('user', user);
 
-    let { id } = useParams();
+        navigate(`/posts?${params.toString()}`);
+    };
+
+    const handleSubmit = (searchValue, tagsValue, idValue) => {
+        setSearch(searchValue);
+        setTags(tagsValue);
+        setId(idValue);
+        updateUrl(searchValue, tagsValue, idValue);
+    };
+
     useEffect(() => {
-        if (id !== undefined) {
-            setCurrentPage(parseInt(id));
-        }
-    }, [id]);
+        axiosPrivate.get(`/posts`)
+            .then(res => {
+                const data = res.data;
+                const tagArray = tags
+                    .split(',')
+                    .map(tag => tag.trim().toLowerCase())
+                    .filter(tag => tag !== '');
 
-    const indexOfLastPost = Math.min(currentPage * postsPerPage, posts.length);
-    const indexOfFirstPost = currentPage * postsPerPage - postsPerPage
+                const filteredPosts = data.filter(post => {
+                    const matchesSearch = search
+                        ? post.title.toLowerCase().includes(search.toLowerCase()) || post.text.toLowerCase().includes(search.toLowerCase())
+                        : true;
 
-    const currentPosts = posts.slice(indexOfFirstPost, indexOfLastPost)
+                    const matchesTags = tagArray.length > 0
+                        ? tagArray.every(tag => post.tags && post.tags.some(postTag => postTag.toLowerCase() === tag))
+                        : true;
+
+                    const matchesUser = user ? post.username === user : true;
+
+                    return matchesSearch && matchesTags && matchesUser;
+                });
+
+                setPosts(filteredPosts.reverse());
+                setLoading(false);
+            })
+            .catch(error => {
+                console.error('Error fetching data:', error);
+                setLoading(false);
+            });
+    }, [search, tags, user]);
+
+    useEffect(() => {
+        axiosPrivate.get(`/users/${user}`)
+            .then(res => {
+                const data = res.data
+                setUserInfo(data[0])
+            })
+            .catch(error => { console.error('Error fetching data:', error); });
+    }, [user]);
+
+    const indexOfLastPost = Math.min(id * postsPerPage, posts.length);
+    const indexOfFirstPost = id * postsPerPage - postsPerPage;
+
+    const currentPosts = posts.slice(indexOfFirstPost, indexOfLastPost);
 
     return (
         <div>
-            <GamePostsList page={page} TotalPosts={posts.length} currentPosts={currentPosts} postsPerPage={postsPerPage} currentPage={currentPage} loading={loading} />
-        </div>
-    )
-}
+            {user !== "" ? (
+                <UserI user={userInfo} />
+            ) : <></>}
+            
+            <QueryParamsForm
+                search={search}
+                tags={tags}
+                id={id}
+                onSubmit={handleSubmit}
+            />
 
-export default GamePosts
+            <GamePostsList
+                page={"posts"}
+                search={search}
+                tags={tags}
+                user={user}
+                TotalPosts={posts.length}
+                currentPosts={currentPosts}
+                postsPerPage={postsPerPage}
+                currentPage={parseInt(id)}
+                loading={loading}
+            />
+        </div>
+    );
+};
+
+export default Test;
