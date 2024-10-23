@@ -1,6 +1,6 @@
 const bcrypt = require('bcrypt');
 const express = require('express');
-const { client } = require('../client');
+const { client } = require('../../client');
 
 const register = express.Router();
 

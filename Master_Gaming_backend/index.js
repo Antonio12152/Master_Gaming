@@ -1,34 +1,20 @@
 const express = require('express');
 const cors = require('cors');
-const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
 require('dotenv').config();
+const helmet = require('helmet');
 
-const posts = require('./posts/posts')
-const post = require('./posts/post')
-const videos = require('./posts/videos')
-const tags = require('./posts/tags')
-const deletePost = require('./posts/deletePost')
-const comment = require('./posts/createComment')
-const deleteComment = require('./posts/deleteComment')
-const update = require('./posts/updatePost')
-const users = require('./users/users')
-const user = require('./users/user')
-const register = require('./users/register')
-const insert = require('./posts/insertPost')
-const login = require('./users/login')
-const logout = require('./users/logout')
-const updateAccessToken = require('./controllers/updateAccessToken')
+// Импортируйте ваши маршруты
+const posts = require('./routes/posts');
+const users = require('./routes/users');
+
 const port = process.env.SERVER_PORT || 5000;
 
 const app = express();
-// use it to connect db without url.
-// (async () => {
-//   await connectClient()
-// })();
+
 const allowedOrigins = [
-//    'http://localhost:3000',
-    'https://master-gaming.netlify.app',
+    'http://localhost:3000',
+    'https://master-gaming.netlify.app/'
 ];
 
 const corsOptions = {
@@ -44,17 +30,24 @@ const corsOptions = {
 };
 
 app.use(cors(corsOptions));
+app.use(helmet()); 
 app.use(express.json());
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: true }));
-
+app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
-app.use(posts, post, videos, tags, users, user, insert, register, login, logout, updateAccessToken, deletePost, comment, deleteComment, update);
+
+app.use(posts, users);
 
 app.get('/', (req, res) => {
-    res.json("Hello world!")
+    res.json("Hello world!");
+});
+
+app.use((err, req, res, next) => {
+    if (err instanceof Error && err.message === 'Not allowed by CORS') {
+        return res.status(403).json({ message: 'Access denied by CORS policy.' });
+    }
+    next(err);
 });
 
 app.listen(port, () => {
-    console.log(`Server start on port ${port}`);
+    console.log(`Server started on port ${port}`);
 });

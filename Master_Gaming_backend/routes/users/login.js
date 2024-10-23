@@ -2,7 +2,7 @@ const express = require('express');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 require('dotenv').config();
-const { client } = require('../client');
+const { client } = require('../../client');
 const login = express.Router();
 
 async function verifyPassword(password, hash) {

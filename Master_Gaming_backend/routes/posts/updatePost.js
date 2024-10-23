@@ -1,8 +1,8 @@
 const express = require('express');
-const { client } = require('../client');
-const authenticateToken = require('../middleware/authenticateToken');
+const { client } = require('../../client');
+const authenticateToken = require('../../middleware/authenticateToken');
 
-const insert = express.Router();
+const update = express.Router();
 
 function hasSpecialChars(tag) {
     const regex = /[^a-zA-Z0-9 ]/;
@@ -38,33 +38,22 @@ async function insertTagAndReturnId(tagName) {
     }
 }
 
-async function insertPostWithTags(userid, title, img, text, tagsArray) {
+async function updatePostWithTags(userid, postId, title, img, text, tagsArray) {
     try {
-        const titleCheckQuery = `
-            SELECT id
+        const postCheckQuery = `
+            SELECT id, user_id
             FROM posts
-            WHERE title = $1;
+            WHERE id = $1;
         `;
-        const titleCheckResult = await client.query(titleCheckQuery, [title]);
+        const postCheckResult = await client.query(postCheckQuery, [postId]);
 
-        if (titleCheckResult.rows.length > 0) {
-            throw new Error('A post with this title already exists.');
+        if (postCheckResult.rows.length === 0) {
+            throw new Error('Post not found.');
         }
 
-        const userQuery = `
-        SELECT 
-            users.id, 
-            users.is_writer,
-            users.is_admin
-        FROM 
-            users
-        WHERE
-            users.id = $1
-        `;
-        const userQueryResult = await client.query(userQuery, [userid]);
-
-        if (!userQueryResult.rows[0].is_admin || !userQueryResult.rows[0].is_writer) {
-            throw new Error('No access to insert post.');
+        const existingPost = postCheckResult.rows[0];
+        if (existingPost.user_id !== userid) {
+            throw new Error('No access to update this post.');
         }
 
         for (const tag of tagsArray) {
@@ -73,13 +62,18 @@ async function insertPostWithTags(userid, title, img, text, tagsArray) {
             }
         }
 
-        const postInsertQuery = `
-            INSERT INTO posts (user_id, title, img, text, created_at)
-            VALUES ($1, $2, $3, $4, CURRENT_TIMESTAMP)
-            RETURNING id;
+        const postUpdateQuery = `
+            UPDATE posts
+            SET title = $2, img = $3, text = $4, updated_at = CURRENT_TIMESTAMP
+            WHERE id = $1;
         `;
-        const postResult = await client.query(postInsertQuery, [userid, title, img, text]);
-        const postId = postResult.rows[0].id;
+        await client.query(postUpdateQuery, [postId, title, img, text]);
+
+        const deletePostTagsQuery = `
+            DELETE FROM post_tags
+            WHERE post_id = $1;
+        `;
+        await client.query(deletePostTagsQuery, [postId]);
 
         for (const tag of tagsArray) {
             const tagId = await insertTagAndReturnId(tag);
@@ -91,13 +85,15 @@ async function insertPostWithTags(userid, title, img, text, tagsArray) {
             await client.query(postTagInsertQuery, [postId, tagId]);
         }
 
-        console.log('Post inserted successfully');
+        console.log('Post updated successfully');
     } catch (err) {
-        console.error('Error inserting post:', err);
+        console.error('Error updating post:', err);
         throw err;
     }
 }
-insert.post('/insertpost', authenticateToken, async (req, res) => {
+
+update.put('/updatepost/:id', authenticateToken, async (req, res) => {
+    const { id } = req.params;
     const { title, img, text, tags } = req.body;
 
     const tagsArray = tags.split(',')
@@ -106,20 +102,20 @@ insert.post('/insertpost', authenticateToken, async (req, res) => {
 
     try {
         if (!req.user) return res.status(303).send('No access, please login.');
-        if (!req.user.roles.writer) return res.status(303).send('No access to make posts.');
+        if (!req.user.roles.writer) return res.status(303).send('No access to update posts.');
         const userId = req.user.id;
-        await insertPostWithTags(userId, title, img, text, tagsArray);
+        await updatePostWithTags(userId, id, title, img, text, tagsArray);
 
-        res.status(201).send('Post and tags inserted successfully');
+        res.status(201).send('Post and tags updated successfully');
     } catch (err) {
-        if (err.message.includes('A post with this title already exists.')) {
-            res.status(400).send(err.message);
+        if (err.message.includes('Post not found.')) {
+            res.status(404).send(err.message);
         } else if (err.message.includes('contains special characters')) {
             res.status(400).send(err.message);
         } else {
-            res.status(500).send(`Error inserting post and tags: ${err.message}`);
+            res.status(500).send('Error updating post and tags');
         }
     }
 });
 
-module.exports = insert 
+module.exports = update;

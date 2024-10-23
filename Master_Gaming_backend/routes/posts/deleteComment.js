@@ -1,6 +1,6 @@
 const express = require('express');
-const { client } = require('../client');
-const authenticateToken = require('../middleware/authenticateToken');
+const { client } = require('../../client');
+const authenticateToken = require('../../middleware/authenticateToken');
 
 const deleteComment = express.Router();
 

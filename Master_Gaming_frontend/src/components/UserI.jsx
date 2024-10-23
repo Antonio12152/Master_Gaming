@@ -4,7 +4,7 @@ const UserI = ({ user }) => {
         <div className='user'>
             <div className="user__information">
                 <div className="user__container">
-                    <img className="user__img" src={user.user_img} alt="user img" onError={(e) => e.currentTarget.src = '/images/blank_user.png'} />
+                    <img className="user__img"  src={user.user_img} alt="user img" onError={(e) => e.currentTarget.src = '/images/blank_user.png'} />
                 </div>
                 <div>
                     <div>

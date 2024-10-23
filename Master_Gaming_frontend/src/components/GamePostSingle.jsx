@@ -26,7 +26,7 @@ const GamePostSingle = ({ post, loading, isSinglePost }) => {
                     <div className='div-container'>
                         <div className='div-post-img'>
                             <div className='div-img'>
-                                <img src={post.img} alt="no img" />
+                                <img src={post.img} crossOrigin="anonymous" alt="no img" />
                             </div>
                         </div>
                         <div className='div-post-inf'>
@@ -71,7 +71,7 @@ const GamePostSingle = ({ post, loading, isSinglePost }) => {
                         <div className='div-post-img'>
                             <Link to={`/post/${post.postid}`}>
                                 <div className='div-img'>
-                                    <img src={post.img} alt="no img" />
+                                    <img src={post.img}  alt="no img" />
                                 </div>
                             </Link>
                         </div>

@@ -21,14 +21,14 @@ const HomePV = ({ post, video, loading }) => {
                         <div className='div-post-img'>
                             <Link to={`/post/${post.postid}`}>
                                 <div className='div-img'>
-                                    <img src={post.img} alt="no img" />
+                                    <img src={post.img}  alt="no img" />
                                 </div>
                             </Link>
                         </div>
                         <div className='div-post-inf'>
                             <div>
                                 <h3>Added by:</h3>
-                                <Link to={`/users/${post.username}`}>{post.username}</Link>
+                                <Link to={`/posts?user=${post.username}&id=1`}>{post.username}</Link>
                                 <h3>Created at:</h3>
                                 <p>{post.created_at}</p>
                             </div>
@@ -37,7 +37,7 @@ const HomePV = ({ post, video, loading }) => {
                                     <h3>Tags:</h3>
                                     {post.tags.map((tag, index) => (
                                         <React.Fragment key={index}>
-                                            <Link to={`/tags/${tag}/1`}>
+                                            <Link to={`/posts?tags=${tag}&id=1`}>
                                                 {tag}
                                             </Link>
                                             {index < post.tags.length - 1 && " | "}

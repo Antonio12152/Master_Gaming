@@ -1,5 +1,5 @@
 const express = require('express');
-const { client } = require('../client');
+const { client } = require('../../client');
 const logout = express.Router();
 
 logout.post('/logout', async (req, res) => {

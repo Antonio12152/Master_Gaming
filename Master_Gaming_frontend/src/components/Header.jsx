@@ -55,7 +55,7 @@ const Header = () => {
             <SearchBar className="header__center" />
             {!auth || auth.user === undefined ? (
                 <div className='header__user'>
-                    <img src="/images/blank_user.png" alt="User" onClick={toggleUserMenu} />
+                    <img src="/images/blank_user.png" crossOrigin="anonymous" alt="User" onClick={toggleUserMenu} />
                     <ul className={`header__user__ul ${isUserMenuOpen ? 'open' : ''}`}>
                         <li>
                             <Link to='/login' onClick={toggleUserMenu}>Login</Link>
@@ -68,7 +68,7 @@ const Header = () => {
             ) :
                 (
                     <div className='header__user'>
-                        <img src={auth.user.img} alt="User" onClick={toggleUserMenu} onError={(e) => e.currentTarget.src = '/images/blank_user.png'} />
+                        <img src={auth.user.img}  alt="User" onClick={toggleUserMenu} onError={(e) => e.currentTarget.src = '/images/blank_user.png'} />
                         <ul className={`header__user__ul ${isUserMenuOpen ? 'open' : ''}`}>
                             <li>
                                 <Link to={`/users/${auth.user.name}`} onClick={toggleUserMenu}>Account</Link>

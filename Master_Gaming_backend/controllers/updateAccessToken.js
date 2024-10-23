@@ -1,6 +1,6 @@
 const jwt = require('jsonwebtoken');
 const express = require('express');
-const { client } = require('../client');
+const { client } = require('../../client');
 const updateAccessToken = express.Router();
 require('dotenv').config();
 

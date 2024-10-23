@@ -106,7 +106,7 @@ const PostComments = ({ post }) => {
                         {post.comments.map((comment, index) => (
                             <div className="comment-single" key={index}>
                                 <Link to={`/users/${comment.comment_author_name}/1`}>
-                                    <img src={comment.comment_author_img} alt='img' onError={(e) => e.currentTarget.src = '/images/blank_user.png'} />
+                                    <img src={comment.comment_author_img}  alt='img' onError={(e) => e.currentTarget.src = '/images/blank_user.png'} />
                                 </Link>
                                 <div className="comment-data">
                                     <div className="comment-author">
