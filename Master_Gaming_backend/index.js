@@ -14,7 +14,7 @@ const app = express();
 
 const allowedOrigins = [
     'http://localhost:3000',
-    'https://master-gaming.netlify.app/'
+    'https://master-gaming.netlify.app'
 ];
 
 const corsOptions = {
