@@ -9,7 +9,7 @@ async function createComment(comment, post_id, userid) {
         const idCheckQuery = `
             SELECT id
             FROM posts
-            WHERE id = $1;
+            WHERE id = $1 and is_deleted = False;
         `;
         const idCheckResult = await client.query(idCheckQuery, [post_id]);
 
