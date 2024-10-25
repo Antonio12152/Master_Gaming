@@ -48,7 +48,7 @@ const QueryParamsForm = ({ search, tags, id, onSubmit }) => {
                 onChange={(e) => setLocalTags(e.target.value)}
             /><br />
 
-            <label htmlFor="id">ID</label><br />
+            <label htmlFor="id">Page</label><br />
             <input
                 type="text"
                 value={localId}
