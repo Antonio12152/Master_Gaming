@@ -14,6 +14,7 @@ const processingPosts = {};
 
 async function generateComment(post_id, title, text) {
     try {
+        console.log("start")
         if (processingPosts[post_id]) {
             throw new Error(`Post with ID ${post_id} is already being processed.`);
         }
@@ -63,6 +64,7 @@ async function generateComment(post_id, title, text) {
         `;
 
         await client.query(commentCreateQuery, [post_id, 3, resAI]);
+        console.log("end")
     } catch (error) {
         throw new Error(`Error generating comment: ${error.message}`);
     } finally {
