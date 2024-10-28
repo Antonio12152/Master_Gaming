@@ -4,9 +4,9 @@ const cookieParser = require('cookie-parser');
 require('dotenv').config();
 const helmet = require('helmet');
 
-// Импортируйте ваши маршруты
 const posts = require('./routes/posts');
 const users = require('./routes/users');
+ const ai = require('./routes/ai');
 
 const port = process.env.SERVER_PORT || 5000;
 
@@ -30,12 +30,12 @@ const corsOptions = {
 };
 
 app.use(cors(corsOptions));
-app.use(helmet()); 
+app.use(helmet());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 
-app.use(posts, users);
+app.use(posts, users, ai);
 
 app.get('/', (req, res) => {
     res.json("Hello world!");

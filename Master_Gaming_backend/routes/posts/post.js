@@ -63,6 +63,9 @@ post.get('/post/:id', async (req, res) => {
 
     try {
         const post = await getPost(id);
+        if (post.comments) {
+            post.comments.reverse();
+        }
         res.json(post);
     } catch (err) {
         console.error('Error fetching post:', err);
