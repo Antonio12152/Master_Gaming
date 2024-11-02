@@ -47,8 +47,8 @@ const PostComments = ({ post }) => {
                 throw new Error(response.data || 'Error comment post');
             }
 
-            alert('Comment created successfully');
             setComment('');
+            window.location.reload();
         } catch (err) {
             console.log(err)
         } finally {
@@ -104,6 +104,12 @@ const PostComments = ({ post }) => {
 
                 {post.comments && (
                     <div className='comment-list'>
+                        {post.comments.some(comment => comment.user_id === 3) ? null : (
+                            <div>
+                                <h1>Generate AI Comment(there can be only 1 comment from AI)</h1>
+                                <CommentButtonAI post={post} />
+                            </div>
+                        )}
                         {post.comments.map((comment, index) => (
                             <div className="comment-single" key={index}>
                                 <Link to={`/users/${comment.comment_author_name}/1`}>
@@ -143,10 +149,6 @@ const PostComments = ({ post }) => {
                                 )}
                             </div>
                         ))}
-                        <div>
-                            <h1>Generate AI Comment(there can be only 1 comment from AI)</h1>
-                            <CommentButtonAI post={post} />
-                        </div>
                     </div>
                 )}
             </div>
