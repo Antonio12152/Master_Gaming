@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import '../CSS/Login.css'
+import '../CSS/usersForm.css'
 import { BASE_URL } from '../api/axios';
 import axios from 'axios';
 import useAuth from '../hooks/useAuth';
@@ -64,11 +64,11 @@ const Login = () => {
         }
     };
     return (
-        <div className='login__main'>
-            <section className='login__section'>
+        <div className='usersForm__main'>
+            <section className='usersForm__section'>
                 <p className={error ? "error" : "offscreen"} aria-live="assertive">{error}</p>
                 <h1>Sign In</h1>
-                <form onSubmit={handleSubmit} className='login__form'>
+                <form onSubmit={handleSubmit} className='usersForm__form'>
                     <label htmlFor="email">Email:</label>
                     <input
                         type="text"

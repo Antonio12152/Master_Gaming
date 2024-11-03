@@ -1,12 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Nunito&display=swap');
 
-/* html {
-    font-family: 'Nunito', sans-serif;
-    font-size: 22px;
-    color: #fff;
-} */
-
-.register__main {
+.usersForm__main {
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -16,7 +10,7 @@
     color: white;
 }
 
-.register__section {
+.usersForm__section {
     border-radius: 5px;
     width: 100%;
     max-width: 420px;
@@ -28,7 +22,7 @@
     background-color: rgba(0, 0, 0, 0.4);
 }
 
-.register__form {
+.usersForm__form {
     display: flex;
     flex-direction: column;
     justify-content: space-evenly;
@@ -36,7 +30,7 @@
     padding-bottom: 1rem;
 }
 
-.register__main {
+.usersForm__main {
 
     input[type="text"],
     input[type="password"],
@@ -53,18 +47,17 @@
         resize: none;
         padding: 10px;
         font-size: 16px;
-        margin-right: 10px;
         overflow: hidden;
         border: 2px inset black;
     }
 }
 
-.register__main label,
-.register__main button {
+.usersForm__main label,
+.usersForm__main button {
     margin-top: 1rem;
 }
 
-.register__main button {
+.usersForm__main button {
     padding: 0.5rem;
 }
 

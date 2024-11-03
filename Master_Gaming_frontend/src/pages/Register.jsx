@@ -2,7 +2,7 @@ import { useState, useEffect, useRef } from "react";
 import { Link } from 'react-router-dom';
 import { faCheck, faTimes, faInfoCircle } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import '../CSS/Register.css'
+import '../CSS/usersForm.css'
 import { BASE_URL } from '../api/axios';
 import axios from 'axios';
 
@@ -102,9 +102,9 @@ const Register = () => {
         }
     }
     return (
-        <div className="register__main">
+        <div className="usersForm__main">
             {success ? (
-                <section className="register__section">
+                <section className="usersForm__section">
                     <h1>Success!</h1>
                     <h2>Now you can Sign In!</h2>
                     <p>
@@ -112,10 +112,10 @@ const Register = () => {
                     </p>
                 </section>
             ) : (
-                <section className="register__section">
+                <section className="usersForm__section">
                     <p className={error ? "error" : "offscreen"} aria-live="assertive">{error}</p>
                     <h1>Register</h1>
-                    <form onSubmit={handleSubmit} className="register__form">
+                    <form onSubmit={handleSubmit} className="usersForm__form">
                         <label htmlFor="username">
                             Username:
                             <FontAwesomeIcon icon={faCheck} className={validName ? "valid" : "hide"} />
