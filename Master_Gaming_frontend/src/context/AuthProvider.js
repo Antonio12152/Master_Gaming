@@ -13,8 +13,7 @@ export const AuthProvider = ({ children }) => {
     useEffect(() => {
         const fetchAuthData = async () => {
             try {
-                const response = await axios.get(`${BASE_URL}`);
-                setAuth(response.data);
+                await axios.get(`${BASE_URL}`);
                 setChecked(true);
             } catch (error) {
                 setErr(true);

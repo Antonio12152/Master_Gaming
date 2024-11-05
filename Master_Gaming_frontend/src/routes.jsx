@@ -8,20 +8,23 @@ import Register from './pages/Register';
 import Login from './pages/Login';
 import UpdatePost from './pages/UpdatePost';
 import GamePosts from './pages/GamePosts';
-
+import UserPasswordUpdate from './pages/UserPasswordUpdate';
+import UserUpdate from './pages/UserUpdate';
 const BaseRoute = () => {
     return (
         <div>
             <Routes>
                 <Route path='/' element={<Home />} />
                 <Route path='/post/:id' element={<GamePost />} />
+                <Route path='/posts' element={<GamePosts />} />
                 <Route path='/insertPost' element={<CreatePost />} />
-                <Route path='/post/update/:id' element={<UpdatePost />}/>
+                <Route path='/post/update/:id' element={<UpdatePost />} />
                 <Route path='/tags/' element={<Tags />} />
                 <Route path='/videos' element={<Videos />} />
-                <Route path='/register' element={<Register />}/>
-                <Route path='/login' element={<Login />}/>
-                <Route path='/posts' element={<GamePosts />}/>
+                <Route path='/register' element={<Register />} />
+                <Route path='/login' element={<Login />} />
+                <Route path='/users/update/profile' element={<UserUpdate />} />
+                <Route path='/users/update/password' element={<UserPasswordUpdate />} />
             </Routes>
         </div>
     )

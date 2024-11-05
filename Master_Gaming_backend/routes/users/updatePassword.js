@@ -12,7 +12,7 @@ async function hashPassword(password) {
 }
 
 async function verifyPassword(userId, password) {
-    const query = `SELECT password FROM users WHERE id = $1`;
+    const query = `SELECT password FROM users WHERE id = $1 AND is_deleted = false`;
     const result = await client.query(query, [userId]);
 
     if (result.rows.length === 0) {
@@ -38,7 +38,7 @@ async function updatePassword(userId, newPassword) {
     await client.query(updateQuery, [hashedPassword, userId]);
 }
 
-updatePasswordRouter.put('/updatePassword', async (req, res) => {
+updatePasswordRouter.put('/users/updatePassword', async (req, res) => {
     const { id, currentPassword, newPassword } = req.body;
 
     if (!id || !currentPassword || !newPassword) {

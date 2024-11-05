@@ -16,7 +16,7 @@ const User = () => {
                 const data = res.data
                 setUser(data[0])
             })
-            .catch(error => { console.error('Error fetching data:', error);});
+            .catch(error => { console.error('Error fetching data:', error); });
     }, [axiosPrivate, username]);
     useEffect(() => {
         if (user.id) {
@@ -25,13 +25,13 @@ const User = () => {
                     const data = res.data
                     setPosts(data.slice().reverse().filter(post => post.user_id === user.id))
                 })
-                .catch(error => { console.error('Error fetching data:', error);});
+                .catch(error => { console.error('Error fetching data:', error); });
         }
-    }, [axiosPrivate,user.id]);
+    }, [axiosPrivate, user.id]);
     return (
         <div>
             <UserI user={user} />
-            <GamePosts userPosts={posts} newpage={user.username}/>
+            <GamePosts userPosts={posts} newpage={user.username} />
         </div>
     );
 }

@@ -7,6 +7,7 @@ const helmet = require('helmet');
 const posts = require('./routes/posts');
 const users = require('./routes/users');
 const ai = require('./routes/ai');
+const updateAccessToken = require('./controllers/updateAccessToken')
 
 const port = process.env.SERVER_PORT || 5000;
 
@@ -35,7 +36,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 
-app.use(posts, users, ai);
+app.use(posts, users, ai, updateAccessToken);
 
 app.get('/', (req, res) => {
     res.json("Hello world!");

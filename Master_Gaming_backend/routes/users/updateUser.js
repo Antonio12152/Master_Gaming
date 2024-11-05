@@ -1,65 +1,68 @@
 const express = require('express');
+const bcrypt = require('bcrypt');
 const { client } = require('../../client');
 
 const updateUser = express.Router();
 
-async function verifyPassword(userId, password) {
-    const query = `SELECT password FROM users WHERE id = $1`;
-    const result = await client.query(query, [userId]);
+async function verifyPassword(userEmail, password) {
+    const query = `SELECT id, password FROM users WHERE email = $1 AND is_deleted = false`;
+    const result = await client.query(query, [userEmail]);
 
     if (result.rows.length === 0) {
         throw new Error('User not found');
     }
 
-    const hashedPassword = result.rows[0].password;
+    const { id, password: hashedPassword } = result.rows[0];
     const isMatch = await bcrypt.compare(password, hashedPassword);
 
     if (!isMatch) {
         throw new Error('Incorrect password');
     }
+
+    return id;
 }
 
-async function updateUserData(id, name, email, img, about) {
+async function updateUserData(id, name, img, about) {
     try {
-        const userCheckQuery = `
-            SELECT id
-            FROM users
-            WHERE email = $1 AND id != $2;
-        `;
-        const userCheckResult = await client.query(userCheckQuery, [email, id]);
+        const userCheckByNameQuery = `SELECT id FROM users WHERE name = $1 AND id != $2`;
+        const nameCheckResult = await client.query(userCheckByNameQuery, [name, id]);
 
-        if (userCheckResult.rows.length === 0) {
-            throw new Error('User not found');
+        if (nameCheckResult.rows.length > 0) {
+            throw new Error('Username already exists');
         }
 
         const updateQuery = `
             UPDATE users
-            SET name = $1, email = $2, img = $3, about = $4
-            WHERE id = $5;
+            SET name = $1, img = $2, about = $3
+            WHERE id = $4;
         `;
-        await client.query(updateQuery, [name, email, img, about, id]);
+        await client.query(updateQuery, [name, img, about, id]);
     } catch (err) {
         console.error('Error updating user:', err);
         throw err;
     }
 }
 
-updateUser.put('/updateUser', async (req, res) => {
-    const { id, name, email, img, about } = req.body;
+updateUser.put('/users/update', async (req, res) => {
+    const { name, email, password, img, about } = req.body;
 
-    if (!id || !name || !email) {
-        return res.status(400).json({ message: 'User ID, name, and email are required' });
+    if (!name || !email || !password) {
+        return res.status(400).json({ message: 'Name, password, and email are required' });
     }
 
     try {
-        await verifyPassword(id, password);
+        const userId = await verifyPassword(email, password);
 
-        await updateUserData(id, name, email, img, about);
+        await updateUserData(userId, name, img, about);
         res.status(200).send({ message: `Account ${name} updated successfully!` });
     } catch (err) {
         console.error('Error updating user:', err);
-        if (err.message === 'Username or email already exists') {
-            res.status(409).json({ err: 'Username or email already exists!' });
+        if (err.message === 'Username already exists') {
+            res.status(409).json({ err: 'Username already exists!' });
+        } else if (err.message === 'Incorrect password') {
+            res.status(401).json({ err: 'Incorrect password' });
+        } else if (err.message === 'User not found') {
+            res.status(404).json({ err: 'User not found' });
         } else {
             res.status(500).json({ err: 'Internal server error' });
         }

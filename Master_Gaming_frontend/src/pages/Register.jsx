@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from "react";
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { faCheck, faTimes, faInfoCircle } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import '../CSS/usersForm.css'
@@ -32,8 +32,7 @@ const Register = () => {
 
     const [loading, setLoading] = useState(false);
 
-    const [success, setSuccess] = useState(false);
-
+    const navigate = useNavigate();
     const textareaRef = useRef(null);
 
     const handleTextareaChange = (e) => {
@@ -83,14 +82,7 @@ const Register = () => {
                     withCredentials: true
                 }
             );
-            setSuccess(true);
-            setName('');
-            setEmail('');
-            setPwd('');
-            setMatchPwd('');
-            setImg('');
-            setAbout('');
-            setError('');
+            navigate(`/login`);
         } catch (err) {
             if (!err?.response) {
                 setError('No Server Response');
@@ -103,15 +95,6 @@ const Register = () => {
     }
     return (
         <div className="usersForm__main">
-            {success ? (
-                <section className="usersForm__section">
-                    <h1>Success!</h1>
-                    <h2>Now you can Sign In!</h2>
-                    <p>
-                        <Link to="/login">Sign In</Link>
-                    </p>
-                </section>
-            ) : (
                 <section className="usersForm__section">
                     <p className={error ? "error" : "offscreen"} aria-live="assertive">{error}</p>
                     <h1>Register</h1>
@@ -217,7 +200,6 @@ const Register = () => {
                         </span>
                     </p>
                 </section>
-            )}
         </div>
     );
 };

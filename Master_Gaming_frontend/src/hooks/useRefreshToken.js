@@ -4,20 +4,21 @@ import { jwtDecode } from "jwt-decode";
 import { BASE_URL } from '../api/axios';
 
 const useRefreshToken = () => {
-    const { auth, setAuth, checked, setChecked } = useAuth();
+    const { setAuth, setChecked } = useAuth();
 
     const refresh = async () => {
-        if (checked) {
-            return auth?.accessToken || null;
-        }
+
+        // if (checked) {
+        //     return auth?.accessToken || null;
+        // }
 
         try {
-            const response = await axios.get(`${BASE_URL}/updateaccessnoken`, {
+            const response = await axios.post(`${BASE_URL}/updateAccessToken`, {}, {
                 withCredentials: true
             });
 
             const info = jwtDecode(response.data.accessToken);
-
+            
             setAuth(prev => ({
                 ...prev,
                 user: {
@@ -29,18 +30,20 @@ const useRefreshToken = () => {
                         writer: info.user.roles.writer
                     }
                 },
-                accessToken: response.data.accessToken
+                accessToken: response.data.accessToken 
             }));
 
             setChecked(true);
 
             return response.data.accessToken;
         } catch (err) {
+            console.error('Error refreshing access token:', err.message);
             setChecked(true);
             return null;
         }
     };
-    return refresh;
+
+    return refresh; // Возвращаем функцию обновления токена
 };
 
 export default useRefreshToken;

@@ -37,8 +37,6 @@ async function createComment(comment, post_id, userid) {
             VALUES ($1, $2, $3);
         `;
         await client.query(commentCreateQuery, [post_id, userid, comment]);
-
-        console.log('Comment created successfully');
     } catch (err) {
         console.error('Error inserting post:', err);
         throw err;

@@ -8,7 +8,7 @@ import PostComments from "./PostComments";
 const GamePostSingle = ({ post, loading, isSinglePost }) => {
     const scroll = document.getElementById("header");
     const { auth } = useAuth()
-
+    
     if (loading) {
         return <div>Loading...</div>;
     }

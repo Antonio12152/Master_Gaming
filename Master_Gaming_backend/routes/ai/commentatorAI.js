@@ -14,7 +14,6 @@ const processingPosts = {};
 
 async function generateComment(post_id, title, text) {
     try {
-        console.log("start")
         if (processingPosts[post_id]) {
             throw new Error(`Post with ID ${post_id} is already being processed.`);
         }
