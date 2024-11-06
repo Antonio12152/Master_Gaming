@@ -5,13 +5,10 @@ import useAuth from '../hooks/useAuth';
 import PostDeleteModal from "./PostDeleteModal";
 import PostComments from "./PostComments";
 
-const GamePostSingle = ({ post, loading, isSinglePost }) => {
+const GamePostSingle = ({ post, isSinglePost }) => {
     const scroll = document.getElementById("header");
     const { auth } = useAuth()
     
-    if (loading) {
-        return <div>Loading...</div>;
-    }
     const maxLength = 400;
 
     const trimmedText = !isSinglePost && post.text.length > maxLength

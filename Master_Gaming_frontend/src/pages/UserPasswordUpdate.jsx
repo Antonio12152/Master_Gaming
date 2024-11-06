@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCheck, faTimes, faInfoCircle } from "@fortawesome/free-solid-svg-icons";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import '../CSS/usersForm.css';
 import { BASE_URL } from '../api/axios';
 import axios from 'axios';
@@ -41,7 +41,7 @@ const PasswordUpdate = () => {
         }
 
         try {
-            await axios.patch(`${BASE_URL}/users/updatePassword`, 
+            await axios.patch(`${BASE_URL}/users/updatePassword`,
                 {
                     currentPassword: oldPassword,
                     newPassword
@@ -121,6 +121,9 @@ const PasswordUpdate = () => {
                     <button disabled={loading || !validNewPassword || !validMatch}>Update Password</button>
                 </form>
             </section>
+            <div className='post-interaction'>
+                <Link to={`/users/update/profile`}>Want to change profile?</Link>
+            </div>
         </div>
     );
 };

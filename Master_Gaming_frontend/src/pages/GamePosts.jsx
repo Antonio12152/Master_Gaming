@@ -80,8 +80,9 @@ const Test = () => {
             .then(res => {
                 const data = res.data
                 setUserInfo(data[0])
+                setLoading(false);
             })
-            .catch(error => { console.error('Error fetching data:', error); });
+            .catch(error => { console.error('Error fetching data:', error); setLoading(false); });
     }, [user]);
 
     const indexOfLastPost = Math.min(id * postsPerPage, posts.length);
@@ -89,12 +90,14 @@ const Test = () => {
 
     const currentPosts = posts.slice(indexOfFirstPost, indexOfLastPost);
 
+    if (loading) return <div>Loading...</div>;
+
     return (
         <div>
             {user !== "" ? (
                 <UserI user={userInfo} />
             ) : <></>}
-            
+
             <QueryParamsForm
                 search={search}
                 tags={tags}
@@ -111,7 +114,6 @@ const Test = () => {
                 currentPosts={currentPosts}
                 postsPerPage={postsPerPage}
                 currentPage={parseInt(id)}
-                loading={loading}
             />
         </div>
     );

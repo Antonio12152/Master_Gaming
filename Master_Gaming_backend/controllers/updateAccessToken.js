@@ -18,7 +18,7 @@ updateAccessToken.post('/updateAccessToken', async (req, res) => {
         const userId = decoded.user.id;
 
         const userQuery = `
-            SELECT id, name, is_admin, is_writer, refresh_token
+            SELECT id, name, img, is_admin, is_writer, refresh_token
             FROM users
             WHERE id = $1;
         `;
@@ -50,6 +50,7 @@ updateAccessToken.post('/updateAccessToken', async (req, res) => {
         );
 
         res.json({
+            img: user.img,
             accessToken: accessToken
         });
     } catch (err) {

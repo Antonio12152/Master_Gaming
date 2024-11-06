@@ -33,7 +33,7 @@ async function updateUserData(id, name, img, about) {
 
         const updateQuery = `
             UPDATE users
-            SET name = $1, img = $2, about = $3
+            SET name = $1, img = $2, about = $3, updated_at = NOW()
             WHERE id = $4;
         `;
         await client.query(updateQuery, [name, img, about, id]);

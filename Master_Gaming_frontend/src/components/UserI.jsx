@@ -3,7 +3,7 @@ import '../CSS/User.css'
 import useAuth from '../hooks/useAuth';
 const UserI = ({ user }) => {
     const { auth } = useAuth()
-
+    
     return (
         <div className='user'>
             <div className="user__information">

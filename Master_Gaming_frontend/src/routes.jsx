@@ -9,7 +9,7 @@ import Login from './pages/Login';
 import UpdatePost from './pages/UpdatePost';
 import GamePosts from './pages/GamePosts';
 import UserPasswordUpdate from './pages/UserPasswordUpdate';
-import UserUpdate from './pages/UserUpdate';
+import UserProfileUpdate from './pages/UserProfileUpdate';
 const BaseRoute = () => {
     return (
         <div>
@@ -23,7 +23,7 @@ const BaseRoute = () => {
                 <Route path='/videos' element={<Videos />} />
                 <Route path='/register' element={<Register />} />
                 <Route path='/login' element={<Login />} />
-                <Route path='/users/update/profile' element={<UserUpdate />} />
+                <Route path='/users/update/profile' element={<UserProfileUpdate />} />
                 <Route path='/users/update/password' element={<UserPasswordUpdate />} />
             </Routes>
         </div>
