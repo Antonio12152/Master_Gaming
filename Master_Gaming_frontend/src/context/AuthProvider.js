@@ -6,7 +6,6 @@ const AuthContext = createContext({});
 
 export const AuthProvider = ({ children }) => {
     const [auth, setAuth] = useState({});
-    const [checked, setChecked] = useState(false);
     const [loading, setLoading] = useState(true);
     const [err, setErr] = useState(false);
 
@@ -14,7 +13,6 @@ export const AuthProvider = ({ children }) => {
         const fetchAuthData = async () => {
             try {
                 await axios.get(`${BASE_URL}`);
-                setChecked(true);
             } catch (error) {
                 setErr(true);
                 console.error("Failed to fetch auth data", error);
@@ -35,7 +33,7 @@ export const AuthProvider = ({ children }) => {
     }
 
     return (
-        <AuthContext.Provider value={{ auth, setAuth, checked, setChecked }}>
+        <AuthContext.Provider value={{ auth, setAuth}}>
             {children}
         </AuthContext.Provider>
     );
