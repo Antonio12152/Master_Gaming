@@ -22,14 +22,16 @@ const Header = () => {
 
     const handleLogout = async (e) => {
         e.preventDefault();
-        await axios.post(`${BASE_URL}/logout`,
-            {
+        try {
+            await axios.post(`${BASE_URL}/logout`, {}, {
                 headers: { 'Content-Type': 'application/json' },
                 withCredentials: true
-            }
-        );
-        setAuth({})
-    }
+            });
+            setAuth({});
+        } catch (error) {
+            console.error("Logout failed:", error);
+        }
+    };
 
     return (
         <header className="header" id="header">
@@ -68,7 +70,7 @@ const Header = () => {
             ) :
                 (
                     <div className='header__user'>
-                        <img src={auth.user.img || '/images/blank_user.png'}  alt="User" onClick={toggleUserMenu} onError={(e) => e.currentTarget.src = '/images/blank_user.png'} />
+                        <img src={auth.user.img || '/images/blank_user.png'} alt="User" onClick={toggleUserMenu} onError={(e) => e.currentTarget.src = '/images/blank_user.png'} />
                         <ul className={`header__user__ul ${isUserMenuOpen ? 'open' : ''}`}>
                             <li>
                                 <Link to={`/posts?user=${auth.user.name}&id=1`} onClick={toggleUserMenu}>Account</Link>
