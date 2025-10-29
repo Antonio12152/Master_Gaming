@@ -3,10 +3,6 @@ from = "/*"
 to = "/index.html"
 status = 200
 [[plugins]]
-package = "@netlify/plugin-sitemap"
-[plugins.inputs]
-buildDir = "."
-[[plugins]]
 package = "netlify-plugin-submit-sitemap"
 [plugins.inputs]
 baseUrl = "https://master-gaming.netlify.app"
