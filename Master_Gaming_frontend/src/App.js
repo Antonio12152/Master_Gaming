@@ -4,13 +4,13 @@ import Main from './pages/Main';
 import BaseRoute from './routes';
 import useRefreshOnPageLoad from './hooks/useRefreshOnPageLoad';
 
-function App(props) {
+function App() {
     useRefreshOnPageLoad();
-    
+
     return (
         <div className="App">
             <BrowserRouter>
-                <Main {...props}>
+                <Main>
                     <BaseRoute />
                 </Main>
             </BrowserRouter>
