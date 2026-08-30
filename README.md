@@ -52,3 +52,5 @@ Frontend variable:
 - `REACT_APP_API_URL`
 
 Set the backend variables in Vercel and `REACT_APP_API_URL` in Netlify. Never commit either `.env` file.
+
+After configuring the Aiven variables, run `npm run init-db` inside `Master_Gaming_backend` once to create the database tables.

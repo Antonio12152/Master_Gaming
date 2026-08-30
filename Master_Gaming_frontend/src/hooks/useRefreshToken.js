@@ -4,8 +4,8 @@ import { jwtDecode } from "jwt-decode";
 import { BASE_URL } from '../api/axios';
 
 const useRefreshToken = () => {
-    const { setAuth} = useAuth();
-    
+    const { setAuth } = useAuth();
+
     const refresh = async () => {
         try {
             const response = await axios.post(`${BASE_URL}/updateAccessToken`, {}, {
@@ -34,7 +34,17 @@ const useRefreshToken = () => {
 
             return response.data.accessToken;
         } catch (err) {
-            console.error('Error refreshing access token:', err?.response?.data || err.message);
+            setAuth(prev => ({
+                ...prev,
+                user: undefined,
+                accessToken: undefined
+            }));
+
+            const message = err?.response?.data?.message || err?.message || 'Unknown refresh error';
+            if (message !== 'No refresh token provided' && message !== 'Invalid or expired refresh token') {
+                console.error('Error refreshing access token:', message);
+            }
+
             throw err;
         }
     };

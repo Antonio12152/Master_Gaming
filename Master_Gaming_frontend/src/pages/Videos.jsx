@@ -1,14 +1,13 @@
 import { useEffect, useState } from "react";
+import axios from 'axios';
 import VideosList from "../components/VideosList";
 import { useLocation } from "react-router-dom";
-import useAxiosPrivate from '../hooks/useAxiosPrivate';
-
+import { BASE_URL } from '../api/axios';
 
 const Videos = () => {
     const [videos, setVideos] = useState([]);
     const [id, setId] = useState('');
     const [loading, setLoading] = useState(true);
-    const axiosPrivate = useAxiosPrivate();
 
     const location = useLocation();
 
@@ -18,14 +17,14 @@ const Videos = () => {
     }, [location.search]);
 
     useEffect(() => {
-        axiosPrivate.get(`/videos`)
+        axios.get(`${BASE_URL}/videos`)
             .then(res => {
                 const data = res.data
                 setVideos(data.slice().reverse())
                 setLoading(false)
             })
             .catch(error => { console.error('Error fetching data:', error); setLoading(false) });
-    }, [axiosPrivate]);
+    }, []);
 
     const [postsPerPage] = useState(6)
 

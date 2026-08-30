@@ -1,28 +1,32 @@
 import { useEffect, useState } from "react";
+import axios from 'axios';
 import HomePV from "../components/HomePV";
-import useAxiosPrivate from '../hooks/useAxiosPrivate';
+import { BASE_URL } from '../api/axios';
 
 const Home = () => {
-    const [post, setPost] = useState([]);
-    const [video, setVideo] = useState([]);
+    const [post, setPost] = useState(null);
+    const [video, setVideo] = useState(null);
     const [loading, setLoading] = useState(true);
-    const axiosPrivate = useAxiosPrivate();
 
     useEffect(() => {
-        axiosPrivate.get(`/posts`)
-            .then(res => {
-                const data = res.data
-                setPost(data[data.length - 1])
+        Promise.allSettled([
+            axios.get(`${BASE_URL}/posts`),
+            axios.get(`${BASE_URL}/videos`)
+        ])
+            .then(([postsResult, videosResult]) => {
+                const postsData = Array.isArray(postsResult.value?.data) ? postsResult.value.data : [];
+                const videosData = Array.isArray(videosResult.value?.data) ? videosResult.value.data : [];
+
+                setPost(postsData[postsData.length - 1] ?? null);
+                setVideo(videosData[videosData.length - 1] ?? null);
             })
-            .catch(error => { console.error('Error fetching data:', error); setLoading(false) });
-        axiosPrivate.get(`/videos`)
-            .then(res => {
-                const data = res.data
-                setVideo(data[data.length - 1])
+            .catch(error => {
+                console.error('Error fetching data:', error);
             })
-            .catch(error => { console.error('Error fetching data:', error); setLoading(false) });
-        setLoading(false)
-    }, [axiosPrivate]);
+            .finally(() => {
+                setLoading(false);
+            });
+    }, []);
 
     return (
         <div className="home">

@@ -1,8 +1,9 @@
 import { useEffect, useState } from "react";
+import axios from 'axios';
 import { useLocation, useNavigate } from "react-router-dom";
 import QueryParamsForm from "../components/QueryParamsForm";
 import GamePostsList from "../components/GamePostsList";
-import { axiosPrivate } from "../api/axios";
+import { BASE_URL } from "../api/axios";
 import UserI from "../components/UserI";
 
 const Test = () => {
@@ -44,7 +45,7 @@ const Test = () => {
     };
 
     useEffect(() => {
-        axiosPrivate.get(`/posts`)
+        axios.get(`${BASE_URL}/posts`)
             .then(res => {
                 const data = res.data;
                 const tagArray = tags
@@ -76,7 +77,12 @@ const Test = () => {
     }, [search, tags, user]);
 
     useEffect(() => {
-        axiosPrivate.get(`/users/${user}`)
+        if (!user) {
+            setUserInfo('');
+            return;
+        }
+
+        axios.get(`${BASE_URL}/users/${user}`)
             .then(res => {
                 const data = res.data
                 setUserInfo(data[0])

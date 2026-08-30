@@ -9,7 +9,11 @@ const useRefreshOnPageLoad = () => {
     useEffect(() => {
         const verifyToken = async () => {
             if (!auth?.accessToken) {
-                await refresh();
+                try {
+                    await refresh();
+                } catch (_error) {
+                    // Anonymous users do not have a refresh cookie; this should not break the app.
+                }
             }
         };
         verifyToken();
