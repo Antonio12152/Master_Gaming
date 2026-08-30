@@ -1,16 +1,20 @@
-const { Mistral } = require('@mistralai/mistralai');
 const express = require('express');
 const { client } = require('../../client.js');
 const dotenv = require('dotenv');
 dotenv.config();
 
 const apiKey = process.env.API_KEY;
-
-const clientAI = new Mistral({ apiKey: apiKey });
-
 const commentAI = express.Router();
-
 const processingPosts = {};
+
+async function getMistralClient() {
+    if (!apiKey) {
+        throw new Error('Missing API_KEY environment variable for Mistral AI.');
+    }
+
+    const { Mistral } = await import('@mistralai/mistralai');
+    return new Mistral({ apiKey });
+}
 
 async function generateComment(post_id, title, text) {
     try {
@@ -50,7 +54,9 @@ async function generateComment(post_id, title, text) {
             throw new Error('Comment by AI already exists or was deleted earlier.');
         }
 
-        const chatResponse = await clientAI.chat.complete({
+        const mistralClient = await getMistralClient();
+
+        const chatResponse = await mistralClient.chat.complete({
             model: 'open-mistral-nemo',
             messages: [message],
         });
