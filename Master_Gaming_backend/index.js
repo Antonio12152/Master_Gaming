@@ -11,17 +11,29 @@ const updateAccessToken = require('./controllers/updateAccessToken');
 
 const app = express();
 const port = Number(process.env.PORT || process.env.SERVER_PORT || 5000);
+const isProduction = process.env.NODE_ENV === 'production';
 
 const allowedOrigins = [
     'http://localhost:3000',
     'http://localhost:3001',
     'https://master-gaming.netlify.app',
-    'https://master-gaming.vercel.app'
+    'https://master-gaming.vercel.app',
+    'https://master-gaming-zeta.vercel.app'
 ];
 
 const corsOptions = {
     origin: (origin, callback) => {
-        if (!origin || allowedOrigins.includes(origin)) {
+        if (!origin) {
+            callback(null, true);
+            return;
+        }
+
+        const isAllowedOrigin =
+            allowedOrigins.includes(origin) ||
+            origin.endsWith('.netlify.app') ||
+            origin.endsWith('.vercel.app');
+
+        if (isAllowedOrigin) {
             callback(null, true);
         } else {
             callback(new Error('Not allowed by CORS'));
@@ -29,7 +41,8 @@ const corsOptions = {
     },
     credentials: true,
     optionsSuccessStatus: 200,
-    methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS']
+    methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS'],
+    allowedHeaders: ['Content-Type', 'Authorization']
 };
 
 app.use(cors(corsOptions));

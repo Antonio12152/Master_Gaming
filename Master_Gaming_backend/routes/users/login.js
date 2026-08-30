@@ -87,10 +87,12 @@ login.post('/login', async (req, res) => {
 
         await saveRefreshToken(user.id, tokens.refreshToken);
 
+        const isProduction = process.env.NODE_ENV === 'production';
+
         res.cookie('jwt', tokens.refreshToken, {
             httpOnly: true,
-            secure: true,
-            sameSite: 'None',
+            secure: isProduction,
+            sameSite: isProduction ? 'None' : 'Lax',
             maxAge: 24 * 60 * 60 * 1000
         });
 

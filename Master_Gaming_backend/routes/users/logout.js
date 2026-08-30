@@ -22,7 +22,9 @@ logout.post('/logout', async (req, res) => {
         const deleteRefreshToken = `UPDATE users SET refresh_token = NULL WHERE id = $1;`;
         await client.query(deleteRefreshToken, [foundUser.id]);
 
-        res.clearCookie('jwt', { httpOnly: true, secure: true, sameSite: 'None' });
+        const isProduction = process.env.NODE_ENV === 'production';
+
+        res.clearCookie('jwt', { httpOnly: true, secure: isProduction, sameSite: isProduction ? 'None' : 'Lax' });
 
         res.sendStatus(204);
     } catch (error) {

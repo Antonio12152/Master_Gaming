@@ -12,8 +12,12 @@ const useRefreshToken = () => {
                 withCredentials: true
             });
 
+            if (!response?.data?.accessToken) {
+                throw new Error('No access token returned from refresh endpoint');
+            }
+
             const info = jwtDecode(response.data.accessToken);
-            
+
             setAuth(prev => ({
                 ...prev,
                 user: {
@@ -25,11 +29,13 @@ const useRefreshToken = () => {
                         writer: info.user.roles.writer
                     }
                 },
-                accessToken: response.data.accessToken 
+                accessToken: response.data.accessToken
             }));
 
+            return response.data.accessToken;
         } catch (err) {
-            console.error('Error refreshing access token:', err.message);
+            console.error('Error refreshing access token:', err?.response?.data || err.message);
+            throw err;
         }
     };
 
