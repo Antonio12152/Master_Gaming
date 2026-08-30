@@ -1,12 +1,12 @@
 require('dotenv').config();
 const { Pool } = require('pg');
 
-const connectionString = process.env.POOL || process.env.DATABASE_URL;
-
 const sslConfig = (() => {
     const ca = process.env.CA?.replace(/\\n/g, '\n');
+    const hasValidCa = ca?.includes('-----BEGIN CERTIFICATE-----') &&
+        ca.includes('-----END CERTIFICATE-----');
 
-    if (!ca) {
+    if (!hasValidCa) {
         return { rejectUnauthorized: false };
     }
 
@@ -16,19 +16,14 @@ const sslConfig = (() => {
     };
 })();
 
-const config_aiven = connectionString
-    ? {
-        connectionString,
-        ssl: sslConfig,
-    }
-    : {
-        user: process.env.USER,
-        password: process.env.PASSWORD,
-        host: process.env.HOST,
-        port: Number(process.env.DB_PORT || 5432),
-        database: process.env.DB,
-        ssl: sslConfig,
-    };
+const config_aiven = {
+    user: process.env.USER,
+    password: process.env.PASSWORD,
+    host: process.env.HOST,
+    port: Number(process.env.DB_PORT || 19396),
+    database: process.env.DB,
+    ssl: sslConfig,
+};
 
 const client = new Pool({
     ...config_aiven,

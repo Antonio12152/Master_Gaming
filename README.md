@@ -35,6 +35,20 @@ Used to push on site, like netlify.
 
 Use it to connect database and site.
 
-Before start create .env file in backend with port and db connection data:
-SERVER_PORT = 5000
-POOL = connention URL with password and else
+Before starting, copy `.env.example` to `.env` in both project folders.
+
+Backend variables:
+
+- `NODE_ENV`
+- `SERVER_PORT`
+- `USER`, `PASSWORD`, `HOST`, `DB_PORT`, `DB` for Aiven PostgreSQL
+- `CA`
+- `ACCESS_TOKEN_SECRET`
+- `REFRESH_TOKEN_SECRET`
+- `API_KEY`
+
+Frontend variable:
+
+- `REACT_APP_API_URL`
+
+Set the backend variables in Vercel and `REACT_APP_API_URL` in Netlify. Never commit either `.env` file.
