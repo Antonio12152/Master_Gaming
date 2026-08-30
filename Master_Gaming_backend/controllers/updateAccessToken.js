@@ -55,7 +55,7 @@ updateAccessToken.post('/updateAccessToken', async (req, res) => {
         });
     } catch (err) {
         console.error('Error refreshing access token:', err.message);
-        res.status(500).json({ err: 'Internal server error' });
+        res.status(401).json({ message: 'Invalid or expired refresh token' });
     }
 });
 

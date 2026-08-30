@@ -13,7 +13,13 @@ logout.post('/logout', async (req, res) => {
         const userResult = await client.query(userQuery, [refreshToken]);
 
         if (userResult.rows.length === 0) {
-            res.clearCookie('jwt', { httpOnly: true, secure: true, sameSite: 'None' });
+            const requestOrigin = req.get('Origin') || '';
+            const isCrossSite = requestOrigin && !/^https?:\/\/localhost(?::\d+)?$/.test(requestOrigin);
+            res.clearCookie('jwt', {
+                httpOnly: true,
+                secure: Boolean(isCrossSite),
+                sameSite: isCrossSite ? 'None' : 'Lax'
+            });
             return res.sendStatus(204);
         }
 
@@ -22,9 +28,14 @@ logout.post('/logout', async (req, res) => {
         const deleteRefreshToken = `UPDATE users SET refresh_token = NULL WHERE id = $1;`;
         await client.query(deleteRefreshToken, [foundUser.id]);
 
-        const isProduction = process.env.NODE_ENV === 'production';
+        const requestOrigin = req.get('Origin') || '';
+        const isCrossSite = requestOrigin && !/^https?:\/\/localhost(?::\d+)?$/.test(requestOrigin);
 
-        res.clearCookie('jwt', { httpOnly: true, secure: isProduction, sameSite: isProduction ? 'None' : 'Lax' });
+        res.clearCookie('jwt', {
+            httpOnly: true,
+            secure: Boolean(isCrossSite),
+            sameSite: isCrossSite ? 'None' : 'Lax'
+        });
 
         res.sendStatus(204);
     } catch (error) {

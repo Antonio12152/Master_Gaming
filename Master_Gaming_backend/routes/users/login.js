@@ -87,12 +87,13 @@ login.post('/login', async (req, res) => {
 
         await saveRefreshToken(user.id, tokens.refreshToken);
 
-        const isProduction = process.env.NODE_ENV === 'production';
+        const requestOrigin = req.get('Origin') || '';
+        const isCrossSite = requestOrigin && !/^https?:\/\/localhost(?::\d+)?$/.test(requestOrigin);
 
         res.cookie('jwt', tokens.refreshToken, {
             httpOnly: true,
-            secure: isProduction,
-            sameSite: isProduction ? 'None' : 'Lax',
+            secure: Boolean(isCrossSite),
+            sameSite: isCrossSite ? 'None' : 'Lax',
             maxAge: 24 * 60 * 60 * 1000
         });
 

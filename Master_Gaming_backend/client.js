@@ -1,20 +1,34 @@
 require('dotenv').config();
-const pg = require('pg');
-const { Pool } = require("pg");
+const { Pool } = require('pg');
 
-const connectionString = process.env.POOL
+const connectionString = process.env.POOL || process.env.DATABASE_URL;
 
-const config_aiven = {
-    user: process.env.USER,
-    password: process.env.PASSWORD,
-    host: process.env.HOST,
-    port: process.env.DB_PORT,
-    database: process.env.DB,
-    ssl: {
-        rejectUnauthorized: true,
-        ca: `${process.env.CA}`,
-    },
-};
+const sslConfig = (() => {
+    const ca = process.env.CA;
+
+    if (!ca) {
+        return process.env.NODE_ENV === 'production' ? { rejectUnauthorized: false } : false;
+    }
+
+    return {
+        rejectUnauthorized: process.env.NODE_ENV !== 'production' ? false : true,
+        ca,
+    };
+})();
+
+const config_aiven = connectionString
+    ? {
+        connectionString,
+        ssl: sslConfig,
+    }
+    : {
+        user: process.env.USER,
+        password: process.env.PASSWORD,
+        host: process.env.HOST,
+        port: Number(process.env.DB_PORT || 5432),
+        database: process.env.DB,
+        ssl: sslConfig,
+    };
 
 const client = new Pool(config_aiven);
 
