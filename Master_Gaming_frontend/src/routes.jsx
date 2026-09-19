@@ -6,6 +6,7 @@ import Videos from './pages/Videos';
 import CreatePost from './pages/CreatePost';
 import Register from './pages/Register';
 import Login from './pages/Login';
+import ForgotPassword from './pages/ForgotPassword';
 import UpdatePost from './pages/UpdatePost';
 import GamePosts from './pages/GamePosts';
 import UserPasswordUpdate from './pages/UserPasswordUpdate';
@@ -23,6 +24,7 @@ const BaseRoute = () => {
                 <Route path='/videos' element={<Videos />} />
                 <Route path='/register' element={<Register />} />
                 <Route path='/login' element={<Login />} />
+                <Route path='/forgot-password' element={<ForgotPassword />} />
                 <Route path='/users/update/profile' element={<UserProfileUpdate />} />
                 <Route path='/users/update/password' element={<UserPasswordUpdate />} />
             </Routes>

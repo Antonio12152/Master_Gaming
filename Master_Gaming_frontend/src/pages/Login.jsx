@@ -78,6 +78,7 @@ const Login = () => {
                         value={email}
                         required
                     />
+                    <p><Link to="/forgot-password">Forgot password?</Link></p>
 
                     <label htmlFor="password">Password:</label>
                     <input

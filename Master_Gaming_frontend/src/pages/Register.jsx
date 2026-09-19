@@ -27,6 +27,8 @@ const Register = () => {
     const [img, setImg] = useState('');
 
     const [about, setAbout] = useState('');
+    const [verificationCode, setVerificationCode] = useState('');
+    const [verificationRequested, setVerificationRequested] = useState(false);
 
     const [error, setError] = useState('');
 
@@ -66,28 +68,31 @@ const Register = () => {
         const v2 = PWD_REGEX.test(password);
         if (!v1 || !v2) {
             setError("Invalid Entry");
+            setLoading(false);
             return;
         }
         try {
-            await axios.post(`${BASE_URL}/register`,
-                JSON.stringify({
-                    name,
-                    email,
-                    password,
-                    img,
-                    about
-                }),
+            const endpoint = verificationRequested ? '/register/verify' : '/register/request-code';
+            const body = verificationRequested
+                ? { name, email, password, img, about, code: verificationCode }
+                : { name, email, password, img, about };
+            await axios.post(`${BASE_URL}${endpoint}`, body,
                 {
                     headers: { 'Content-Type': 'application/json' },
                     withCredentials: true
                 }
             );
-            navigate(`/login`);
+            if (verificationRequested) {
+                navigate(`/login`);
+            } else {
+                setVerificationRequested(true);
+                setError('Verification code sent. Check your email.');
+            }
         } catch (err) {
             if (!err?.response) {
                 setError('No Server Response');
             } else {
-                setError(`Registration Failed: ${err.message}`)
+                setError(err.response.data?.err || 'Registration failed');
             }
         } finally {
             setLoading(false);
@@ -191,7 +196,22 @@ const Register = () => {
                             onChange={handleTextareaChange}
                         />
 
-                        <button disabled={loading || !validName || !validPwd || !validMatch ? true : false}>Sign Up</button>
+                        {verificationRequested && <>
+                            <label htmlFor="verification_code">Email verification code:</label>
+                            <input
+                                type="text"
+                                id="verification_code"
+                                inputMode="numeric"
+                                maxLength="6"
+                                onChange={(e) => setVerificationCode(e.target.value)}
+                                value={verificationCode}
+                                required
+                            />
+                        </>}
+
+                        <button disabled={loading || !validName || !validPwd || !validMatch || (verificationRequested && !/^\d{6}$/.test(verificationCode))}>
+                            {verificationRequested ? 'Verify and Create Account' : 'Send Verification Code'}
+                        </button>
                     </form>
                     <p>
                         Already registered?<br />
