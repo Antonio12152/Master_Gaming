@@ -28,8 +28,14 @@ forgotPassword.post('/forgot-password/request-code', async (req, res) => {
 forgotPassword.post('/forgot-password/reset', async (req, res) => {
     const { email, code, newPassword } = req.body;
     const normalizedEmail = typeof email === 'string' ? verification.normalizeEmail(email) : '';
-    if (!normalizedEmail || !/^\d{6}$/.test(code || '') || !PWD_REGEX.test(newPassword || '')) {
-        return res.status(400).json({ message: 'Email, 6-digit code, and new password are required' });
+    if (!normalizedEmail) {
+        return res.status(400).json({ err: 'Validation error: email is required.' });
+    }
+    if (!/^\d{6}$/.test(code || '')) {
+        return res.status(400).json({ err: 'Validation error: the email code must contain exactly 6 digits.' });
+    }
+    if (!PWD_REGEX.test(newPassword || '')) {
+        return res.status(400).json({ err: 'Validation error: password must be 8-24 characters and include uppercase, lowercase, a number, and one of ! @ # $ %.' });
     }
 
     try {

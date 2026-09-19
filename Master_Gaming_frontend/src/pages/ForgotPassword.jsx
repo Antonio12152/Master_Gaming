@@ -32,8 +32,16 @@ const ForgotPassword = () => {
                 return;
             }
 
-            if (!/^\d{6}$/.test(code) || !PWD_REGEX.test(newPassword) || newPassword !== confirmPassword) {
-                setError('Enter a valid code and matching valid passwords.');
+            if (!/^\d{6}$/.test(code)) {
+                setError('Validation error: the email code must contain exactly 6 digits.');
+                return;
+            }
+            if (!PWD_REGEX.test(newPassword)) {
+                setError('Validation error: password must be 8-24 characters and include uppercase, lowercase, a number, and one of ! @ # $ %.');
+                return;
+            }
+            if (newPassword !== confirmPassword) {
+                setError('Validation error: the passwords do not match.');
                 return;
             }
 

@@ -3,11 +3,14 @@ import axios from 'axios';
 import VideosList from "../components/VideosList";
 import { useLocation } from "react-router-dom";
 import { BASE_URL } from '../api/axios';
+import useAuth from '../hooks/useAuth';
+import AddVideo from '../components/AddVideo';
 
 const Videos = () => {
     const [videos, setVideos] = useState([]);
     const [id, setId] = useState('');
     const [loading, setLoading] = useState(true);
+    const { auth } = useAuth();
 
     const location = useLocation();
 
@@ -34,8 +37,13 @@ const Videos = () => {
 
     const currentVideos = videos.slice(indexOfFirstPost, indexOfLastPost)
 
+    const handleVideoAdded = (video) => {
+        setVideos((current) => [video, ...current]);
+    };
+
     return (
         <div>
+            {auth?.user?.roles?.admin && <AddVideo onAdded={handleVideoAdded} />}
             <VideosList page={"videos"} TotalPosts={videos.length} currentVideos={currentVideos} postsPerPage={postsPerPage} currentPage={parseInt(id)} loading={loading} />
         </div>
     )

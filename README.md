@@ -1,5 +1,11 @@
 ### Master Gaming
 
+### Project overview
+
+Master Gaming is a simple gaming website where people can read news, explore game posts, view videos, and search content by tags. The app is built with a React frontend and a Node.js backend, with PostgreSQL used for storing users, posts, comments, and related data.
+
+Users can register, log in, update their profile, reset passwords, and leave comments. Some actions, like creating posts, require permission. The project also includes email verification and a basic AI comment helper to make the experience easier and more interactive.
+
 Master Gaming is a gaming news site. There are posts and videos there. Posts include tags to make it easier to search by interest. \
 Link on netlify - https://master-gaming.netlify.app/ 
 
