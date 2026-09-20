@@ -40,6 +40,52 @@ dailyPost.get('/daily-post', async (req, res) => {
     }
 });
 
+async function selectDailyPost(postId = null) {
+    const result = await client.query(
+        `WITH selected_post AS (
+            SELECT id
+            FROM posts
+            WHERE is_deleted = FALSE
+              AND ($1::bigint IS NULL OR id = $1::bigint)
+            ORDER BY CASE WHEN $1::bigint IS NULL THEN RANDOM() END
+            LIMIT 1
+        )
+        INSERT INTO daily_posts (post_id)
+        SELECT id FROM selected_post
+        ON CONFLICT (selection_date) DO NOTHING
+        RETURNING post_id`,
+        [postId]
+    );
+
+    if (result.rows.length === 0) {
+        const existing = await client.query(dailyPostQuery);
+        if (existing.rows.length > 0) {
+            return existing.rows[0];
+        }
+        throw new Error('Post not found or has been deleted');
+    }
+
+    const selected = await client.query(dailyPostQuery);
+    return selected.rows[0];
+}
+
+dailyPost.get('/api/cron/daily-post', async (req, res) => {
+    const authorization = req.headers.authorization;
+    const expectedAuthorization = `Bearer ${process.env.CRON_SECRET}`;
+
+    if (!process.env.CRON_SECRET || authorization !== expectedAuthorization) {
+        return res.status(401).json({ err: 'Unauthorized' });
+    }
+
+    try {
+        res.status(200).json(await selectDailyPost());
+    } catch (err) {
+        console.error('Error selecting daily post from cron:', err);
+        res.status(err.message === 'Post not found or has been deleted' ? 404 : 500)
+            .json({ err: err.message });
+    }
+});
+
 dailyPost.post('/daily-post', authenticateToken, async (req, res) => {
     const postId = req.body.postId ?? req.body.post_id ?? null;
 
@@ -52,35 +98,11 @@ dailyPost.post('/daily-post', authenticateToken, async (req, res) => {
             return res.status(403).json({ err: 'Only administrators can select the daily post' });
         }
 
-        const result = await client.query(
-            `WITH selected_post AS (
-                SELECT id
-                FROM posts
-                WHERE is_deleted = FALSE
-                  AND ($1::bigint IS NULL OR id = $1::bigint)
-                ORDER BY CASE WHEN $1::bigint IS NULL THEN RANDOM() END
-                LIMIT 1
-            )
-            INSERT INTO daily_posts (post_id)
-            SELECT id FROM selected_post
-            ON CONFLICT (selection_date) DO NOTHING
-            RETURNING post_id`,
-            [postId]
-        );
-
-        if (result.rows.length === 0) {
-            const existing = await client.query(dailyPostQuery);
-            if (existing.rows.length > 0) {
-                return res.json(existing.rows[0]);
-            }
-            return res.status(404).json({ err: 'Post not found or has been deleted' });
-        }
-
-        const selected = await client.query(dailyPostQuery);
-        res.status(201).json(selected.rows[0]);
+        res.status(201).json(await selectDailyPost(postId));
     } catch (err) {
         console.error('Error selecting daily post:', err);
-        res.status(500).json({ err: 'Unable to select daily post' });
+        res.status(err.message === 'Post not found or has been deleted' ? 404 : 500)
+            .json({ err: err.message });
     }
 });
 

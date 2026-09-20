@@ -14,8 +14,6 @@ const port = Number(process.env.PORT || process.env.SERVER_PORT || 5000);
 const isProduction = process.env.NODE_ENV === 'production';
 
 const allowedOrigins = [
-    'http://localhost:3000',
-    'http://localhost:3001',
     'https://master-gaming.netlify.app',
     'https://master-gaming.vercel.app',
     'https://master-gaming-zeta.vercel.app'
