@@ -1,19 +1,186 @@
-.div-tags li {
-    padding: 4px;
-    margin: 2px;
+.div-main {
+    max-width: 1100px;
+    margin: 2rem auto;
+    padding: 0 1rem;
 }
-.div-tags li>a {
-    display: block;
-    background-color: rgb(240, 158, 6);
-    border-radius: 10px;
-    border: 1px solid black;
-    padding: 10px;
-    width: 230px;
-    text-decoration: none;
-    color: inherit;
+
+.tag-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: end;
+    gap: 1rem;
+    margin-bottom: 1rem;
 }
-.div-tags li>a:hover{
-    background-color: rgb(201, 131, 0);
+
+.tag-kicker {
+    margin: 0;
+    color: #f4a100;
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+}
+
+.tag-header h2 {
+    margin: 0.25rem 0 0;
+    font-size: clamp(2rem, 4vw, 2.8rem);
+}
+
+.tag-summary {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    color: #dfe7f5;
+    font-size: 0.92rem;
+}
+
+.tag-toolbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+    margin-bottom: 1.5rem;
+}
+
+.tag-search-wrap {
+    flex: 1 1 300px;
+}
+
+.tag-search-input {
+    width: min(100%, 500px);
+    padding: 0.9rem 1rem;
+    border: 1px solid #3b3f4b;
+    border-radius: 12px;
+    background: #10151d;
+    color: #f1f5f9;
+    font-size: 1rem;
+}
+
+.tag-search-input:focus {
+    border-color: #f4a100;
+    outline: none;
+    box-shadow: 0 0 0 2px rgba(244, 161, 0, 0.2);
+}
+
+.tag-toggle-group {
+    display: inline-flex;
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 999px;
+    padding: 0.25rem;
+    gap: 0.25rem;
+}
+
+.tag-toggle {
+    border: none;
+    border-radius: 999px;
+    background: transparent;
+    color: #dfe7f5;
+    padding: 0.55rem 0.9rem;
     cursor: pointer;
-    transition: 0.3s;
+    font-weight: 600;
+}
+
+.tag-toggle.active {
+    background: linear-gradient(135deg, #f4a100, #d88900);
+    color: #111827;
+}
+
+.div-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.tag-item {
+    flex: 1 1 220px;
+    min-width: 200px;
+}
+
+.tag-link {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 0.5rem;
+    background: linear-gradient(135deg, #f4a100, #d88900);
+    border-radius: 16px;
+    border: 1px solid rgba(0,0,0,0.15);
+    padding: 1rem 1rem 0.9rem;
+    text-decoration: none;
+    color: #121821;
+    min-height: 90px;
+    box-shadow: 0 8px 18px rgba(244, 161, 0, 0.2);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.tag-link:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 12px 24px rgba(244, 161, 0, 0.28);
+}
+
+.tag-name {
+    font-size: 1.1rem;
+    font-weight: 700;
+    line-height: 1.2;
+    word-break: break-word;
+}
+
+.tag-count {
+    font-size: 0.82rem;
+    opacity: 0.8;
+}
+
+.tag-empty {
+    background: rgba(255,255,255,0.03);
+    border: 1px dashed rgba(255,255,255,0.15);
+    border-radius: 12px;
+    padding: 1.5rem;
+    color: #dfe7f5;
+}
+
+.tag-featured {
+    max-width: 1100px;
+    margin: 1.5rem auto 0;
+    padding: 0 1rem;
+}
+
+.tag-featured h3 {
+    margin: 0 0 0.75rem;
+    font-size: 1.05rem;
+    color: #f3f7ff;
+}
+
+.tag-featured-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+}
+
+.tag-featured-pill {
+    display: inline-flex;
+    align-items: center;
+    background: rgba(244, 161, 0, 0.12);
+    color: #f7c96d;
+    border: 1px solid rgba(244, 161, 0, 0.35);
+    border-radius: 999px;
+    padding: 0.5rem 0.9rem;
+    text-decoration: none;
+    font-size: 0.92rem;
+}
+
+@media (max-width: 640px) {
+    .tag-header {
+        display: block;
+    }
+
+    .tag-summary {
+        margin-top: 0.75rem;
+    }
+
+    .tag-toolbar {
+        align-items: stretch;
+    }
 }

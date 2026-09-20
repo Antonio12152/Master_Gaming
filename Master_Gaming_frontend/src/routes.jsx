@@ -11,6 +11,8 @@ import UpdatePost from './pages/UpdatePost';
 import GamePosts from './pages/GamePosts';
 import UserPasswordUpdate from './pages/UserPasswordUpdate';
 import UserProfileUpdate from './pages/UserProfileUpdate';
+import AdminPanel from './pages/AdminPanel';
+import TagDetail from './pages/TagDetail';
 const BaseRoute = () => {
     return (
         <div>
@@ -21,12 +23,14 @@ const BaseRoute = () => {
                 <Route path='/insertPost' element={<CreatePost />} />
                 <Route path='/post/update/:id' element={<UpdatePost />} />
                 <Route path='/tags/' element={<Tags />} />
+                <Route path='/tags/:tagName' element={<TagDetail />} />
                 <Route path='/videos' element={<Videos />} />
                 <Route path='/register' element={<Register />} />
                 <Route path='/login' element={<Login />} />
                 <Route path='/forgot-password' element={<ForgotPassword />} />
                 <Route path='/users/update/profile' element={<UserProfileUpdate />} />
                 <Route path='/users/update/password' element={<UserPasswordUpdate />} />
+                <Route path='/admin' element={<AdminPanel />} />
             </Routes>
         </div>
     )

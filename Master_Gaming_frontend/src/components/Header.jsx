@@ -80,6 +80,11 @@ const Header = () => {
                                     <Link to='/insertpost' onClick={toggleUserMenu}>Write Post</Link>
                                 </li>
                             )}
+                            {auth.user.roles.admin && (
+                                <li>
+                                    <Link to='/admin' onClick={toggleUserMenu}>Admin Panel</Link>
+                                </li>
+                            )}
                             <li>
                                 <a href='/' onClick={handleLogout}>Logout</a>
                             </li>
