@@ -6,8 +6,8 @@ const admin = express.Router();
 
 function normalizeRoleUpdatePayload(body = {}) {
     const nextRoles = {
-        is_admin: false,
-        is_writer: false
+        is_admin: null,
+        is_writer: null
     };
 
     if (typeof body.is_admin === 'boolean') {
@@ -52,12 +52,21 @@ admin.patch('/admin/users/:id/roles', authenticateToken, async (req, res) => {
     }
 
     const nextRoles = normalizeRoleUpdatePayload(req.body);
+    if (nextRoles.is_admin === null && nextRoles.is_writer === null) {
+        return res.status(400).json({ err: 'At least one role must be provided.' });
+    }
+
+    if (userId === Number(req.user.id) &&
+        (nextRoles.is_admin === false || nextRoles.is_writer === false)) {
+        return res.status(403).json({ err: 'You cannot remove your own admin or writer role.' });
+    }
 
     try {
         const result = await client.query(
             `
                 UPDATE users
-                SET is_admin = $1, is_writer = $2
+                SET is_admin = COALESCE($1, is_admin),
+                    is_writer = COALESCE($2, is_writer)
                 WHERE id = $3 AND is_deleted = false
                 RETURNING id, name, email, is_admin, is_writer
             `,

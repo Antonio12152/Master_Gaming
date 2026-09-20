@@ -1,0 +1,38 @@
+.admin-panel {
+    width: min(1100px, calc(100% - 2rem));
+    margin: 2rem auto 4rem;
+    padding: 2rem;
+    color: #142850;
+    background: #f7f9fc;
+    border: 1px solid #d9e1ee;
+    border-radius: 12px;
+    box-shadow: 0 12px 30px rgba(20, 40, 80, 0.12);
+}
+
+.admin-panel--denied { max-width: 620px; }
+.admin-panel__header { display: flex; justify-content: space-between; gap: 2rem; align-items: end; margin-bottom: 1.5rem; }
+.admin-panel__eyebrow { color: #2878c8; font-size: .75rem; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; }
+.admin-panel h2 { margin: .25rem 0; font-size: 2rem; }
+.admin-panel__summary { color: #63718a; }
+.admin-panel__filter { display: grid; gap: .4rem; min-width: min(100%, 280px); color: #63718a; font-size: .85rem; font-weight: 700; }
+.admin-panel__filter input { padding: .7rem .8rem; border: 1px solid #b9c6d9; border-radius: 6px; font: inherit; color: #142850; background: white; }
+.admin-panel__filter input:focus { outline: 2px solid #55a7e8; outline-offset: 1px; }
+.admin-panel__message { margin: 1rem 0; padding: .75rem 1rem; border-radius: 6px; }
+.admin-panel__message--error { color: #8d2020; background: #fdecec; border: 1px solid #f2b8b8; }
+.admin-panel__message--success { color: #17663e; background: #e8f7ef; border: 1px solid #a9dec0; }
+.admin-panel__loading { padding: 2rem 0; color: #63718a; }
+.admin-panel__table-wrap { overflow-x: auto; }
+.admin-panel__table { width: 100%; border-collapse: collapse; background: white; }
+.admin-panel__table th { padding: .85rem 1rem; text-align: left; color: white; background: #142850; font-size: .85rem; }
+.admin-panel__table td { padding: .9rem 1rem; border-top: 1px solid #e3e9f2; }
+.admin-panel__table tbody tr:hover { background: #f0f6fc; }
+.admin-panel__table input { width: 1.1rem; height: 1.1rem; accent-color: #2878c8; cursor: pointer; }
+.admin-panel__table input:disabled { cursor: not-allowed; opacity: .55; }
+.admin-panel__empty { text-align: center; color: #63718a; }
+
+@media (max-width: 650px) {
+    .admin-panel { width: calc(100% - 1rem); margin-top: 1rem; padding: 1rem; }
+    .admin-panel__header { align-items: stretch; flex-direction: column; gap: 1rem; }
+    .admin-panel h2 { font-size: 1.6rem; }
+    .admin-panel__table th, .admin-panel__table td { padding: .7rem; }
+}
