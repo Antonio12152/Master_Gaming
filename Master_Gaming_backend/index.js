@@ -8,6 +8,7 @@ const posts = require('./routes/posts');
 const users = require('./routes/users');
 const ai = require('./routes/ai');
 const updateAccessToken = require('./controllers/updateAccessToken');
+const { startDatabaseHealthCheck } = require('./databaseHealthCheck');
 
 const app = express();
 const port = Number(process.env.PORT || process.env.SERVER_PORT || 5000);
@@ -65,6 +66,7 @@ app.use((err, req, res, next) => {
 });
 
 if (require.main === module) {
+    startDatabaseHealthCheck();
     app.listen(port, () => {
         console.log(`Server started on port ${port}`);
     });
