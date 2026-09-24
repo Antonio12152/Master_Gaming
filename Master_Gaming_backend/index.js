@@ -12,7 +12,7 @@ const { startDatabaseHealthCheck } = require('./databaseHealthCheck');
 
 const app = express();
 const port = Number(process.env.PORT || process.env.SERVER_PORT || 5000);
-const isProduction = process.env.NODE_ENV === 'production';
+// const isProduction = process.env.NODE_ENV === 'production';
 
 const allowedOrigins = [
     'https://master-gaming.netlify.app',
